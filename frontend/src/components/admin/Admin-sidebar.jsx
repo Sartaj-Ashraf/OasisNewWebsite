@@ -20,39 +20,50 @@ import {
     LogOut,
     ChevronRight,
 } from 'lucide-react';
-
+import { logoutUser } from '@/services/auth.service';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 export const AdminSidebar = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [activeTab, setActiveTab] = useState('Dashboard');
+    const router = useRouter();
 
     const menuItems = [
-        { title: 'Dashboard', icon: <LayoutDashboard size={20} /> },
+        { title: 'Dashboard', icon: <LayoutDashboard size={19} /> },
         // { title: 'Web Development', icon: <Code2 size={20} /> },
-        // { title: 'Web Design (UI/UX)', icon: <Palette size={20} /> },
+            { title: 'Our team', icon: <Palette size={20} /> },
         // { title: 'App Development', icon: <Smartphone size={20} /> },
         // { title: 'Digital Marketing', icon: <TrendingUp size={20} /> },
         // { title: 'Social Media Marketing', icon: <Share2 size={20} /> },
         // { title: 'SEO Optimization', icon: <Search size={20} /> },
-        { title: 'Blog / Articles', icon: <FileText size={20} /> },
-        { title: 'Case Studies', icon: <BarChart3 size={20} /> },
-        { title: 'Testimonials', icon: <MessageSquareQuote size={20} /> },
-        { title: 'Pricing Plans', icon: <CreditCard size={20} /> },
-        { title: 'Portfolio / Projects', icon: <Briefcase size={20} /> },
-        { title: 'About Us', icon: <Users size={20} /> },
+        { title: 'Blog / Articles', icon: <FileText size={19} /> },
+        { title: 'Case Studies', icon: <BarChart3 size={19} /> },
+        { title: 'Testimonials', icon: <MessageSquareQuote size={19} /> },
+        { title: 'Pricing Plans', icon: <CreditCard size={19} /> },
+        { title: 'Portfolio / Projects', icon: <Briefcase size={19} /> },
+        { title: 'About Us', icon: <Users size={19} /> },
         { title: 'Contact', icon: <Mail size={20} /> },
         { title: 'FAQ', icon: <HelpCircle size={20} /> },
     ];
-
+    const handleLogout = async () => {
+        try {
+            await logoutUser();
+            toast.success("Logged out successfully");
+            router.push("/login");
+        } catch (error) {
+            console.error("Logout failed:", error);
+            toast.error("Logout failed");
+        }
+    };
     return (
         <aside
-            className={`${isOpen ? 'w-64' : 'w-20'} 
+            className={`${isOpen ? 'w-54' : 'w-18'} 
             h-full flex flex-col
             border-r border-white/10 
             bg-gray-900 backdrop-blur-xl 
             transition-all duration-300`}
         >
 
-            {/* Toggle */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="absolute top-5 -right-3 text-black bg-yellow-400 p-1 rounded-full z-50"
@@ -61,18 +72,18 @@ export const AdminSidebar = () => {
             </button>
 
             {/* Logo */}
-            <div className="py-8 px-3 flex items-center gap-x-4">
-                <div className="flex-shrink-0 bg-yellow-400 p-2.5 rounded-2xl shadow-[0_0_20px_rgba(250,204,21,0.3)]">
+            <div className="py-3 px-3 flex items-center gap-x-4">
+                <div className="shrink-0 bg-yellow-400 p-2.5 rounded-2xl shadow-[0_0_20px_rgba(250,204,21,0.3)]">
                     <div className="w-5 h-5 border-2 border-black rounded-sm rotate-45 flex items-center justify-center">
                         <div className="w-1 h-1 bg-black rounded-full" />
                     </div>
                 </div>
-                <h1 className={`text-white origin-left font-extrabold text-xl tracking-tight duration-300 ${!isOpen && 'scale-0 opacity-0'}`}>
+                <h5 className={`text-white origin-left font-bold tracking-tight duration-300 text-[10px] ${!isOpen && 'scale-0 opacity-0'}`}>
                     Oasis <span className="text-yellow-400">Ascend</span>
-                </h1>
+                </h5>
             </div>
             {/* 🔥 SCROLLABLE NAV ONLY */}
-            <nav className="flex-1 overflow-y-auto custom-scroll px-3 space-y-2">
+            <nav className="flex-1 overflow-y-auto custom-scroll px-3 space-y-1">
                 {menuItems.map((item) => {
                     const isActive = activeTab === item.title;
 
@@ -80,29 +91,29 @@ export const AdminSidebar = () => {
                         <button
                             key={item.title}
                             onClick={() => setActiveTab(item.title)}
-                            className={`flex items-center gap-3 w-full p-3 rounded-lg transition
+                            className={`flex items-center gap-2 w-full px-3 py-2 rounded-lg transition
                                 ${isActive
                                     ? 'bg-yellow-400 text-black'
                                     : 'text-gray-400 hover:bg-white/10 hover:text-white'
                                 }`}
                         >
-                            {item.icon}
-                            {isOpen && <span>{item.title}</span>}
+                            <span className="shrink-0">{item.icon}</span>
+                            {isOpen && <h5>{item.title}</h5>}
                         </button>
                     );
                 })}
             </nav>
 
             {/* Footer (fixed bottom) */}
-            <div className="p-3 border-t border-white/10">
-                <button className="flex items-center gap-3 w-full p-3 text-gray-400 hover:text-white">
+            <div className="p-2 border-t border-white/10">
+                <button className="flex items-center gap-3 w-full p-2 text-gray-400 hover:text-white">
                     <Settings color='white' size={18} />
-                    {isOpen && 'Settings'}
+                    {isOpen && <h5>Settings</h5>}
                 </button>
 
-                <button className="flex items-center gap-3 w-full p-3 text-red-400 hover:text-red-600">
+                <button onClick={handleLogout} className="flex items-center gap-3 w-full p-2 text-red-400 hover:text-red-600">
                     <LogOut color='white' className='hover:text-red-900' size={18} />
-                    {isOpen && 'Logout'}
+                    {isOpen && <h5>Logout</h5>}
                 </button>
             </div>
 
