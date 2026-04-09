@@ -8,11 +8,13 @@ const getInitials = (name = "") =>
   name.trim().split(" ").slice(0, 2).map((w) => w[0]?.toUpperCase()).join("");
 
 const AvatarCell = ({ src, name }) => (
-  <div className="h-9 w-9 rounded-xl border border-white/10 p-0.5 flex-shrink-0 bg-white/5 overflow-hidden">
+  // Changed border to slate-200 and bg to slate-50
+  <div className="h-9 w-9 rounded-xl border border-slate-200 p-0.5 flex-shrink-0 bg-slate-50 overflow-hidden shadow-sm">
     {src ? (
       <img src={src} alt={name} className="h-full w-full rounded-[10px] object-cover" />
     ) : (
-      <div className="h-full w-full flex items-center justify-center text-[#a89060] font-bold text-xs uppercase bg-[#1a1814]">
+      // Amber tones adjusted for light mode legibility
+      <div className="h-full w-full flex items-center justify-center text-amber-700 font-bold text-xs uppercase bg-amber-100">
         {getInitials(name)}
       </div>
     )}
@@ -20,9 +22,13 @@ const AvatarCell = ({ src, name }) => (
 );
 
 const StatusPill = ({ isActive }) => (
-  <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest border ${isActive ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-white/5 text-white/20 border-white/10"
+  // Swapped to soft emerald and slate palettes
+  <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${isActive
+    ? "bg-emerald-50 text-emerald-600 border-emerald-200"
+    : "bg-slate-50 text-slate-400 border-slate-200"
     }`}>
-    <span className={`w-1 h-1 rounded-full ${isActive ? "bg-emerald-400 animate-pulse" : "bg-white/20"}`} />
+    <span className={`w-1 h-1 rounded-full ${isActive ? "bg-emerald-500" : "bg-slate-300"
+      }`} />
     {isActive ? "Active" : "Inactive"}
   </div>
 );
@@ -43,7 +49,8 @@ const ActionMenu = ({ item, onEdit, onDelete }) => {
     <div className="relative flex justify-end" ref={menuRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 hover:bg-white/5 rounded-lg text-white/40 hover:text-white transition-colors"
+        // Hover and text colors updated for light background
+        className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
       >
         <MoreVertical size={18} />
       </button>
@@ -54,20 +61,21 @@ const ActionMenu = ({ item, onEdit, onDelete }) => {
             initial={{ opacity: 0, scale: 0.95, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            className="absolute right-0 mt-2 w-36 bg-[#121212] border border-white/10 rounded-xl shadow-2xl z-50 py-1 overflow-hidden backdrop-blur-xl"
+            // Swapped to white background with slate border
+            className="absolute right-0 mt-2 w-44 bg-white border border-slate-200 rounded-xl shadow-xl z-50 py-1.5 overflow-hidden"
           >
             <button
               onClick={() => { onEdit(item); setIsOpen(false); }}
-              className="w-full flex items-center gap-2 px-3 py-2 text-xs text-white/70 hover:bg-white/5 hover:text-white transition-colors"
+              className="w-full flex items-center gap-2 px-4 py-2.5 text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors"
             >
-              <Pencil size={14} className="text-blue-400" /> Edit Profile
+              <Pencil size={14} className="text-blue-500" /> Edit Member
             </button>
-            <div className="h-px bg-white/5 mx-2 my-1" />
+            <div className="h-px bg-slate-100 mx-2 my-1" />
             <button
               onClick={() => { onDelete(item._id); setIsOpen(false); }}
-              className="w-full flex items-center gap-2 px-3 py-2 text-xs text-red-400 hover:bg-red-500/10 transition-colors"
+              className="w-full flex items-center gap-2 px-4 py-2.5 text-xs text-red-500 hover:bg-red-50 transition-colors"
             >
-              <Trash2 size={14} /> Terminate Member
+              <Trash2 size={14} /> Remove Personnel
             </button>
           </motion.div>
         )}
@@ -78,58 +86,52 @@ const ActionMenu = ({ item, onEdit, onDelete }) => {
 
 export const TeamTable = ({ data = [], onDelete, onEdit }) => {
   return (
-    <div className="w-full bg-[#080808] border border-white/5 rounded-3xl overflow-hidden shadow-xl">
+    // Main container now bg-white with slate-200 border
+    <div className="w-full bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
       <div className="overflow-x-auto">
         <table className="w-full text-left border-separate border-spacing-0">
           <thead>
-            <tr className="bg-white/2">
-              <th className="p-4 border-b border-white/5 text-[10px] font-black uppercase tracking-[0.2em] text-white/30">
+            {/* Header background adjusted to very light slate */}
+            <tr className="bg-slate-50/50">
+              <th className="p-4 border-b border-slate-100 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 <div className="flex items-center gap-2"><User size={12} /> Member</div>
               </th>
-              <th className="hidden md:table-cell p-4 border-b border-white/5 text-[10px] font-black uppercase tracking-[0.2em] text-white/30">
+              <th className="hidden md:table-cell p-4 border-b border-slate-100 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 <div className="flex items-center gap-2"><Briefcase size={12} /> Role</div>
               </th>
-              <th className="hidden sm:table-cell p-4 border-b border-white/5 text-[10px] font-black uppercase tracking-[0.2em] text-white/30">
+              <th className="hidden sm:table-cell p-4 border-b border-slate-100 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 <div className="flex items-center gap-2"><Hash size={12} /> Priority</div>
               </th>
-              <th className="p-4 border-b border-white/5 text-[10px] font-black uppercase tracking-[0.2em] text-white/30 text-center">
+              <th className="p-4 border-b border-slate-100 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-center">
                 Status
               </th>
-              <th className="p-4 border-b border-white/5 text-right text-white/30">
+              <th className="p-4 border-b border-slate-100 text-right text-slate-300">
                 <MoreVertical size={14} className="ml-auto" />
               </th>
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-white/2">
-            {!data.length ? (
-              <tr>
-                <td colSpan={5} className="py-20 text-center">
-                  <div className="flex flex-col items-center opacity-20">
-                    <User size={40} className="mb-2" />
-                    <p className="text-xs font-bold uppercase tracking-widest">Database Empty</p>
-                  </div>
-                </td>
-              </tr>
-            ) : (
+          <tbody className="divide-y divide-slate-100">
+            {
               data.map((item) => (
-                <tr key={item._id} className="group hover:bg-white/[0.01] transition-all">
+                // Hover effect changed to light slate
+                <tr key={item._id} className="group hover:bg-slate-50/50 transition-all">
                   <td className="p-4">
                     <div className="flex items-center gap-3">
                       <AvatarCell src={item.profileImage?.url} name={item.name} />
                       <div className="flex flex-col">
-                        <span className="text-sm font-semibold text-white tracking-tight">{item.name}</span>
-                        <span className="md:hidden text-[10px] text-white/30 uppercase tracking-wider">{item.designation}</span>
+                        <span className="text-sm font-semibold text-slate-900 tracking-tight">{item.name}</span>
+                        <span className="md:hidden text-[10px] text-slate-500 uppercase tracking-wider">{item.designation}</span>
                       </div>
                     </div>
                   </td>
 
                   <td className="hidden md:table-cell p-4">
-                    <span className="text-[13px] text-white/50">{item.designation}</span>
+                    <span className="text-[13px] text-slate-600">{item.designation}</span>
                   </td>
 
                   <td className="hidden sm:table-cell p-4">
-                    <span className="font-mono text-[11px] text-primary/40 bg-white/5 px-2 py-0.5 rounded">
+                    <span className="font-mono text-[11px] text-slate-500 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded">
                       #{String(item.order).padStart(2, "0")}
                     </span>
                   </td>
@@ -143,7 +145,7 @@ export const TeamTable = ({ data = [], onDelete, onEdit }) => {
                   </td>
                 </tr>
               ))
-            )}
+            }
           </tbody>
         </table>
       </div>

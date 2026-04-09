@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { loginUser } from "@/services/auth.service";
-
 export default function Login() {
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
@@ -39,6 +38,7 @@ export default function Login() {
 
     return (
         <main className="min-h-screen w-full flex bg-[#030303] text-primary selection:bg-white selection:text-black lp-font-body">
+            {/* <BeamGridBackground /> */}
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap');
                 .lp-font-bebas { font-family: 'Bebas Neue', sans-serif; }

@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Users, Plus, Search, Filter, RotateCcw, UserCheck, UserMinus } from "lucide-react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Users, Plus, Search, Filter, RotateCcw } from "lucide-react";
 import { TeamTable } from "@/components/admin/Team-members/Team-table.jsx";
 import { getTeamMembers, deleteTeamMember } from "@/services/team.service";
 import { toast } from "sonner";
@@ -23,7 +23,6 @@ export default function TeamPage() {
         name: "",
     });
 
-    // Fetch Data
     const fetchData = async () => {
         try {
             setLoading(true);
@@ -42,7 +41,6 @@ export default function TeamPage() {
         fetchData();
     }, []);
 
-    // Handle Filtering Logic
     useEffect(() => {
         let result = team;
 
@@ -61,7 +59,6 @@ export default function TeamPage() {
         setFilteredTeam(result);
     }, [searchQuery, statusFilter, team]);
 
-    // Delete Logic
     const openDeleteModal = (item) => {
         setDeleteModal({ isOpen: true, id: item._id, name: item.name });
     };
@@ -77,14 +74,8 @@ export default function TeamPage() {
         }
     };
 
-    const stats = {
-        total: team.length,
-        active: team.filter(m => m.isActive).length,
-        inactive: team.filter(m => !m.isActive).length
-    };
-
     return (
-        <div className="min-h-screen bg-[#050505] text-white p-6 lg:p-10 font-sans">
+        <div className="min-h-screen bg-slate-50 text-slate-900 p-6 lg:p-10 font-sans">
             <DeleteModal
                 isOpen={deleteModal.isOpen}
                 title={deleteModal.name}
@@ -92,58 +83,58 @@ export default function TeamPage() {
                 onConfirm={confirmDelete}
             />
 
-            <div className="max-w-7xl mx-auto space-y-10">
+            <div className="max-w-7xl mx-auto space-y-8">
                 {/* ── TOP HEADER ── */}
                 <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div>
-                        <div className="flex items-center gap-3 text-yellow-500 mb-2">
+                        <div className="flex items-center gap-3 text-amber-600 mb-2">
                             <Users size={18} />
-                            <span className="text-[8px] uppercase tracking-[0.3em] font-bold">Personnel Management</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Personnel Management</span>
                         </div>
-                        <h3 className="text-4xl font-bold tracking-tight">Our <span className="text-yellow-500 italic">Team</span></h3>
+                        <h3 className="text-4xl font-bold tracking-tight text-slate-800">
+                            Our <span className="text-amber-500 italic">Team</span>
+                        </h3>
                     </div>
 
                     <button
                         onClick={() => router.push("/admin/our-team/create")}
-                        className="group flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-lg shadow-yellow-500/10 active:scale-95"
+                        className="group flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-md active:scale-95"
                     >
                         <Plus size={16} className="group-hover:rotate-90 transition-transform" />
                         Onboard Member
                     </button>
                 </header>
 
-
-
                 {/* ── SEARCH & FILTERS ── */}
-                <section className="bg-white/2 border border-white/5 rounded-3xl flex flex-col lg:flex-row gap-4 items-center">
+                <section className="flex flex-col lg:flex-row gap-4 items-center">
                     <div className="relative flex-1 w-full">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={18} />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                         <input
                             type="text"
                             placeholder="Search by name or designation..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-white/3 border border-white/10 rounded-2xl py-3 pl-10 pr-4 text-sm outline-none focus:border-yellow-500/50 transition-all placeholder:text-white/10"
+                            className="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-11 pr-4 text-sm outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all placeholder:text-slate-400 shadow-sm"
                         />
                     </div>
 
                     <div className="flex items-center gap-3 w-full lg:w-auto">
                         <div className="relative flex-1 lg:w-48">
-                            <Filter className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={16} />
+                            <Filter className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                             <select
                                 value={statusFilter}
                                 onChange={(e) => setStatusFilter(e.target.value)}
-                                className="w-full bg-white/3 border border-white/10 rounded-2xl py-3 pl-10 pr-4 text-sm outline-none cursor-pointer appearance-none hover:bg-white/5"
+                                className="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-11 pr-8 text-sm outline-none cursor-pointer appearance-none hover:border-slate-300 transition-all shadow-sm"
                             >
-                                <option value="all" className="bg-[#050505]">All Status</option>
-                                <option value="active" className="bg-[#050505]">Active Only</option>
-                                <option value="inactive" className="bg-[#050505]">Inactive Only</option>
+                                <option value="all">All Status</option>
+                                <option value="active">Active Only</option>
+                                <option value="inactive">Inactive Only</option>
                             </select>
                         </div>
 
                         <button
                             onClick={() => { setSearchQuery(""); setStatusFilter("all"); }}
-                            className="p-3 bg-white/[0.03] border border-white/10 rounded-2xl text-white/40 hover:text-white hover:bg-white/10 transition-all"
+                            className="p-3 bg-white border border-slate-200 rounded-2xl text-slate-500 hover:text-slate-900 hover:border-slate-400 transition-all shadow-sm"
                             title="Reset Filters"
                         >
                             <RotateCcw size={18} />
@@ -153,14 +144,14 @@ export default function TeamPage() {
 
                 {/* ── TABLE AREA ── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/[0.01] border border-white/5 rounded-3xl overflow-hidden"
+                    className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm"
                 >
                     {loading ? (
                         <div className="py-20 flex flex-col items-center justify-center gap-4">
-                            <div className="w-8 h-8 border-2 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin" />
-                            <span className="text-[10px] uppercase tracking-[0.3em] text-white/20 font-bold">Accessing Encrypted Data</span>
+                            <div className="w-8 h-8 border-3 border-slate-100 border-t-amber-500 rounded-full animate-spin" />
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold">Fetching Records</span>
                         </div>
                     ) : (
                         <TeamTable
@@ -176,9 +167,9 @@ export default function TeamPage() {
                     )}
 
                     {!loading && filteredTeam.length === 0 && (
-                        <div className="py-20 text-center">
-                            <Users size={40} className="mx-auto text-white/5 mb-4" />
-                            <p className="text-white/20 text-sm italic">No matching personnel found in database.</p>
+                        <div className="py-24 text-center">
+                            <Users size={40} className="mx-auto text-slate-200 mb-4" />
+                            <p className="text-slate-400 text-sm italic">No matching personnel found.</p>
                         </div>
                     )}
                 </motion.div>
