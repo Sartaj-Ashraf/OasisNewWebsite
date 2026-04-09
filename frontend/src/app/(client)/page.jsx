@@ -1,10 +1,11 @@
 
-import HeroBanner from '@/shared/HeroBanner'
+import { HomePage } from '@/components/client/Pages/HomePage'
 import React from 'react'
 
 const page = () => {
   return (
-    <div className='container'><HeroBanner/></div>
+    <div className='container'>
+      <HomePage/></div>
   )
 }
 

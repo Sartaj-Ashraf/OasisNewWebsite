@@ -4,10 +4,34 @@
    🎨 Design Tokens
 ======================== */
 :root {
+/* 🔶 Primary (Yellow Theme) */
   --primary: #eab308;
-  --secondary: #ffffff;
+  --primary-dark: #d6a107;
+  --primary-light: #facc15;
+
+  /* 🌿 Secondary (Green Shades) */
+  --secondary: #4f7f74;        /* main green */
+  --secondary-dark: #0f2e3a;   /* deep green */
+  --secondary-light: #6f9f94;  /* soft green */
+  --secondary-muted: #8fb5ab;  /* subtle bg green */
+
+  /* 🟡 Tertiary (Gold Accent) */
   --tertiary: #ffd700;
+  --tertiary-dark: #e6c200;
+  --tertiary-light: #ffdf33;
+
+  /* ⚪ Accent (Neutral UI) */
   --accent: #f5f5f5;
+  --accent-dark: #e0e0e0;
+  --accent-light: #ffffff;
+
+  /* ⚫ Text Colors */
+  --text-primary: #1f1f1f;
+  --text-secondary: #6b7280;
+  --text-light: #ffffff;
+
+  /* 🧱 Borders */
+  --border: #d1d5db;
 
   --font-base: 16px;
   --container-max-width: 1320px;
@@ -16,9 +40,21 @@
 /* Tailwind Theme Mapping */
 @theme inline {
   --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
   --color-secondary: var(--secondary);
+  --color-secondary-dark: var(--secondary-dark);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-muted: var(--secondary-muted);
   --color-tertiary: var(--tertiary);
+  --color-tertiary-dark: var(--tertiary-dark);
+  --color-tertiary-light: var(--tertiary-light);
   --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-light: var(--accent-light);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-light: var(--text-light);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -42,30 +78,37 @@ body {
 ======================== */
 h1 {
   font-size: clamp(2.5rem, 5vw, 5.125rem);
+  line-height: 1.1;
 }
 
 h2 {
   font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.2;
 }
 
 h3 {
   font-size: clamp(1.75rem, 3vw, 3rem);
+  line-height: 1;
 }
 
 h4 {
   font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1;
 }
 
 h5 {
   font-size: 1rem;
+  line-height: 1.4;
 }
 
 h6 {
   font-size: 0.875rem;
+  line-height: 1.4;
 }
 
 p {
-  font-size: clamp(1.1rem, 1.5vw, 1.6rem);
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  line-height: 1.6;
 }
 
 /* ========================
@@ -74,7 +117,7 @@ p {
 .container {
   width: 100%;
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: 1.5rem;
   max-width: var(--container-max-width);
 }
 
@@ -92,7 +135,7 @@ p {
   }
 
   .container {
-    padding-inline: 0.75rem;
+    padding-inline: 1rem;
   }
 }
 
@@ -123,4 +166,13 @@ p {
 
 .custom-scroll:hover::-webkit-scrollbar-thumb {
   background: rgba(234, 179, 8, 0.8);
+}
+
+.hero {
+  height: 100vh;
+  width: 100%;
+  border-radius: 2rem;
+  clip-path: path(
+    "M 30 80 L 180 80 A 55 55 0 0 0 235 50 A 50 100 0 0 1 250 20 A 50 60 0 0 1 290 0 L 1220 0 L 1220 30 L 1250 1250 L 1280 1250 L 1280 1280 L 0 1280 L 0 110 A 30 30 0 0 1 30 80 Z"
+  );
 }
