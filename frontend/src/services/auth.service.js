@@ -14,13 +14,13 @@ export const registerUser = async (userData) => {
 
 // ================= LOGOUT =================
 export const logoutUser = async () => {
-    const { data } = await customFetch.post("/auth/logout");
+    const { data } = await customFetch.get("/auth/logout");
     return data;
 };
 
 // ================= IS AUTH =================
 export const isAuth = async () => {
-    const { data } = await customFetch.get("/auth/is-auth");
+    const { data } = await customFetch.get("/auth/is-user-logged-in");
     return data;
 };
 
