@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Home, Wrench } from "lucide-react";
+import { Home, LifeBuoy } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -15,16 +15,17 @@ const fadeUp = {
 
 export default function NotFound() {
   return (
-    <section className="login-bg flex items-center justify-center px-4">
-
-      {/* Glow */}
-      <div className="absolute top-0 left-1/3 w-[400px] h-[400px] bg-yellow-500/10 blur-[120px] rounded-full" />
+    <section className="min-h-screen bg-slate-50 flex items-center justify-center px-4 overflow-hidden relative select-none">
+      
+      {/* Decorative Light Glows */}
+      <div className="absolute top-0 left-1/4 w-125 h-125 bg-yellow-400/10 blur-[120px] rounded-full -z-0" />
+      <div className="absolute bottom-0 right-1/4 w-125 h-125 bg-blue-400/5 blur-[120px] rounded-full -z-0" />
 
       <div className="container text-center relative z-10">
-
-        {/* 404 */}
+        
+        {/* Large 404 Text - Using Slate for Light Theme */}
         <motion.h1
-          className="text-[120px] md:text-[180px] font-black bg-gradient-to-b from-white/10 to-white/0 bg-clip-text text-transparent"
+          className="text-[120px] md:text-[200px] font-primary leading-none bg-gradient-to-b from-slate-200 to-transparent bg-clip-text text-transparent select-none"
           variants={fadeUp}
           initial="hidden"
           animate="show"
@@ -34,7 +35,7 @@ export default function NotFound() {
 
         {/* Title */}
         <motion.h2
-          className="text-2xl md:text-4xl font-bold text-white mt-2"
+          className="text-3xl md:text-5xl font-bold text-slate-900 -mt-10"
           variants={fadeUp}
           initial="hidden"
           animate="show"
@@ -45,43 +46,54 @@ export default function NotFound() {
 
         {/* Description */}
         <motion.p
-          className="text-gray-400 mt-3 max-w-md mx-auto"
+          className="text-slate-500 mt-4 max-w-md mx-auto text-lg"
           variants={fadeUp}
           initial="hidden"
           animate="show"
           custom={2}
         >
-          Looks like this page is broken or removed.
-          Let’s get you back to fixing things with Gofixy.
+          It seems the page you are looking for has been moved or doesn't exist. 
+          Let’s get you back to the dashboard.
         </motion.p>
 
         {/* Actions */}
         <motion.div
-          className="flex flex-col sm:flex-row justify-center gap-4 mt-8"
+          className="flex flex-col sm:flex-row justify-center gap-4 mt-10"
           variants={fadeUp}
           initial="hidden"
           animate="show"
           custom={3}
         >
           <Link
-            href="/"
-            className="flex items-center gap-2 justify-center bg-primary text-black font-semibold px-6 py-3 rounded-xl shadow-lg shadow-yellow-500/20 hover:scale-105 transition-all"
+            href="/admin"
+            className="flex items-center gap-2 justify-center bg-primary text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-slate-900/10 hover:bg-slate-800 hover:scale-105 transition-all active:scale-95"
           >
-            <Home className="w-4 h-4" />
-            Go Home
+            <Home className="w-5 h-5" />
+            Back to Dashboard
+          </Link>
+          
+          <Link
+            href="/admin/support"
+            className="flex items-center gap-2 justify-center bg-white text-secondary font-bold px-8 py-4 rounded-2xl border border-slate-200 shadow-sm hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-95"
+          >
+            <LifeBuoy className="w-5 h-5" />
+            Contact Support
           </Link>
         </motion.div>
 
-        {/* Help */}
-        <motion.p
-          className="mt-10 text-gray-500 text-sm"
+        {/* Brand Footer */}
+        <motion.div
+          className="mt-16 flex items-center justify-center gap-2 grayscale opacity-50"
           variants={fadeUp}
           initial="hidden"
           animate="show"
           custom={4}
         >
-          Need help? <span className="text-yellow-400">Contact support</span>
-        </motion.p>
+            <div className="w-6 h-6 bg-primary rounded-lg rotate-45 flex items-center justify-center">
+                 <div className="w-1.5 h-1.5 bg-white rounded-full" />
+            </div>
+            <span className="text-slate-900 font-bold tracking-tight">Oasis Ascend</span>
+        </motion.div>
 
       </div>
     </section>

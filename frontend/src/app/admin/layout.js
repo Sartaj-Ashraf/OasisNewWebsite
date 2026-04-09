@@ -63,13 +63,13 @@ export default function AdminLayout({ children }) {
     }
 
     return (
-        <div className="flex h-screen overflow-hidden bg-gray-950">
+        <div className="flex h-screen overflow-hidden bg-white-950">
             <div className="h-full">
                 <AdminSidebar />
             </div>
 
             {/* Main Content (scrollable only here) */}
-            <main className="flex-1 h-full overflow-y-auto p-6">
+            <main className="flex-1 h-full overflow-y-auto ">
                 {children}
             </main>
 
