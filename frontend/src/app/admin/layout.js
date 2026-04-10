@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { isAuth } from "@/services/auth.service";
 import { motion } from "framer-motion";
+
+
 export default function AdminLayout({ children }) {
     const router = useRouter();
     const [loading, setLoading] = useState(true);

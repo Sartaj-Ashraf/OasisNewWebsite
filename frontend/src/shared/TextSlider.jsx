@@ -54,13 +54,21 @@ export default function TextSlider() {
 
   return (
     <div className="w-full overflow-hidden  relative">
+           {/* LEFT FADE */}
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-40 z-10
+        bg-linear-to-r from-accent to-transparent" />
+
+      {/* RIGHT FADE */}
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-40 z-10
+        bg-linear-to-l from-accent to-transparent" />
+
       <div className="splide" ref={splideRef}>
         <div className="splide__track">
           <ul className="splide__list">
             {words.map((word, i) => (
               <li
                 key={i}
-                className="splide__slide whitespace-nowrap text-4xl md:text-6xl md:h-[100px] flex items-center font-bold
+                className="splide__slide whitespace-nowrap text-5xl md:text-6xl md:h-[100px] flex items-center font-bold
                            text-black/10 [&.is-active]:text-transparent
                            [&.is-active]:bg-linear-to-r
                            [&.is-active]:from-secondary

@@ -1,3 +1,6 @@
+
+import { Home, Search, Info, User } from "lucide-react";
+
 export const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
@@ -5,6 +8,12 @@ export const navLinks = [
   { name: 'Services', path: '/services' },
   { name: 'Blog', path: '/blog' },
   { name: 'Contact', path: '/contact' },
+];
+export const bottomNavItems = [
+  { name: "Home",    href: "/",       icon: Home   },
+  { name: "Search",  href: "/search", icon: Search },
+  { name: "About",   href: "/about",  icon: Info   },
+  { name: "Profile", href: "/profile",icon: User   },
 ];
 
 

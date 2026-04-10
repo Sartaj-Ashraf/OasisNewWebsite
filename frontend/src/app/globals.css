@@ -56,6 +56,8 @@
   --color-text-secondary: var(--text-secondary);
   --color-text-light: var(--text-light);
 
+  --font-inter: var(--font-inter);
+  --font-poppins: var(--font-poppins);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -70,12 +72,15 @@ html {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* ========================
    🔤 Typography (Fluid)
 ======================== */
+h1,h2,h3,h4,h5{
+  font-family: var(--font-inter);
+}
 h1 {
   font-size: clamp(2.5rem, 5vw, 5.125rem);
   line-height: 1.1;
@@ -107,8 +112,9 @@ h6 {
 }
 
 p {
-  font-size: clamp(1rem, 1.5vw, 1.5rem);
-  line-height: 1.6;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  line-height: 1.5;
+  font-family: var(--font-inter);
 }
 
 /* ========================
@@ -175,4 +181,11 @@ p {
   clip-path: path(
     "M 30 80 L 180 80 A 55 55 0 0 0 235 50 A 50 100 0 0 1 250 20 A 50 60 0 0 1 290 0 L 1220 0 L 1220 30 L 1250 1250 L 1280 1250 L 1280 1280 L 0 1280 L 0 110 A 30 30 0 0 1 30 80 Z"
   );
+}
+
+.button{
+   
+  width: fit-content;
+   border-radius: 10px; /* Size of the notch */
+  corner-shape: scoop;   /* Style of the notch */
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Loader, X, Plus, Megaphone, Palette, Headphones } from "lucide-react";
 import bgImage from "@/assets/svg/download.svg";
+import { Button, LinkBtn } from "@/shared/ClickAble";
 const services = [
   {
     id: "marketing",
@@ -17,8 +18,8 @@ const services = [
     ServiceIcon: Megaphone,
   },
   {
-    id: "design",
-    title: "Design",
+    id: "web-development",
+    title: "Web Development",
     description:
       "We craft visually compelling and user-centric design systems that transform complex ideas into intuitive, beautiful experiences across every touchpoint.",
     bg: "bg-gradient-to-br from-[#e8d0f8] via-[#c9a8ee] to-[#a87ad8]",
@@ -29,8 +30,8 @@ const services = [
     ServiceIcon: Palette,
   },
   {
-    id: "support",
-    title: "Support",
+    id: "social-media-marketing",
+    title: "Social Media Marketing",
     description:
       "We provide dedicated, around-the-clock support to ensure your business runs smoothly — resolving issues swiftly and keeping your customers satisfied.",
     bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
@@ -84,7 +85,7 @@ export default function Services() {
   const [active, setActive] = useState("marketing");
 
   return (
-    <div className="flex items-center justify-center py-8 px-4 min-h-screen">
+    <div className="flex items-center justify-center py-8  min-h-screen">
       {/*
         Layout:
         - Mobile  (< md): flex-col, full width, each panel expands vertically
@@ -131,7 +132,7 @@ export default function Services() {
                     className="opacity-70"
                   />
                   <span
-                    className="text-[13px] font-bold tracking-widest uppercase"
+                    className="text-[13px] font-medium tracking-widest uppercase"
                     style={{ color: s.iconColor }}
                   >
                     {s.title}
@@ -152,7 +153,7 @@ export default function Services() {
                 `}
               >
                 <span
-                  className="text-2xl font-bold tracking-widest uppercase text-white/90"
+                  className="text-2xl font-medium tracking-widest uppercase text-white/90"
                   style={{
                     writingMode: "vertical-rl",
                     transform: "rotate(180deg)",
@@ -189,7 +190,7 @@ export default function Services() {
                     opacity: 0.7, 
                   }}
                 />
-                <div className="mt-auto">
+                <div className="mt-auto space-y-4">
                   <div className="mb-2 opacity-50"> 
                     <ServiceIcon
                       size={32}
@@ -198,18 +199,17 @@ export default function Services() {
                     />
                   </div>
                   <h2
-                    className={`text-[32px] md:text-[36px] font-extrabold leading-tight tracking-tight ${s.titleColor} mb-2`}
+                    className={`text-[32px] md:text-[36px] font-medium leading-tight tracking-tight ${s.titleColor} mb-2`}
                   >
                     {s.title}
                   </h2>
                   <p className={` leading-relaxed ${s.descColor} opacity-85 `}>
                     {s.description}
                   </p>
-                  <button
-                    className={`mt-5 px-5 py-2 rounded-full border text-[10px] font-bold tracking-widest uppercase hover:bg-white/30 transition-colors ${s.btnBorder}`}
-                  >
-                    Discover More
-                  </button>
+                  <LinkBtn
+                   link="/services" children=" Discover More" className="mt-8" />
+                   
+                 
                 </div>
               </div>
 
@@ -223,7 +223,7 @@ export default function Services() {
                 `}
               >
                 <span
-                  className="text-2xl font-bold tracking-widest uppercase text-white/80"
+                  className="text-2xl font-medium tracking-widest uppercase text-white/80"
                   style={{
                     writingMode: "vertical-rl",
                     transform: "rotate(180deg)",

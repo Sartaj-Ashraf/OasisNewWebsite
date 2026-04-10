@@ -20,7 +20,7 @@ export const Customers = () => {
         </Link>
       </div>
       <div className="flex flex-col justify-end h-full gap-4">
-        <h3 className="font-semibold text-white">AI Innovation Globally Proven</h3>
+        <h3 className="font-medium text-white">AI Innovation Globally Proven</h3>
         <p className="text-white">Used by 50k+ people around the world</p>
         <LinkBtn link="/" children="Discover More" />
       </div>
