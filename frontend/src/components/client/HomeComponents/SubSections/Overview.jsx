@@ -8,15 +8,17 @@ import bgImage from "@/assets/Digital3.jpg";
 export const Overview = () => {
   return (
     <div
-      className="flex flex-col gap-4 relative  w-full h-[400px] md:h-[500px] sm:col-span-3 text-white p-6 rounded-3xl overflow-hidden"
-      style={{
+      className="flex flex-col gap-4 relative  bg-linear-to-br from-secondary-dark to-transparent w-full h-[400px] md:h-[500px] sm:col-span-3 text-white p-6 rounded-3xl overflow-hidden"
+    >
+      <div className="absolute inset-0  "
+       style={{
         backgroundImage: `url(${bgImage.src})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        opacity: 0.5,
       }}
-    >
-      {/* <div className="absolute inset-0 bg-linear-to-br from-secondary-dark/90 to-transparent" /> */}
+      />
       <div className="absolute bottom-0 right-0  ">
         <Image src={svgImg} alt="svg" className="w-full h-full " />
         <Link

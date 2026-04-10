@@ -19,10 +19,10 @@ const HeroBanner = () => {
       <div className="  relative z-10  py-4 md:py-8   h-full ">
         <NavBar />
         <div className="flex flex-col justify-center h-full ">
-          <h1 className="md:ml-[20%] px-4 md:px-0 font-bold text-black/70">AI-Powered</h1>
+          <h1 className="md:ml-[20%] px-4 md:px-0 font-medium text-black/70">AI-Powered</h1>
 
           <TextSlider />
-          <h1 className="md:ml-[20%] px-4 md:px-0  font-bold text-black/70">
+          <h1 className="md:ml-[20%] px-4 md:px-0 font-medium text-black/70">
             Smart Solutions
           </h1>
           <p className="md:ml-[20%] px-4 md:px-0 text-black/70 lg:w-xl">
@@ -30,7 +30,7 @@ const HeroBanner = () => {
             benefits that can save time, boost rankings, and make your digital
             strategy way more efficient.
           </p>
-          <Button className="md:ml-[20%]">Get Started</Button>
+          <Button className="w-fit button md:ml-[20%]">Get Started</Button>
         </div>
       </div>
 
