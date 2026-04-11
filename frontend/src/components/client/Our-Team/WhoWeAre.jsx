@@ -1,3 +1,11 @@
+import { title } from "framer-motion/client";
+
+const data=[
+  {title: "our services ",
+  description:"we provide WEB DEVELOPMENT services "},
+  {title: "our services ",
+  description:"we provide WEB DEVELOPMENT services "}
+]
 export default function WhoWeAre() {
   return (
     <section className="container bg-[#f5f6f7] py-24 px-6 md:px-16">
