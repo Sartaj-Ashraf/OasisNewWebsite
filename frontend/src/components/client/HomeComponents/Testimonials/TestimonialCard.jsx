@@ -2,9 +2,10 @@ import React from "react";
 import Image from "next/image";
 import svgImg from "@/assets/svg/angle-start.svg";
 import bgImage from "@/assets/testimonialBg.png";
+import quorte from "@/assets/svg/quotes.svg"
 export const TestimonialCard = () => {
   return (
-    <div className="h-[60vh] md:h-[90vh] relative  md:flex-1  rounded-3xl pl-10 p-8 overflow-hidden">
+    <div className="h-[60vh] md:h-[90vh] max-h-[500px] relative  md:flex-1 rounded-3xl pl-10 p-8 overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center W-[60%] -z-10 "
         style={{ 
@@ -27,7 +28,8 @@ export const TestimonialCard = () => {
           <p className="text-sm text-secondary">Shahid Ajaz</p>
         </div>
       </div>
-      <span className="text-xl md:text-4xl text-secondary-dark font-semibold my-auto h-full ">
+      <Image src={quorte} alt="quorte" className="w-28 h-28" />
+      <span className="text-xl md:text-3xl text-secondary-dark font-semibold   my-auto h-full ">
         We specialize in creating, developing, and managing a brand’s identity
         to help businesses stand out in the marketplace and connect with their
         target audience.

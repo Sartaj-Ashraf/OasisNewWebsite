@@ -8,7 +8,7 @@ export const Footer = () => {
   return (
     <footer className='container py-6'>
 
-    <div className='pl-0 md:pl-[21%] h-screen md:h-[70vh] bg-secondary-dark rounded-3xl relative'>
+    <div className='pl-0 md:pl-[21%] h-screen md:h-[70vh] max-h-[500px] bg-secondary-dark rounded-3xl relative'>
           <div className="absolute -top-[1px] left-0 ">
                 <Image src={svgImg} alt="svg" className="w-[70%] md:w-full md:h-full " />
                 <div className="flex items-center gap-2 absolute md:top-5 top-0 md:left-10 left-5">

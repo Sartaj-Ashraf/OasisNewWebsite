@@ -9,7 +9,7 @@ export const BlogCard = () => {
         <Image src={bottomCorner} alt="bottom corner" width={77} height={77} />
       </div>
       <span className="text-xs text-black/60">10th-Oct-2025</span>
-      <h3 className="text-2xl font-semibold text-black">
+      <h3 className="text-xl font-medium text-black">
         10 Principles Of Effective Web Design
       </h3>
       <LinkBtn link="/" children="Read More" />
