@@ -45,12 +45,12 @@ export default function Marque() {
     <div className="w-full overflow-hidden py-4 relative pt-10">
       
       {/* LEFT FADE */}
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-24 z-10
-        bg-gradient-to-r from-white to-transparent" />
+      <div className="hidden lg:block pointer-events-none absolute left-0 top-0 h-full w-24 z-10
+        bg-linear-to-r from-white to-transparent" />
 
       {/* RIGHT FADE */}
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-24 z-10
-        bg-gradient-to-l from-white to-transparent" />
+      <div className="hidden lg:block pointer-events-none absolute right-0 top-0 h-full w-24 z-10
+        bg-linear-to-l from-white to-transparent" />
 
       {/* SPLIDE */}
       <div className="splide" ref={splideRef}>
