@@ -9,8 +9,9 @@ import React from 'react'
 
 export const page = () => {
   return (
-    <div>
-      <HeroBanner/>
+    <>
+    <HeroBanner/>
+    <div className='container space-y-8'>
         <AboutSection/>
         <VideoSection/>
         <StatsSection/>
@@ -18,6 +19,7 @@ export const page = () => {
         <WhyChooseUs/>
         <TestimonialSection/>
             </div>
+    </>
   )
 }
 export default page;

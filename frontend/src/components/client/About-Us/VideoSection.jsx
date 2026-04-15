@@ -4,40 +4,50 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import thumb1 from "@/assets/OurTeam/shahid.jpeg";
-import thumb2 from "@/assets/OurTeam/mehran.jpeg";
-import thumb3 from "@/assets/OurTeam/asif.jpeg";
+import thumb1 from "@/assets/videosection/second.webp";
+import thumb2 from "@/assets/videosection/second.webp";
+import thumb3 from "@/assets/videosection/third.webp";
+
+// ✅ API STYLE DATA (VIDEO + TEXT + THUMBNAIL)
+const videos = [
+  {
+    id: 1,
+    thumbnail: thumb1,
+    video: "/videos/offvideo.mp4",
+    title: "Outstanding ",
+    description:
+      "Using AI for SEO is super helpful! It can save you time, improve your rankings, and really amp up your online strategy.",
+  },
+  {
+    id: 2,
+    thumbnail: thumb2,
+    video: "/videos/offvideo.mp4",
+    title: "Grow Faster With Smart AI",
+    description:
+      "Leverage AI-powered tools to boost your growth, automate tasks, and scale your business efficiently.",
+  },
+  {
+    id: 3,
+    thumbnail: thumb3,
+    video: "/videos/offvideo.mp4",
+    title: "Next Level Marketing Strategy",
+    description:
+      "Transform your digital marketing with data-driven strategies and intelligent automation.",
+  },
+];
 
 export default function VideoSection() {
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const videos = [
-    {
-      id: 1,
-      thumbnail: thumb1,
-      video: "/videos/offvideo.mp4",
-    },
-    {
-      id: 2,
-      thumbnail: thumb2,
-      video: "/videos/offvideo.mp4",
-    },
-    {
-      id: 3,
-      thumbnail: thumb3,
-      video: "/videos/offvideo.mp4",
-    },
-  ];
-
-  // ✅ AUTO SLIDE (5 sec)
+  // ✅ AUTO SLIDE
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % videos.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [videos.length]);
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % videos.length);
@@ -49,9 +59,11 @@ export default function VideoSection() {
     );
   };
 
+  const currentVideo = videos[currentIndex];
+
   return (
-    <section className="bg-[#f5f6f7] py-20 px-6 md:px-16">
-      <div className=" container max-w-6xl mx-auto relative">
+    <section className="">
+      <div className="container max-w-6xl mx-auto relative">
 
         {/* CAROUSEL */}
         <div className="relative group">
@@ -63,18 +75,28 @@ export default function VideoSection() {
           >
             <div className="relative w-full h-[400px] md:h-[500px]">
               <Image
-                src={videos[currentIndex].thumbnail}
+                src={currentVideo.thumbnail}
                 alt="Video"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+            {/* OVERLAY + DYNAMIC TEXT */}
+            <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center px-6">
 
-            {/* Play Button */}
-            <div className="absolute inset-0 flex items-center justify-center">
+              <h2 className="text-white text-2xl md:text-5xl font-medium mb-4">
+                {currentVideo.title}
+              </h2>
+
+              <p className="text-gray-200 max-w-xl text-sm md:text-lg leading-relaxed">
+                {currentVideo.description}
+              </p>
+
+            </div>
+
+            {/* PLAY BUTTON */}
+            <div className="absolute inset-0 flex items-center justify-center z-10">
               <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-xl hover:scale-110 transition">
                 ▶
               </div>
@@ -117,7 +139,6 @@ export default function VideoSection() {
         {open && (
           <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
 
-            {/* CLOSE */}
             <button
               className="absolute top-6 right-6 text-white text-3xl"
               onClick={() => setOpen(false)}
@@ -125,10 +146,9 @@ export default function VideoSection() {
               ✕
             </button>
 
-            {/* VIDEO */}
             <div className="w-[90%] max-w-3xl aspect-video">
               <video
-                src={videos[currentIndex].video}
+                src={currentVideo.video}
                 controls
                 autoPlay
                 muted
