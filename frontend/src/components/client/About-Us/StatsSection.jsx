@@ -1,8 +1,30 @@
+"use client";
 
+// ✅ API STYLE DATA
+const statsData = [
+  {
+    id: 1,
+    value: "+130%",
+    label: "Conversion Rate Increased",
+    color: "text-teal-400",
+  },
+  {
+    id: 2,
+    value: "+150K",
+    label: "Monthly Active Users",
+    color: "text-purple-400",
+  },
+  {
+    id: 3,
+    value: "+15K",
+    label: "Active Followers",
+    color: "text-orange-400",
+  },
+];
 
 export default function StatsSection() {
   return (
-    <section className="px-6 md:px-16 py-10 bg-[#f5f6f7]">
+    <section className="">
       <div className="container max-w-7xl mx-auto rounded-3xl p-10 md:p-16 relative overflow-hidden text-white">
 
         {/* BACKGROUND GRADIENT */}
@@ -15,32 +37,20 @@ export default function StatsSection() {
         {/* CONTENT */}
         <div className="relative grid md:grid-cols-3 gap-10">
 
-          {/* ITEM 1 */}
-          <div>
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-4xl text-teal-400">↗</span>
-              <h2 className="text-5xl font-semibold">+130%</h2>
-            </div>
-            <p className="text-gray-300">Conversion Rate Increased</p>
-          </div>
+          {statsData.map((item) => (
+            <div key={item.id}>
 
-          {/* ITEM 2 */}
-          <div>
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-4xl text-purple-400">↗</span>
-              <h2 className="text-5xl font-semibold">+150K</h2>
-            </div>
-            <p className="text-gray-300">Monthly Active Users</p>
-          </div>
+              <div className="flex items-center gap-4 mb-4">
+                <span className={`text-4xl ${item.color}`}>↗</span>
+                <h2 className="font-medium">{item.value}</h2>
+              </div>
 
-          {/* ITEM 3 */}
-          <div>
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-4xl text-orange-400">↗</span>
-              <h2 className="text-5xl font-semibold">+15K</h2>
+              <p className="!text-lg text-gray-300">
+                {item.label}
+              </p>
+
             </div>
-            <p className="text-gray-300">Active Followers</p>
-          </div>
+          ))}
 
         </div>
       </div>

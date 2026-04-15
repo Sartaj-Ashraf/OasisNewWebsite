@@ -3,7 +3,7 @@ import { title } from "framer-motion/client";
 const data=[
   {title: "our services ",
   description:"we provide WEB DEVELOPMENT services "},
-  {title: "our services ",
+  {title: "our services ",  
   description:"we provide WEB DEVELOPMENT services "}
 ]
 export default function WhoWeAre() {

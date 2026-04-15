@@ -1,39 +1,46 @@
 import Image from "next/image";
 import AboutImage from "@/assets/OurTeam/shahid.jpeg";
+import { Button } from "@/shared/ClickAble"
+
 export default function AboutSection() {
   return (
-    
-    <section className="bg-[#f5f6f7] py-24 px-6 md:px-16">
-      <div className="container max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <section className="">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
         {/* LEFT */}
-        <div>
-          <p className="text-xs tracking-widest text-gray-500 mb-6 uppercase">
+        <div className="max-w-xl">
+
+          {/* Small Label */}
+          <p className="text-sm tracking-[0.2em] text-gray-400 mb-4 uppercase font-medium">
             About Us
           </p>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-black leading-tight mb-6">
+          {/* Heading */}
+          <h2 className="text-4xl md:text-5xl font-medium text-black leading-tight mb-6">
             Boost your Website <br /> Traffic!
-          </h1>
+          </h2>
 
-          <p className="text-gray-500 leading-relaxed mb-6 max-w-md">
+          {/* Paragraph 1 */}
+          <p className="text-black/70 !text-lg leading-relaxed mb-5">
             AI-powered SEO (Search Engine Optimization) offers a bunch
             of benefits that can save time, boost rankings, and make your
             digital strategy way more efficient.
           </p>
 
-          <p className="text-gray-500 leading-relaxed mb-10 max-w-md">
+          {/* Paragraph 2 */}
+          <p className="text-black/70 !text-lg leading-relaxed mb-10">
             Using AI for SEO is super helpful. It can save you time, improve
             your rankings, and really amp up your online strategy.
           </p>
 
-          <button className="px-6 py-3 rounded-full border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white transition duration-300">
-            DISCOVER MORE
-          </button>
+          {/* Button */}
+         <div className="flex justify-start">
+          <Button className="w-fit button">Get Started</Button>
+          </div>
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="relative w-full h-[400px] md:h-[450px] rounded-3xl overflow-hidden">
+        <div className="relative w-full h-[400px] md:h-[450px] rounded-[28px] overflow-hidden shadow-lg">
           <Image
             src={AboutImage}
             alt="AI SEO"

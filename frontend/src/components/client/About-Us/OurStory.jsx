@@ -43,7 +43,7 @@ export default function OurStory() {
   ];
 
   return (
-    <section className="bg-[#f9f9f7] py-28 px-6 md:px-16">
+    <section className=" ">
       <div className="container mx-auto">
 
         {/* HEADER */}
