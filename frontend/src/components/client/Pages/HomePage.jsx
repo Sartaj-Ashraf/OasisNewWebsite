@@ -6,6 +6,7 @@ import Marque from '../../../shared/Marque'
 import { TestimonialSection } from '../HomeComponents/TestimonialSection'
 import { BlogSection } from '../HomeComponents/BlogSection'
 import {ClientsSlider} from '@/shared/ClientsSlider'
+import { ContactSection } from '../HomeComponents/ContactSection'
 
 export const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ export const HomePage = () => {
       <ClientsSlider/>
       <TestimonialSection/>
       <BlogSection/>
+      <ContactSection/>
     </div>
   )
 }

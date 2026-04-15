@@ -1,6 +1,6 @@
 
 import { Home, Search, Info, User } from "lucide-react";
-
+import { X ,Facebook, Instagram, LinkedIn } from "./SocialIcons";
 export const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
@@ -17,10 +17,43 @@ export const bottomNavItems = [
 ];
 
 
+
 export const contactLinks = [
-  { name: 'Email', path: 'mailto:info@oasis.com' },
-  { name: 'Phone', path: 'tel:+1234567890' },
-  { name: 'Address', path: '123 Main St, Anytown, USA' },
+  {
+    label: "Email Address",
+    value: "info@oasis.com",
+    href: "mailto:info@oasis.com",
+  },
+  {
+    label: "Phone Number",
+    value: "+1234567890",
+    href: "tel:+1234567890",
+  },
+  {
+    label: "Address",
+    value: "123 Main St, Anytown, USA",
+  },
 ];
 
-
+export const socailLinks = [
+  {
+    name: "Facebook",
+    path: "https://facebook.com",
+    icon: Facebook,
+  },
+  {
+    name: "X",
+    path: "https://twitter.com",
+    icon: X,
+  },
+  {
+    name: "Instagram",
+    path: "https://instagram.com",
+    icon: Instagram,
+  },
+  {
+    name: "LinkedIn",
+    path: "https://linkedin.com",
+    icon: LinkedIn,
+  },
+];
