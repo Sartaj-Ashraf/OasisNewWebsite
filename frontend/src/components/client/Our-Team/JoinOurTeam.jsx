@@ -20,9 +20,9 @@ export default function JoinOurTeam() {
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        <h2 className="text-4xl md:text-5xl font-medium mb-4">
           Join Our Team
-        </h1>
+        </h2>
 
         <p className="max-w-xl text-sm md:text-base mb-6">
           Join our dynamic team and explore how AI can revolutionize your SEO

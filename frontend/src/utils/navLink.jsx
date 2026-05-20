@@ -3,11 +3,11 @@ import { Home, Search, Info, User } from "lucide-react";
 import { X ,Facebook, Instagram, LinkedIn } from "./SocialIcons";
 export const navLinks = [
   { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
+  { name: 'About', path: '/about-us' },
   { name: 'Our Team', path: '/our-team' },
   { name: 'Services', path: '/services' },
   { name: 'Blog', path: '/blog' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'Contact', path: '/contact-us' },
 ];
 export const bottomNavItems = [
   { name: "Home",    href: "/",       icon: Home   },

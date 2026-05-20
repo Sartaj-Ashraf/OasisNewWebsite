@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import logo from "@/assets/logoColored.png";
+import Link from "next/link";
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -15,13 +16,14 @@ export const NavBar = () => {
       {/* Desktop Links */}
       <ul className="hidden lg:flex items-center gap-8">
         {navLinks.map((link) => (
-          <li
+          <Link
+          href={link.path}
             key={link.name}
-            className="relative group cursor-pointer text-secondary text-sm lg:text-lg font-medium"
+            className="relative group cursor-pointer text-secondary text-sm lg:text-sm font-medium"
           >
             {link.name}
             <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
-          </li>
+          </Link>
         ))}
       </ul>
 
@@ -60,7 +62,7 @@ export const NavBar = () => {
         {/* Links */}
         <ul className="flex flex-col gap-6 p-6">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = pathname === link.path;
             return (
               <li
                 key={link.name}

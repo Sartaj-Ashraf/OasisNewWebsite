@@ -31,8 +31,8 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+    <section className=" py-8 ">
+      <div className="container max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
         {/* LEFT IMAGE */}
         <div className="relative w-full h-[350px] md:h-[450px] rounded-3xl overflow-hidden">
@@ -51,8 +51,8 @@ export default function WhyChooseUs() {
             WHY CHOOSE US
           </p>
 
-          <h2 className="text-3xl md:text-5xl font-medium text-black leading-tight mb-4">
-            Save Time & Effort With <br /> the Ewebot
+          <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-6 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            Save Time & Effort <br /> With the Ewebot
           </h2>
 
           <p className="!text-lg text-gray-500 mb-5 max-w-md leading-relaxed">
