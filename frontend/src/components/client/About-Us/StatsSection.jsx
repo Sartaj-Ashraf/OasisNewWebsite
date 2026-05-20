@@ -31,11 +31,11 @@ export default function StatsSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0b0b2b] via-[#1a0b3b] to-[#050510]" />
 
         {/* GLOW EFFECT */}
-        <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-blue-500 opacity-30 blur-3xl rounded-full" />
-        <div className="absolute right-0 top-0 w-[300px] h-[300px] bg-purple-500 opacity-20 blur-3xl rounded-full" />
+        <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-blue-500/30 blur-3xl rounded-full" />
+        <div className="absolute right-0 top-0 w-[300px] h-[300px] bg-purple-500/20 blur-3xl rounded-full" />
 
         {/* CONTENT */}
-        <div className="relative grid md:grid-cols-3 gap-10">
+        <div className="relative grid md:grid-cols-3 gap-10 text-center">
 
           {statsData.map((item) => (
             <div key={item.id}>
@@ -52,8 +52,12 @@ export default function StatsSection() {
             </div>
           ))}
 
+            <p className="text-gray-300 text-sm md:text-base">
+              Active Followers
+            </p>
+          </div>
         </div>
-      </div>
+   
     </section>
   );
 }

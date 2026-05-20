@@ -4,8 +4,9 @@ import { Button } from "@/shared/ClickAble"
 
 export default function AboutSection() {
   return (
+    
     <section className="">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div className="container max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
         {/* LEFT */}
         <div className="max-w-xl">
@@ -15,8 +16,7 @@ export default function AboutSection() {
             About Us
           </p>
 
-          {/* Heading */}
-          <h2 className="text-4xl md:text-5xl font-medium text-black leading-tight mb-6">
+          <h2 className=" font-medium text-black leading-tight mb-6">
             Boost your Website <br /> Traffic!
           </h2>
 

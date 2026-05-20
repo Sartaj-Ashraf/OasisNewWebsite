@@ -8,8 +8,8 @@ const data=[
 ]
 export default function WhoWeAre() {
   return (
-    <section className="container bg-[#f5f6f7] py-24 px-6 md:px-16">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <section className="container  py-24 px-6 md:px-16">
+      <div className=" grid md:grid-cols-2 gap-16 ">
         
         {/* LEFT SIDE */}
         <div>
@@ -17,14 +17,14 @@ export default function WhoWeAre() {
             WHO WE ARE
           </p>
 
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-[#0f2b3d]">
+          <h2 className="font-medium  leading-tight text-[#0f2b3d]">
             A Professional and <br />
-            <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
               Innovative Team
             </span>{" "}
             of <br />
             Creatives.
-          </h1>
+          </h2>
         </div>
 
         {/* RIGHT SIDE */}
@@ -73,7 +73,7 @@ export default function WhoWeAre() {
           </div>
 
           {/* BUTTON */}
-          <button className="mt-10 px-6 py-3 rounded-full border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white transition-all duration-300">
+          <button className="mt-10 px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300">
             DISCOVER MORE
           </button>
         </div>

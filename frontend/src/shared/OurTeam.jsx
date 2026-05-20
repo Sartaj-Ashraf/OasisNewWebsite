@@ -2,7 +2,7 @@ import Image from "next/image";
 import Asif from "@/assets/OurTeam/asif.jpeg";
 import Mehran from "@/assets/OurTeam/mehran.jpeg";
 import Shahid from "@/assets/OurTeam/shahid.jpeg";
-
+  
 const teamMembers = [
   { name: "Victor Lewis", role: "General Manager", image: Asif },
   { name: "Sandra Watson", role: "Chief Operating Officer", image: Shahid },
@@ -33,14 +33,14 @@ const LiIcon = () => (
 export default function OurTeam() {
   return (
     <main className=" ">
-    <section className="py-10 rounded-xl mt-5 bg-gray-50">
-      <div className="container max-w-6xl mx-auto px-6 text-center">
+    <section className="py-10 rounded-xl mt-5 ">
+      <div className="container px-6 text-center">
 
         {/* Header */}
         <p className="text-[11px] tracking-[0.18em] text-gray-400 uppercase font-medium mb-3">
           Our Team
         </p>
-        <h2 className="text-4xl font-bold text-gray-900 mb-4 leading-tight">
+        <h2 className=" font-medium text-gray-900 mb-4 leading-tight">
           Our Professionals
         </h2>
         <p className="text-gray-400 text-[15px] max-w-md mx-auto mb-14 leading-relaxed">
