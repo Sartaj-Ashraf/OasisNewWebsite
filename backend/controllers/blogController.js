@@ -97,6 +97,7 @@ export const createBlog = async (req, res) => {
             slug: makeSlug(title),
             excerpt,
             content: updatedContent,
+
             isPublished: isPublished === "true",
             publishedAt: isPublished === "true" ? new Date() : null,
         });
@@ -286,7 +287,7 @@ export const deleteBlog = async (req, res) => {
 };
 
 /* =========================
-   GET ALL BLOGS (PUBLIC)
+   GET ALL BLOGS (PUBLIC)   
 ========================= */
 export const getAllBlogs = async (req, res) => {
     try {
@@ -342,7 +343,7 @@ export const getBlogBySlug = async (req, res) => {
     try {
         const blog = await Blog.findOne({
             slug: req.params.slug,
-            isPublished: true,
+            
         }).lean();
 
         if (!blog) {

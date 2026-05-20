@@ -8,14 +8,19 @@ const API = "/blogs";
 ========================= */
 export const getAllBlogs = () => customFetch.get(API);
 
-export const getBlogBySlug = (slug) =>
-  customFetch.get(`${API}/slug/${slug}`);
-
+export const getBlogBySlug = (slug) => {
+ const response = customFetch.get(`${API}/slug/${slug}`);
+ return response;
+}
 /* =========================
    ADMIN
 ========================= */
-export const getAllBlogsAdmin = () =>
-  customFetch.get(`${API}`);
+export const getAllBlogsAdmin = async () => {
+ const response = await customFetch.get(`${API}/admin`);
+ console.log(response.data);
+ return response.data;
+};
+
 
 export const getBlogStats = () =>
   customFetch.get(`${API}/stats`);
@@ -34,7 +39,7 @@ export const createBlog = (formData) =>
    UPDATE BLOG
 ========================= */
 export const updateBlog = (id, formData) =>
-  customFetch.put(`${API}/admin/${id}`, formData, {
+  customFetch.put(`${API}/${id}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -50,7 +55,7 @@ export const deleteBlog = (id) =>
    TOGGLE STATUS
 ========================= */
 export const toggleBlogStatus = (id) =>
-  customFetch.patch(`${API}/admin/${id}/toggle-status`);
+  customFetch.patch(`${API}/${id}/toggle-status`);
 
 /* =========================
    REORDER CONTENT

@@ -25,7 +25,7 @@ router.get("/", getAllBlogs);
 router.get("/slug/:slug", getBlogBySlug);
 
 
-router.get("/", getAllBlogsAdmin);
+router.get("/admin", getAllBlogsAdmin);
 router.get("/stats", getBlogStats);
 
 
