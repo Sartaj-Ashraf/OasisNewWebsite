@@ -22,7 +22,7 @@
 
   /* ⚪ Accent (Neutral UI) */
   --accent: #f5f5f5;
-  --accent-dark: #e0e0e0;
+  --accent-dark: #F0F2F4;
   --accent-light: #ffffff;
 
   /* ⚫ Text Colors */
@@ -112,7 +112,7 @@ h6 {
 }
 
 p {
-  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-size: clamp(1rem, 1.5vw, 1.3 rem);
   line-height: 1.5;
   font-family: var(--font-inter);
 }
@@ -189,3 +189,5 @@ p {
    border-radius: 10px; /* Size of the notch */
   corner-shape: scoop;   /* Style of the notch */
 }
+
+

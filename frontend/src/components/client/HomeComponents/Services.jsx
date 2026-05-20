@@ -81,17 +81,17 @@ function RibbonShape() {
   );
 }
 
-export default function Services() {
+export default function  Services() {
   const [active, setActive] = useState("marketing");
 
   return (
-    <div className="flex items-center justify-center py-8  min-h-screen">
+    <div className="flex items-center justify-center py-8 ">
       {/*
         Layout:
         - Mobile  (< md): flex-col, full width, each panel expands vertically
         - Desktop (≥ md): flex-row, fixed 420px height, each panel expands horizontally
       */}
-      <div className="flex flex-col md:flex-row h-[90vh] gap-3 w-full ">
+      <div className="flex flex-col md:flex-row h-fit md:h-[90vh] max-h-[550px] gap-3 w-full ">
         {services.map((s) => {
           const isOpen = active === s.id;
           const { ServiceIcon } = s;
@@ -173,7 +173,7 @@ export default function Services() {
                   /* Mobile: full inset with padding */
                   inset-3 p-6
                   /* Desktop: left-anchored fixed-width card */
-                  md:top-4 md:left-4 md:bottom-4 md:right-auto md:w-xl 
+                  md:top-4 md:left-4 md:bottom-4 md:right-auto  lg:w-xl 
                   transition-opacity duration-200 rounded-[2rem_0_2rem_2rem]
                   ${isOpen ? "opacity-100 pointer-events-auto delay-150" : "opacity-0 pointer-events-none delay-0"}
                 `}
