@@ -11,8 +11,17 @@ import logo3 from "@/assets/clientlogo/3.png";
 import logo4 from "@/assets/clientlogo/4.png";
 import logo5 from "@/assets/clientlogo/5.png";
 import logo6 from "@/assets/clientlogo/6.png";
+import { getAllClients } from "@/services/clients.service";
 export function ClientsSlider() {
   const splideRef = useRef(null);
+
+useEffect(() => {
+    const fetchClients = async () => {
+        const response = await getAllClients();
+        console.log(response);
+    }
+    fetchClients();
+}, [])
 
   const logos = [logo1, logo2, logo3, logo4, logo5, logo6];
 

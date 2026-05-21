@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Photo from "@/assets/contactheader.png"
-import picture from "@/assets/OurTeam/mehran.jpeg"
 export default function JoinOurTeam() {
   return (
     

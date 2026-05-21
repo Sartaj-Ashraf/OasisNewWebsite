@@ -39,7 +39,7 @@ const PageHeader = ({title}) => {
 
         {/* Centered Title */}
         <div className="flex-1 flex flex-col items-center justify-center">
-          <h1 className="font-semibold text-2xl md:text-4xl text-center">
+          <h1 className="font-semibold text-2xl md:text-7xl! text-black/80 text-center">
             {title}
           </h1>
 
