@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 export const Customers = () => {
   return (
-    <div className="h-full relative md:col-span-1 bg-linear-to-br from-primary via-primary/70 to-primary/20 w-full p-4 rounded-3xl">
+    <div className="h-[300px] md:h-full relative md:col-span-1 bg-linear-to-br from-primary via-primary/70 to-primary/20 w-full p-4 rounded-3xl">
       <div className="absolute top-0 right-0">
         <Image src={svgImg} alt="svg" className="w-full h-full " />
         <Link

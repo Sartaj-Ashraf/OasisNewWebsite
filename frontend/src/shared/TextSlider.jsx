@@ -55,11 +55,11 @@ export default function TextSlider() {
   return (
     <div className="w-full overflow-hidden  relative">
            {/* LEFT FADE */}
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-40 z-10
+      <div className="hidden lg:block pointer-events-none absolute left-0 top-0 h-full w-40 z-10
         bg-linear-to-r from-accent to-transparent" />
 
       {/* RIGHT FADE */}
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-40 z-10
+      <div className="hidden lg:block pointer-events-none absolute right-0 top-0 h-full w-40 z-10
         bg-linear-to-l from-accent to-transparent" />
 
       <div className="splide" ref={splideRef}>

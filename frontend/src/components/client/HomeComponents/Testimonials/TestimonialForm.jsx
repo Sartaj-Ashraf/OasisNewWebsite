@@ -74,14 +74,16 @@ export default function TestimonialForm() {
             className="hidden"
           />
         </label>
-        <div>
-          <p className="text-sm font-medium text-gray-700">Profile photo</p>
-          <p className="text-xs text-gray-400 mt-0.5">Optional · PNG or JPG</p>
+        <div className="flex flex-col">
+          <span className="text-sm font-medium text-gray-700">Profile photo</span>
+          <span className="text-xs text-gray-400 mt-0.5">Optional · PNG or JPG</span>
         </div>
       </div>
 
       {/* Name */}
-      <div className="mb-4">
+      <div className="mb-4 flex gap-4">
+        <div className="flex-1">
+
         <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">
           Name
         </label>
@@ -93,14 +95,14 @@ export default function TestimonialForm() {
           onChange={handleChange}
           maxLength={60}
           className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 outline-none placeholder:text-gray-300 focus:border-gray-400 focus:bg-white transition-colors"
-        />
-      </div>
+          />
+          </div>
 
-      <div className="h-px bg-gray-100 my-5" />
-
-      {/* Star rating */}
-      {/* <div className="mb-4">
-        <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-2">Rating</p>
+          {/* Star rating */}
+      <div className="mb-4 flex-1">
+        <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">
+          Rating
+        </label>
         <div className="flex gap-1.5">
           {[1, 2, 3, 4, 5].map((val) => (
             <button
@@ -112,7 +114,12 @@ export default function TestimonialForm() {
             >★</button>
           ))}
         </div>
-      </div> */}
+      </div>
+      </div>
+
+      <div className="h-px bg-gray-100 my-5" />
+
+    
 
       {/* Message */}
       <div className="mb-5 relative w-full">
@@ -139,7 +146,7 @@ export default function TestimonialForm() {
           handleClick={handleSubmit}
           disabled={!isValid}
           children="Submit"
-          className="button w-full"
+          className={"button w-full"}
         />
       ) : (
         <div className="flex items-center gap-2.5 bg-green-50 border border-green-200 rounded-lg px-4 py-3 text-sm text-green-700">

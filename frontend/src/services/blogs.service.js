@@ -1,8 +1,6 @@
 // services/blogs.service.js
 import customFetch from "@/lib/customFetch";
-
 const API = "/blogs";
-
 /* =========================
    PUBLIC
 ========================= */
