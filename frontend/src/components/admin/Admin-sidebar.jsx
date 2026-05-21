@@ -29,14 +29,10 @@ export const AdminSidebar = () => {
 
     const menuItems = [
         { title: 'Our team', link: '/admin/our-team', icon: <Palette size={20} /> },
-        { title: 'Blog / Articles', link: '/admin/blog', icon: <FileText size={19} /> },
-        { title: 'Case Studies', link: '/admin/cases', icon: <BarChart3 size={19} /> },
-        { title: 'Testimonials', link: '/admin/testimonials', icon: <MessageSquareQuote size={19} /> },
-        { title: 'Pricing Plans', link: '/admin/pricing', icon: <CreditCard size={19} /> },
+        { title: 'Blog / Articles', link: '/admin/blogs', icon: <FileText size={19} /> },
+        // { title: 'Case Studies', link: '/admin/cases', icon: <BarChart3 size={19} /> },
         { title: 'Portfolio / Projects', link: '/admin/portfolio', icon: <Briefcase size={19} /> },
-        { title: 'About Us', link: '/admin/about', icon: <Users size={19} /> },
-        { title: 'Contact', link: '/admin/contact', icon: <Mail size={20} /> },
-        { title: 'FAQ', link: '/admin/faq', icon: <HelpCircle size={20} /> },
+        { title: 'Contacts', link: '/admin/contacts', icon: <Mail size={20} /> },
     ];
 
     const handleLogout = async () => {

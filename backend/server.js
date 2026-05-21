@@ -25,6 +25,8 @@ import clientRouter from "./routes/clientRoutes.js";
 import videoRouter from "./routes/videoroutes.js";
 import teamMemberRouter from "./routes/teamMemberRoutes.js";
 import blogRouter from "./routes/blogRouter.js";
+import contactRouter from "./routes/contactRoutes.js";
+
 // public
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -84,6 +86,7 @@ app.use("/api/clients", clientRouter);
 app.use("/api/videos", videoRouter);
 app.use("/api/team-members", teamMemberRouter);
 app.use("/api/blogs", blogRouter);
+app.use("/api/contacts", contactRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({

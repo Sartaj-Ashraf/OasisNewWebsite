@@ -3,17 +3,17 @@ import express from "express";
 import {
   createContact,
   deleteContact,
-  getAllContacts,
+  getContacts,
   getSingleContact,
   toggleReadStatus,
 } from "../controllers/contact.controller.js";
 
-import validate from "../middlewares/validation.middleware.js";
+import {validate} from "../middlewares/validation.middleware.js";
 
 import {
   contactIdValidator,
   createContactValidator,
-} from "../validators/contacts.validation.js";
+} from "../validations/contact.validation.js";
 
 const router = express.Router();
 
@@ -24,7 +24,7 @@ router.post(
   createContact
 );
 
-router.get("/", getAllContacts);
+router.get("/", getContacts);
 
 router.get(
   "/:id",

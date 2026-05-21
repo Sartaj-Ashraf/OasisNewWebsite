@@ -1,17 +1,23 @@
-import { Contact } from "../models/contact.model.js";
+import Contact from "../models/contact.model.js";
 
 export const createContactService = async (contactData) => {
     const contact = await Contact.create(contactData);
     return contact;
 };
 
-export const getContactService=async({page=1,limit=10,isRead=false})=>{
-    const query={};
-    if(isRead!==undefined)
-        {
-            query.isRead=isRead===true;
-        }
-        const skip=(page-1)*limit;
+export const getContactService = async ({
+  page = 1,
+  limit = 10,
+  isRead,
+}) => {
+  const query = {};
+
+  if (isRead !== undefined) {
+    query.isRead = isRead === "true";
+  }
+
+  const skip = (page - 1) * limit;
+
   const [contacts, total] = await Promise.all([
     Contact.find(query)
       .sort({ createdAt: -1 })
@@ -20,6 +26,7 @@ export const getContactService=async({page=1,limit=10,isRead=false})=>{
 
     Contact.countDocuments(query),
   ]);
+
   return {
     contacts,
     pagination: {
@@ -29,8 +36,7 @@ export const getContactService=async({page=1,limit=10,isRead=false})=>{
       totalPages: Math.ceil(total / limit),
     },
   };
-
-}
+};
 export const getSingleContactService = async (id) => {
   return await Contact.findById(id);
 };
