@@ -14,7 +14,7 @@ import {
 
 import { authenticateUser, authorizePermissions } from "../middlewares/authMiddleware.js";
 import { upload } from "../middlewares/multer.js"; // multer-s3 config
-
+import deleteFromS3 from "../utils/s3.config.js";
 const router = express.Router();
 
 
@@ -43,6 +43,6 @@ router.put(
 
 router.patch("/:id/toggle-status", toggleBlogStatus);
 router.patch("/:id/reorder-sections", reorderContentSections);
-router.delete("/:id", deleteBlog);
+router.delete("/admin/:id", deleteBlog);
 
 export default router;

@@ -74,7 +74,10 @@ const BlogSchema = new mongoose.Schema(
       },
     },
 
-
+coverImage: {
+  url: { type: String, default: "" },
+  key: { type: String, default: "" },
+},
 
     isPublished: {
       type: Boolean,
@@ -107,7 +110,7 @@ BlogSchema.index({ isPublished: 1, publishedAt: -1 });
 BlogSchema.index({ title: "text", excerpt: "text" });
 
 // Compound for fast filtering
-BlogSchema.index({ isPublished: 1, tags: 1, createdAt: -1 });
+BlogSchema.index({ isPublished: 1, createdAt: -1 });
 
 /* =========================
    EXPORT
