@@ -3,14 +3,12 @@ import { uploadToS3, deleteFromS3 } from "../utils/s3Upload.js";
 import { getPaginationParams, getPaginationInfo } from "../utils/pagination.js";
 import { makeSlug, getUniqueSlug } from "../utils/slugUtils.js";
 
-const POPULATE_INDUSTRY = { path: "industry", select: "name slug" };
-
 // ─── CREATE ───────────────────────────────────────────────────────────────────
 export const createClient = async (req, res) => {
-    const { name, description, industry, isActive } = req.body;
+    const { name, website, isActive } = req.body;
 
-    if (!name) {
-      return res.status(400).json({ success: false, message: "Name is required" });
+    if (!name||!req.file) {
+      return res.status(400).json({ success: false, message: "Name and cover image are required" });
     }
 
     const order = req.body.order !== undefined ? Number(req.body.order) : 0;
@@ -23,9 +21,8 @@ export const createClient = async (req, res) => {
     const client = await Client.create({
       name,
       slug,
-      description,
+      website,
       coverImage,
-      industry: industry || null,
       order,
       isActive: isActive !== undefined ? isActive : true,
     });
@@ -44,14 +41,14 @@ export const getClients = async (req, res) => {
       ? {
           $or: [
             { name: { $regex: search, $options: "i" } },
-            { description: { $regex: search, $options: "i" } },
+            { website: { $regex: search, $options: "i" } },
           ],
         }
       : {};
 
     const [clients, totalDocs] = await Promise.all([
       Client.find(query)
-        .populate(POPULATE_INDUSTRY)
+        
         .sort({ order: 1, createdAt: -1 })
         .skip(skip)
         .limit(limit),
@@ -68,7 +65,6 @@ export const getClients = async (req, res) => {
 export const getActiveClients = async (req, res) => {
  
     const clients = await Client.find({ isActive: true })
-      .populate(POPULATE_INDUSTRY)
       .sort({ order: 1, createdAt: -1 });
 
     res.json({ success: true, data: clients });
@@ -78,7 +74,7 @@ export const getActiveClients = async (req, res) => {
 // ─── GET ONE BY ID ────────────────────────────────────────────────────────────
 export const getClientById = async (req, res) => {
  
-    const client = await Client.findById(req.params.id).populate(POPULATE_INDUSTRY);
+    const client = await Client.findById(req.params.id);
     if (!client) {
       return res.status(404).json({ success: false, message: "Client not found" });
     }
@@ -89,7 +85,7 @@ export const getClientById = async (req, res) => {
 // ─── GET ONE BY SLUG ──────────────────────────────────────────────────────────
 export const getClientBySlug = async (req, res) => {
 
-    const client = await Client.findOne({ slug: req.params.slug }).populate(POPULATE_INDUSTRY);
+    const client = await Client.findOne({ slug: req.params.slug });
     if (!client) {
       return res.status(404).json({ success: false, message: "Client not found" });
     }
@@ -97,24 +93,11 @@ export const getClientBySlug = async (req, res) => {
 
 };
 
-// ─── GET BY INDUSTRY ──────────────────────────────────────────────────────────
-export const getClientsByIndustry = async (req, res) => {
-
-    const clients = await Client.find({
-      industry: req.params.industryId,
-      isActive: true,
-    })
-      .populate(POPULATE_INDUSTRY)
-      .sort({ order: 1, createdAt: -1 });
-
-    res.json({ success: true, data: clients });
- 
-};
 
 // ─── UPDATE ───────────────────────────────────────────────────────────────────
 export const updateClient = async (req, res) => {
  
-    const { name, description, industry, order, isActive } = req.body;
+    const { name, website, order, isActive } = req.body;
 
     const client = await Client.findById(req.params.id);
     if (!client) {
@@ -122,7 +105,6 @@ export const updateClient = async (req, res) => {
     }
 
     // Snapshot previous values BEFORE any mutations — pre-save hook needs these
-    client._previousIndustry = client.industry ?? null;
     client._previousOrder = client.order;
 
     if (req.file) {
@@ -136,11 +118,8 @@ export const updateClient = async (req, res) => {
       client.slug = await getUniqueSlug(Client, baseSlug, client._id);
     }
 
-    if (description !== undefined) client.description = description;
+    if (website !== undefined) client.website = website;
     if (isActive !== undefined) client.isActive = isActive;
-
-    // Industry must be assigned BEFORE order so hook sees the correct new group
-    if (industry !== undefined) client.industry = industry || null;
 
     // Order assigned last — hook uses it to shift siblings within the new group
     if (order !== undefined) client.order = Number(order);

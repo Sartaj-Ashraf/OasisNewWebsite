@@ -5,7 +5,6 @@ import {
   getActiveClients,
   getClientById,
   getClientBySlug,
-  getClientsByIndustry,
   updateClient,
   deleteClient,
 } from "../controllers/clientController.js";
@@ -16,7 +15,6 @@ const router = express.Router();
 
 // Public
 router.get("/active", getActiveClients);
-router.get("/industry/:industryId", getClientsByIndustry);
 router.get("/slug/:slug", getClientBySlug);
 router.get("/", getClients);
 router.get("/:id", getClientById);
