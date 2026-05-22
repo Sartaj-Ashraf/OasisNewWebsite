@@ -32,6 +32,7 @@ export const AdminSidebar = () => {
         { title: 'Blog / Articles', link: '/admin/blogs', icon: <FileText size={19} /> },
         // { title: 'Case Studies', link: '/admin/cases', icon: <BarChart3 size={19} /> },
         { title: 'Portfolio / Projects', link: '/admin/portfolio', icon: <Briefcase size={19} /> },
+        { title: 'Clients', link: '/admin/clients', icon: <Users size={20} /> },
         { title: 'Contacts', link: '/admin/contacts', icon: <Mail size={20} /> },
     ];
 
