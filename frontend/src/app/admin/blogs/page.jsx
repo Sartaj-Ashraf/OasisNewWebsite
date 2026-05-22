@@ -119,7 +119,7 @@ export default function AdminBlogDashboard() {
       const isSuccess = response?.success || response?.data?.success;
 
       if (isSuccess) {
-        toast.success("Article layout removed from database");
+        toast.success("Article deleted and also image from s3");
         setBlogs((prev) => prev.filter((blog) => blog._id !== id));
         
         const statsRes = await getBlogStats();
