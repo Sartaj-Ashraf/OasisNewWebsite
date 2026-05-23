@@ -7,6 +7,7 @@ import {
     BarChart3,
     MessageSquareQuote,
     CreditCard,
+    Building2 ,
     Briefcase,
     Users,
     Mail,
@@ -51,6 +52,11 @@ const menuItems = [
     title: "Portfolio / Projects",
     link: "/admin/portfolio",
     icon: <Briefcase size={19} />,
+  },
+  {
+    title: "Careers",
+    link: "/admin/careers",
+    icon: <Building2  size={19} />,
   },
 
   {
