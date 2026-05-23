@@ -26,7 +26,7 @@ import videoRouter from "./routes/videoroutes.js";
 import teamMemberRouter from "./routes/teamMemberRoutes.js";
 import blogRouter from "./routes/blogRouter.js";
 import contactRouter from "./routes/contactRoutes.js";
-
+import careerRouter from "./routes/careerRoutes.js";
 // public
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -87,6 +87,7 @@ app.use("/api/videos", videoRouter);
 app.use("/api/team-members", teamMemberRouter);
 app.use("/api/blogs", blogRouter);
 app.use("/api/contacts", contactRouter);
+app.use("/api/careers", careerRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({
