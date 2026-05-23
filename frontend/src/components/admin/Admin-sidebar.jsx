@@ -27,14 +27,50 @@ export const AdminSidebar = () => {
     const [activeTab, setActiveTab] = useState('Dashboard');
     const router = useRouter();
 
-    const menuItems = [
-        { title: 'Our team', link: '/admin/our-team', icon: <Palette size={20} /> },
-        { title: 'Blog / Articles', link: '/admin/blogs', icon: <FileText size={19} /> },
-        // { title: 'Case Studies', link: '/admin/cases', icon: <BarChart3 size={19} /> },
-        { title: 'Portfolio / Projects', link: '/admin/portfolio', icon: <Briefcase size={19} /> },
-        { title: 'Clients', link: '/admin/clients', icon: <Users size={20} /> },
-        { title: 'Contacts', link: '/admin/contacts', icon: <Mail size={20} /> },
-    ];
+
+const menuItems = [
+  {
+    title: "Our Team",
+    link: "/admin/our-team",
+    icon: <Palette size={20} />,
+  },
+
+  {
+    title: "Blog / Articles",
+    link: "/admin/blogs",
+    icon: <FileText size={19} />,
+  },
+
+  // {
+  //   title: "Case Studies",
+  //   link: "/admin/cases",
+  //   icon: <BarChart3 size={19} />,
+  // },
+
+  {
+    title: "Portfolio / Projects",
+    link: "/admin/portfolio",
+    icon: <Briefcase size={19} />,
+  },
+
+  {
+    title: "Clients",
+    link: "/admin/clients",
+    icon: <Users size={20} />,
+  },
+
+  {
+    title: "Testimonials",
+    link: "/admin/testimonials",
+    icon: <MessageSquareQuote size={20} />,
+  },
+
+  {
+    title: "Contacts",
+    link: "/admin/contacts",
+    icon: <Mail size={20} />,
+  },
+];
 
     const handleLogout = async () => {
         toast.loading("Logging out...");
