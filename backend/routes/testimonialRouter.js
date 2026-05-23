@@ -1,32 +1,54 @@
 import express from "express";
 import {
-  createTestimonial,
-  getTestimonials,
-  getFeaturedTestimonials,
-  getTestimonialById,
-  getTestimonialStats,
-  updateTestimonial,
-  deleteTestimonial,
-  createBulkTestimonials,
+    getAllTestimonials,
+    getFeaturedTestimonials,
+    getAllTestimonialsAdmin,
+    getTestimonialById,
+    createTestimonial,
+    updateTestimonial,
+    deleteTestimonial,
+    toggleApproval,
+    toggleFeatured,
+    getTestimonialStats,
 } from "../controllers/testimonialController.js";
+import { authenticateUser, authorizePermissions } from "../middlewares/authMiddleware.js";
 import { upload } from "../middlewares/multer.js";
-import { authenticateUser } from "../middlewares/authMiddleware.js";
+import {
+    validateCreateTestimonial,
+    validateUpdateTestimonial,
+} from "../validations/testimonials.validation.js";
 
 const router = express.Router();
 
-router.get("/stats", getTestimonialStats);
-router.get("/", getTestimonials);
+/* =========================
+   PUBLIC ROUTES
+========================= */
+router.get("/", getAllTestimonials);
 router.get("/featured", getFeaturedTestimonials);
+router.get("/stats", getTestimonialStats);
+router.get("/admin", getAllTestimonialsAdmin);
 router.get("/:id", getTestimonialById);
 
-router.post("/", authenticateUser, upload.single("image"), createTestimonial);
-router.put("/:id", authenticateUser, upload.single("image"), updateTestimonial);
-router.delete("/:id", authenticateUser, deleteTestimonial);
+/* =========================
+   ADMIN ROUTES
+========================= */
+router.post(
+    "/",
+    upload.any(),
+    validateCreateTestimonial,
+    createTestimonial
+);
 
-router.post("/bulk", authenticateUser, createBulkTestimonials);
+router.put(
+    "/:id",
+    upload.any(),
+    validateUpdateTestimonial,
+    updateTestimonial
+);
 
+router.patch("/:id/toggle-approval", toggleApproval);
+router.patch("/:id/toggle-featured", toggleFeatured);
 
-
-
+router.delete("/:id", deleteTestimonial);
 
 export default router;

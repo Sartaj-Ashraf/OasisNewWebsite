@@ -14,7 +14,6 @@ import {
 
 import { authenticateUser, authorizePermissions } from "../middlewares/authMiddleware.js";
 import { upload } from "../middlewares/multer.js"; // multer-s3 config
-import deleteFromS3 from "../utils/s3.config.js";
 const router = express.Router();
 
 
