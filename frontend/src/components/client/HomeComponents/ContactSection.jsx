@@ -115,7 +115,7 @@ export const ContactSection = () => {
                   />
                 </div>
 
-                <Button type="submit" className="button mt-6 ">
+                <Button type="submit" className="button mt-6 bg-linear-to-br from-primary via-primary to-primary-dark hover:primary-dark hover:via-primary hover:to-primary ">
                   Send Message
                 </Button>
               </form>
