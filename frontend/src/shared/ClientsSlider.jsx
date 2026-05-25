@@ -1,30 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Splide from "@splidejs/splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/splide/css";
 import Image from "next/image";
-import logo1 from "@/assets/clientlogo/1.png";
-import logo2 from "@/assets/clientlogo/2.png";
-import logo3 from "@/assets/clientlogo/3.png";
-import logo4 from "@/assets/clientlogo/4.png";
-import logo5 from "@/assets/clientlogo/5.png";
-import logo6 from "@/assets/clientlogo/6.png";
 import { getClientsService } from "@/services/clients.service";
 export function ClientsSlider() {
+const [clients, setClients] = useState([]);
+
   const splideRef = useRef(null);
 
 useEffect(() => {
     const fetchClients = async () => {
         const response = await getClientsService();
-        console.log(response);
+        // console.log(response.data);
+        setClients(response.data)
     }
     fetchClients();
 }, [])
-
-  const logos = [logo1, logo2, logo3, logo4, logo5, logo6];
-
   useEffect(() => {
     const splide = new Splide(splideRef.current, {
       type: "loop",
@@ -62,15 +56,15 @@ useEffect(() => {
       />
 
       {/* SPLIDE */}
-      <div className="splide bg-black" ref={splideRef}>
+      <div className="splide" ref={splideRef}>
         <div className="splide__track">
           <div className="splide__list flex items-center ">
-            {logos.map((logo, i) => (
+            {clients.map((client, i) => (
               <div
                 key={i}
                 className="splide__slide whitespace-nowrap uppercase text-5xl md:text-8xl font-bold text-black/10"
               >
-                <Image src={logo} alt={`Client ${i + 1}`} width={100} height={100} className=""  />
+                <Image src={client?.coverImage?.url} alt={`Client ${i + 1}`} width={100} height={100} className=""  />
               </div>
             ))}
           </div>

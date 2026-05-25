@@ -1,6 +1,8 @@
 "use client";
+
 import { Button } from "@/shared/ClickAble";
 import { useState } from "react";
+import { createTestimonial } from "@/services/testimonials.service";
 
 export default function TestimonialForm() {
   const [form, setForm] = useState({
@@ -9,28 +11,109 @@ export default function TestimonialForm() {
     message: "",
     image: null,
   });
+
   const [preview, setPreview] = useState(null);
   const [rating, setRating] = useState(0);
   const [hovered, setHovered] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [errors, setErrors] = useState({
+    name: "",
+    message: "",
+    rating: "",
+  });
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+
     if (name === "image") {
       const file = files[0];
-      setForm({ ...form, image: file });
+
+      setForm({
+        ...form,
+        image: file,
+      });
+
       setPreview(URL.createObjectURL(file));
     } else {
-      setForm({ ...form, [name]: value });
+      setForm({
+        ...form,
+        [name]: value,
+      });
+
+      setErrors({
+        ...errors,
+        [name]: "",
+      });
     }
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    console.log({ ...form, rating });
+  const handleSubmit = async () => {
+    const newErrors = {
+      name: "",
+      message: "",
+      rating: "",
+    };
+
+    if (!form.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+
+    if (!form.message.trim()) {
+      newErrors.message = "Testimonial is required";
+    }
+
+    if (!rating) {
+      newErrors.rating = "Please select rating";
+    }
+
+    setErrors(newErrors);
+
+    if (
+      newErrors.name ||
+      newErrors.message ||
+      newErrors.rating
+    ) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await createTestimonial(
+        {
+          name: form.name,
+          company: form.role,
+          testimonial: form.message,
+          rating,
+        },
+        form.image
+      );
+
+      setSubmitted(true);
+
+      setForm({
+        name: "",
+        role: "",
+        message: "",
+        image: null,
+      });
+
+      setPreview(null);
+      setRating(0);
+
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const isValid = form.name.trim() && form.message.trim();
+  const isValid =
+    form.name.trim() &&
+    form.message.trim() &&
+    rating;
 
   return (
     <div className="rounded-2xl border border-dashed border-primary p-4 flex-1">
@@ -63,9 +146,13 @@ export default function TestimonialForm() {
                 <polyline points="17 8 12 3 7 8" />
                 <line x1="12" y1="3" x2="12" y2="15" />
               </svg>
-              <span className="text-[10px] text-gray-400">photo</span>
+
+              <span className="text-[10px] text-gray-400">
+                photo
+              </span>
             </div>
           )}
+
           <input
             type="file"
             name="image"
@@ -74,58 +161,106 @@ export default function TestimonialForm() {
             className="hidden"
           />
         </label>
+
         <div className="flex flex-col">
-          <span className="text-sm font-medium text-gray-700">Profile photo</span>
-          <span className="text-xs text-gray-400 mt-0.5">Optional · PNG or JPG</span>
+          <span className="text-sm font-medium text-gray-700">
+            Profile photo
+          </span>
+
+          <span className="text-xs text-gray-400 mt-0.5">
+            Optional · PNG or JPG
+          </span>
         </div>
       </div>
 
-      {/* Name */}
+      {/* Name + Rating */}
       <div className="mb-4 flex gap-4">
         <div className="flex-1">
+          <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">
+            Name
+          </label>
 
-        <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">
-          Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          placeholder="Your full name"
-          value={form.name}
-          onChange={handleChange}
-          maxLength={60}
-          className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 outline-none placeholder:text-gray-300 focus:border-gray-400 focus:bg-white transition-colors"
+          <input
+            type="text"
+            name="name"
+            placeholder="Your full name"
+            value={form.name}
+            onChange={handleChange}
+            maxLength={60}
+            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 outline-none placeholder:text-gray-300 focus:border-gray-400 focus:bg-white transition-colors"
           />
+
+          {errors.name && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.name}
+            </p>
+          )}
+        </div>
+
+        {/* Rating */}
+        <div className="mb-4 flex-1">
+          <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">
+            Rating
+          </label>
+
+          <div className="flex gap-1.5">
+            {[1, 2, 3, 4, 5].map((val) => (
+              <button
+                key={val}
+                type="button"
+                onClick={() => {
+                  setRating(val);
+
+                  setErrors({
+                    ...errors,
+                    rating: "",
+                  });
+                }}
+                onMouseEnter={() => setHovered(val)}
+                onMouseLeave={() => setHovered(0)}
+                className={`text-2xl transition-colors ${
+                  val <= (hovered || rating)
+                    ? "text-amber-400"
+                    : "text-gray-200"
+                }`}
+              >
+                ★
+              </button>
+            ))}
           </div>
 
-          {/* Star rating */}
-      <div className="mb-4 flex-1">
-        <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">
-          Rating
-        </label>
-        <div className="flex gap-1.5">
-          {[1, 2, 3, 4, 5].map((val) => (
-            <button
-              key={val} type="button"
-              onClick={() => setRating(val)}
-              onMouseEnter={() => setHovered(val)}
-              onMouseLeave={() => setHovered(0)}
-              className={`text-2xl transition-colors ${val <= (hovered || rating) ? "text-amber-400" : "text-gray-200"}`}
-            >★</button>
-          ))}
+          {errors.rating && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.rating}
+            </p>
+          )}
         </div>
       </div>
+
+      {/* Role */}
+      <div className="mb-4">
+        <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">
+          Role / Company
+        </label>
+
+        <input
+          type="text"
+          name="role"
+          placeholder="Frontend Developer"
+          value={form.role}
+          onChange={handleChange}
+          className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 outline-none placeholder:text-gray-300 focus:border-gray-400 focus:bg-white transition-colors"
+        />
       </div>
 
       <div className="h-px bg-gray-100 my-5" />
-
-    
 
       {/* Message */}
       <div className="mb-5 relative w-full">
         <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">
           Testimonial
         </label>
+
         <textarea
           name="message"
           rows={4}
@@ -135,18 +270,27 @@ export default function TestimonialForm() {
           onChange={handleChange}
           className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 outline-none placeholder:text-gray-300 focus:border-gray-400 focus:bg-white transition-colors resize-none"
         />
+
         <span className="absolute right-3 bottom-2.5 text-[11px] text-gray-300">
           {form.message.length} / 300
         </span>
+
+        {errors.message && (
+          <p className="text-red-500 text-xs mt-1">
+            {errors.message}
+          </p>
+        )}
       </div>
 
       {/* Submit */}
       {!submitted ? (
         <Button
           handleClick={handleSubmit}
-          disabled={!isValid}
-          children="Submit"
-          className={"button w-full"}
+          disabled={!isValid || loading}
+          children={loading ? "Submitting..." : "Submit"}
+          className={
+            "button w-full bg-linear-to-br from-primary via-primary to-primary-dark hover:from-primary-dark hover:via-primary hover:to-primary transition-all duration-300"
+          }
         />
       ) : (
         <div className="flex items-center gap-2.5 bg-green-50 border border-green-200 rounded-lg px-4 py-3 text-sm text-green-700">
@@ -159,6 +303,7 @@ export default function TestimonialForm() {
           >
             <polyline points="20 6 9 17 4 12" />
           </svg>
+
           Thank you! Your testimonial was submitted.
         </div>
       )}

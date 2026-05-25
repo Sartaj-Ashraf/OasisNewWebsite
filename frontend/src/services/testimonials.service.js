@@ -5,7 +5,7 @@ import customFetch from "@/lib/customFetch";
 /* =========================
    HELPER: BUILD FORM DATA
 ========================= */
-const buildFormData = (data, imageFile = null) => {
+export const buildFormData = (data, imageFile = null) => {
     const formData = new FormData();
 
     Object.entries(data).forEach(([key, value]) => {
