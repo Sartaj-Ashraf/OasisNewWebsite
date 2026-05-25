@@ -1,6 +1,6 @@
 import Blog from "../models/blogsModel.js";
 import { makeSlug } from "../utils/slugUtils.js";
-import { uploadToS3 } from "../utils/s3Upload.js";
+import { uploadToS3, deleteFromS3 } from "../utils/s3Upload.js";
 /* =========================
    CREATE BLOG
 ========================= */
@@ -88,7 +88,13 @@ export const createBlog = async (req, res) => {
                 };
             })
         );
-
+        let coverImageData = { url: "", key: "" };
+        const coverFile = fileMap["coverImage"];
+        if (coverFile) {
+            const uploaded = await uploadToS3(coverFile);
+            uploadedKeys.push(uploaded.key);
+            coverImageData = { url: uploaded.url, key: uploaded.key };
+        }
         /* =========================
            CREATE BLOG
         ========================= */
@@ -97,7 +103,7 @@ export const createBlog = async (req, res) => {
             slug: makeSlug(title),
             excerpt,
             content: updatedContent,
-
+            coverImage: coverImageData,
             isPublished: isPublished === "true",
             publishedAt: isPublished === "true" ? new Date() : null,
         });
@@ -132,6 +138,7 @@ export const createBlog = async (req, res) => {
 export const updateBlog = async (req, res) => {
     try {
         const { id } = req.params;
+
         const existing = await Blog.findById(id);
 
         if (!existing) {
@@ -141,6 +148,24 @@ export const updateBlog = async (req, res) => {
             });
         }
 
+        /* =========================
+           NORMALIZE FILES
+        ========================= */
+        const filesArray = Array.isArray(req.files)
+            ? req.files
+            : Object.values(req.files || {}).flat();
+
+        const fileMap = {};
+
+        filesArray.forEach((file) => {
+            if (!fileMap[file.fieldname]) {
+                fileMap[file.fieldname] = file;
+            }
+        });
+
+        /* =========================
+           CONTENT UPDATE
+        ========================= */
         let updatedContent = existing.content;
 
         if (req.body.content) {
@@ -155,19 +180,18 @@ export const updateBlog = async (req, res) => {
                 });
             }
 
-            /* ✅ normalize files */
-            const filesArray = Array.isArray(req.files)
-                ? req.files
-                : Object.values(req.files || {}).flat();
-
-            const fileMap = {};
-            filesArray.forEach((file) => {
-                fileMap[file.fieldname] = file;
-            });
-
             updatedContent = await Promise.all(
                 parsedContent.map(async (block) => {
-                    if (block.type !== "image") return block;
+
+                    /* =========================
+                       NON IMAGE BLOCKS
+                    ========================= */
+                    if (block.type !== "image") {
+                        return {
+                            ...block,
+                            content: block.content ?? "",
+                        };
+                    }
 
                     const keyName = `image_block_${block.id}`;
                     const file = fileMap[keyName];
@@ -176,14 +200,18 @@ export const updateBlog = async (req, res) => {
                         (b) => b.id === block.id
                     );
 
-                    // ✅ NEW IMAGE
+                    /* =========================
+                       NEW IMAGE UPLOAD
+                    ========================= */
                     if (file) {
-                        // delete old image
+
+                        // upload first
+                        const uploaded = await uploadToS3(file);
+
+                        // delete old image AFTER success
                         if (oldBlock?.content?.key) {
                             await deleteFromS3(oldBlock.content.key);
                         }
-
-                        const uploaded = await uploadToS3(file);
 
                         return {
                             ...block,
@@ -192,60 +220,122 @@ export const updateBlog = async (req, res) => {
                                 key: uploaded.key,
                             },
                             meta: {
-                                alt: block.meta?.alt || "",
-                                caption: block.meta?.caption || "",
+                                alt:
+                                    block.meta?.alt ||
+                                    oldBlock?.meta?.alt ||
+                                    "",
+
+                                caption:
+                                    block.meta?.caption ||
+                                    oldBlock?.meta?.caption ||
+                                    "",
                             },
                         };
                     }
 
-                    // ✅ KEEP OLD IMAGE
+                    /* =========================
+                       KEEP EXISTING IMAGE
+                    ========================= */
                     if (oldBlock?.content) {
                         return {
                             ...block,
                             content: oldBlock.content,
                             meta: {
-                                alt: block.meta?.alt || oldBlock.meta?.alt || "",
-                                caption: block.meta?.caption || oldBlock.meta?.caption || "",
+                                alt:
+                                    block.meta?.alt ||
+                                    oldBlock?.meta?.alt ||
+                                    "",
+
+                                caption:
+                                    block.meta?.caption ||
+                                    oldBlock?.meta?.caption ||
+                                    "",
                             },
                         };
                     }
 
-                    throw new Error(`Image missing for block ${block.id}`);
+                    /* =========================
+                       IMAGE MISSING
+                    ========================= */
+                    throw new Error(
+                        `Image missing for block ${block.id}`
+                    );
                 })
             );
         }
 
+        /* =========================
+           COVER IMAGE UPDATE
+        ========================= */
+        let coverImageUpdate = {};
+
+        const coverFile = fileMap["coverImage"];
+
+        if (coverFile) {
+
+            // upload new cover first
+            const uploaded = await uploadToS3(coverFile);
+
+            // delete old cover after success
+            if (existing.coverImage?.key) {
+                await deleteFromS3(existing.coverImage.key);
+            }
+
+            coverImageUpdate = {
+                coverImage: {
+                    url: uploaded.url,
+                    key: uploaded.key,
+                },
+            };
+        }
+
+        /* =========================
+           UPDATE BLOG
+        ========================= */
         const updated = await Blog.findByIdAndUpdate(
             id,
             {
                 title: req.body.title || existing.title,
-                slug: req.body.title
-                    ? makeSlug(req.body.title)
-                    : existing.slug,
-                excerpt: req.body.excerpt ?? existing.excerpt,
+
+                // keep custom slug support
+                slug: req.body.slug || existing.slug,
+
+                excerpt:
+                    req.body.excerpt ?? existing.excerpt,
+
                 content: updatedContent,
+
+                ...coverImageUpdate,
+
                 isPublished:
                     req.body.isPublished !== undefined
                         ? req.body.isPublished === "true"
                         : existing.isPublished,
+
                 publishedAt:
                     req.body.isPublished === "true"
                         ? existing.publishedAt || new Date()
                         : null,
             },
-            { new: true, runValidators: true }
+            {
+                new: true,
+                runValidators: true,
+            }
         );
 
-        res.json({
+        return res.status(200).json({
             success: true,
             message: "Blog updated successfully",
             data: updated,
         });
+
     } catch (error) {
+
         console.error("UPDATE BLOG ERROR:", error);
-        res.status(500).json({
+
+        return res.status(500).json({
             success: false,
-            message: error.message,
+            message: error.message || "Something went wrong",
         });
     }
 };
@@ -258,11 +348,15 @@ export const deleteBlog = async (req, res) => {
 
         const blog = await Blog.findById(id);
 
+        //  await deleteFromS3(block.content.key);
         if (!blog) {
             return res.status(404).json({
                 success: false,
                 message: "Blog not found",
             });
+        }
+        if (blog.coverImage?.key) {
+            await deleteFromS3(blog.coverImage.key);
         }
 
         // ✅ delete all images from S3
@@ -343,7 +437,7 @@ export const getBlogBySlug = async (req, res) => {
     try {
         const blog = await Blog.findOne({
             slug: req.params.slug,
-            
+
         }).lean();
 
         if (!blog) {
