@@ -9,7 +9,7 @@ import svgImg from '@/assets/svg/angle-header.svg'
 
 const HeroBanner = () => {
   return (
-    <section className="relative h-screen max-h-[800px]  mt-8">
+    <section className="relative h-[60vh] md:h-screen md:max-h-[800px]  mt-8">
       {/* Logo */}
        <div className="absolute -top-[1px] left-0 z-10">
                      <Image src={svgImg} alt="svg" className="md:w-full md:h-full " />
@@ -28,11 +28,11 @@ const HeroBanner = () => {
       {/* Content Layer */}
       <div className="  relative z-10  py-4 md:py-8 h-full ">
         <NavBar />
-        <div className="flex flex-col justify-center h-full ">
-          <h1 className="md:ml-[20%] px-4 md:px-0 font-medium text-black/70">AI-Powered</h1>
+        <div className="flex flex-col justify-center mt-8 h-full ">
+          <h1 className=" md:ml-[20%] px-4 md:px-0 pt-4 font-medium text-gray-600">AI-Powered</h1>
 
           <TextSlider />
-          <h1 className="md:ml-[20%] px-4 md:px-0 font-medium text-black/70">
+          <h1 className=" md:ml-[20%] px-4 md:px-0 font-medium text-gray-600">
             Smart Solutions
           </h1>
           <p className="md:ml-[20%] px-4 md:px-0 text-black/70 lg:w-xl">

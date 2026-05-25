@@ -10,12 +10,12 @@ import React from "react";
 export const page = () => {
   return (
     <>
-      <PageHeader title="About Us" />
       <div className="container space-y-16">
+        <PageHeader title="About Us" />
         <AboutSection />
         <VideoSection />
         <StatsSection />
-        <OurStory />
+        {/* <OurStory /> */}
         <WhyChooseUs />
         <TestimonialSection />
       </div>

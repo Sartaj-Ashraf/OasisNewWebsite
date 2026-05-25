@@ -19,10 +19,10 @@ export const NavBar = () => {
           <Link
           href={link.path}
             key={link.name}
-            className="relative group cursor-pointer text-secondary text-sm lg:text-sm font-medium"
+            className="relative group cursor-pointer text-secondary text-sm md:text-base font-sans font-medium"
           >
             {link.name}
-            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
+            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
           </Link>
         ))}
       </ul>
@@ -34,7 +34,7 @@ export const NavBar = () => {
 
       {/* Desktop CTA */}
       <div className="hidden md:block transition hover:scale-105 active:scale-95">
-        <LinkBtn link="#" children="Get Started" />
+        <LinkBtn link="#" children="Get Started" className={`bg-linear-to-br from-primary via-primary to-primary-dark hover:from-primary-dark hover:via-primary-dark  hover:to-primary`}/>
       </div>
 
       {/* 🔥 Overlay */}
@@ -79,7 +79,7 @@ export const NavBar = () => {
 
         {/* CTA */}
         <div className="px-6 mt-4">
-          <LinkBtn link="#" children="Get Started" />
+          <LinkBtn link="#" children="Get Started" className={`bg-linear-to-br from-primary via-primary to-primary-dark hover:from-primary hover:via-primary hover:to-primary-dark`}/>
         </div>
       </div>
     </nav>

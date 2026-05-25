@@ -59,7 +59,7 @@ export default function Marque() {
             {words.map((word, i) => (
               <li
                 key={i}
-                className="splide__slide whitespace-nowrap uppercase text-5xl md:text-8xl font-bold text-black/10"
+                className="splide__slide whitespace-nowrap uppercase text-6xl md:text-8xl font-bold text-black/10"
               >
                 {word}
               </li>

@@ -1,7 +1,11 @@
+"use client"
 import Image from "next/image";
 import Asif from "@/assets/OurTeam/asif.jpeg";
 import Mehran from "@/assets/OurTeam/mehran.jpeg";
 import Shahid from "@/assets/OurTeam/shahid.jpeg";
+import { useEffect, useState } from "react";
+import { getTeamMembers } from "@/services/team.service";
+import Link from "next/link";
   
 const teamMembers = [
   { name: "Victor Lewis", role: "General Manager", image: Asif },
@@ -31,6 +35,25 @@ const LiIcon = () => (
 );
 
 export default function OurTeam() {
+const [teamMembers, setTeamMembers] = useState([]);
+const [mounted , setMounted] = useState(false);
+
+useEffect(()=>{
+  setMounted(true)
+
+const fetchTeamMembers = async () => {
+  const response = await getTeamMembers();
+  setTeamMembers(response.data.data);
+  console.log(response.data.data)
+  return response.data
+}
+
+fetchTeamMembers();
+
+},[])
+
+if(!mounted) return null;
+
   return (
     <main className=" ">
     <section className="py-10 rounded-xl mt-5 ">
@@ -40,9 +63,11 @@ export default function OurTeam() {
         <p className="text-[11px] tracking-[0.18em] text-gray-400 uppercase font-medium mb-3">
           Our Team
         </p>
-        <h2 className=" font-medium text-gray-900 mb-4 leading-tight">
+
+        <h2 className=" font-medium text-secondary-dark mb-4 leading-tight">
           Our Professionals
         </h2>
+
         <p className="text-gray-400 text-[15px] max-w-md mx-auto mb-14 leading-relaxed">
           Ne summo dictas pertinacia nam. Illum cetero vocent ei vim,
           case regione signiferumque vim te.
@@ -61,8 +86,9 @@ export default function OurTeam() {
             >
               {/* Photo */}
               <Image
-                src={member.image}
+                src={member.profileImage.url}
                 alt={member.name}
+                unoptimized
                 fill
                 className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
               />
@@ -74,24 +100,52 @@ export default function OurTeam() {
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-400" />
 
               {/* Bottom info */}
-              <div className=" flex flex-col  justify-center w-full absolute bottom-0 text-center px-4 py-4  translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <h5 className="text-white  font-xs text-lg leading-snug">
+              <div className=" flex flex-col justify-center w-full absolute bottom-0 text-center px-4 py-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                
+                <h5 className="text-white font-xs text-lg leading-snug">
                   {member.name}
                 </h5>
+
                 <span className="text-white/70 text-sm mt-0.5 mb-0 group-hover:mb-3 transition-all duration-300">
-                  {member.role}
+                  {member.designation}
                 </span>
 
                 {/* Social icons */}
                 <div className="flex gap-2 justify-center overflow-hidden max-h-0 opacity-0 group-hover:max-h-10 group-hover:opacity-100 transition-all duration-300 ease-out">
-                  {[XIcon, FbIcon, LiIcon].map((Icon, i) => (
-                    <button
-                      key={i}
+                  
+                  {member.instagram && (
+                    <Link
+                      href={member.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-8 h-8 rounded-full bg-white/90 hover:bg-white text-gray-800 flex items-center justify-center transition-colors duration-200 flex-shrink-0"
                     >
-                      <Icon />
-                    </button>
-                  ))}
+                      <FbIcon />
+                    </Link>
+                  )}
+
+                  {member.linkedin && (
+                    <Link
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full bg-white/90 hover:bg-white text-gray-800 flex items-center justify-center transition-colors duration-200 flex-shrink-0"
+                    >
+                      <LiIcon />
+                    </Link>
+                  )}
+
+                  {member.website && (
+                    <Link
+                      href={member.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full bg-white/90 hover:bg-white text-gray-800 flex items-center justify-center transition-colors duration-200 flex-shrink-0"
+                    >
+                      <XIcon />
+                    </Link>
+                  )}
+
                 </div>
               </div>
             </div>

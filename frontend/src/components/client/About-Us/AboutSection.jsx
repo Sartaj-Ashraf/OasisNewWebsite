@@ -1,5 +1,5 @@
 import Image from "next/image";
-import AboutImage from "@/assets/OurTeam/shahid.jpeg";
+import AboutImage from "@/assets/AboutImage.png";
 import { Button } from "@/shared/ClickAble"
 
 export default function AboutSection() {
@@ -40,12 +40,12 @@ export default function AboutSection() {
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="relative w-full h-[400px] md:h-[450px] rounded-[28px] overflow-hidden shadow-lg">
+        <div className="relative w-full h-[400px] md:h-[450px]  overflow-hidden ">
           <Image
             src={AboutImage}
             alt="AI SEO"
             fill
-            className="object-cover"
+            className="object-contain"
             priority
           />
         </div>
