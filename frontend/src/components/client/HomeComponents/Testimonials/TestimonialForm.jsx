@@ -33,7 +33,7 @@ export default function TestimonialForm() {
   const isValid = form.name.trim() && form.message.trim();
 
   return (
-    <div className="bg-white rounded-2xl border border-dashed border-gray-200 p-4 flex-1">
+    <div className="rounded-2xl border border-dashed border-primary p-4 flex-1">
       {/* Header */}
       <div className="mb-4">
         <h2 className="text-base font-medium text-gray-900">

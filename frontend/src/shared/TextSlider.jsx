@@ -30,7 +30,7 @@ export default function TextSlider() {
     arrows: false,
     pagination: false,
     interval: 2400,
-    speed: 1400,
+    speed: 1600,
     autoplay: true,
     drag: false,
     pauseOnHover: false,
@@ -68,7 +68,7 @@ export default function TextSlider() {
             {words.map((word, i) => (
               <li
                 key={i}
-                className="splide__slide whitespace-nowrap text-5xl md:text-6xl md:h-[100px] flex items-center font-bold
+                className="splide__slide whitespace-nowrap text-4xl md:text-6xl md:h-[100px] flex items-center font-bold
                            text-black/10 [&.is-active]:text-transparent
                            [&.is-active]:bg-linear-to-r
                            [&.is-active]:from-secondary

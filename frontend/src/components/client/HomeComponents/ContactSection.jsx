@@ -23,7 +23,7 @@ export const ContactSection = () => {
           {/* LEFT CONTENT */}
          <div className="text-white space-y-8 relative z-10">
             <h2 className="text-secondary-dark font-medium  leading-tight">
-              We’re here to help with your questions.
+              We’re here to <span className="italic text-transparent bg-clip-text bg-linear-to-r from-primary to-primary-dark px-1">help</span> with your <span className="italic text-transparent bg-clip-text bg-linear-to-r from-primary to-primary-dark px-1">questions</span>.
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">

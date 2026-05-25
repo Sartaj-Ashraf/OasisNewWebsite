@@ -2,37 +2,37 @@
 
 import Image from "next/image";
 import { Check } from "lucide-react";
-import whychooseus from "@/assets/videosection/whychooseus.webp";
+import whychooseus from "@/assets/rocket.png";
 
-// ✅ DATA (API READY STRUCTURE)
+// ✅ DATA
 const features = [
   {
     id: 1,
     title: "Startup Growth",
     description:
-      "For startups and growing businesses, an online specialist can develop a digital marketing plan to help you grow.",
+      "Oasis Ascend helps businesses build strong digital foundations with scalable web solutions and modern brand strategies.",
     color: "bg-teal-400",
   },
   {
     id: 2,
     title: "Campaign Strategy",
     description:
-      "Your digital consultant will also be able to kickstart campaigns and maximise your marketing budget.",
+      "We create result-driven marketing campaigns that improve visibility, generate quality leads, and boost engagement.",
     color: "bg-purple-400",
   },
   {
     id: 3,
     title: "Business Optimization",
     description:
-      "Lorem ipsum dolor sit amet, vix an natum labitur eleif, mel amet laoreet prois menandri.",
+      "Our team delivers innovative technology and performance-focused solutions tailored for long-term business growth.",
     color: "bg-red-400",
   },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className=" py-8 ">
-      <div className="container max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <section className="py-8">
+      <div className="container mx-auto grid md:grid-cols-2 gap-10 items-center">
 
         {/* LEFT IMAGE */}
         <div className="relative w-full h-[350px] md:h-[450px] rounded-3xl overflow-hidden">
@@ -47,36 +47,35 @@ export default function WhyChooseUs() {
 
         {/* RIGHT CONTENT */}
         <div>
-          <p className="!text-lg uppercase tracking-widest text-gray-400 mb-3">
+          <span className="text-sm uppercase tracking-widest text-gray-400 mb-2">
             WHY CHOOSE US
-          </p>
+          </span>
 
-          <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-6 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-            Save Time & Effort <br /> With the Ewebot
+          <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-4 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            Save Time & Effort <br /> With Oasis Ascend
           </h2>
 
-          <p className="!text-lg text-gray-500 mb-5 max-w-md leading-relaxed">
-            Ad nec unum copiosae. Sea ex everti labores, ad option iuvaret qui muva.
+          <p className="!text-lg text-gray-500 mb-4 max-w-md leading-relaxed">
+            We help brands grow faster with smart digital solutions, creative strategies, and modern technology.
           </p>
 
           {/* LIST */}
-          <div className="space-y-4">
+          <div className="space-y-2">
             {features.map((item) => (
               <div key={item.id} className="flex items-start gap-3">
 
-                {/* ICON (PERFECT CIRCLE) */}
+                {/* ICON */}
                 <div
-                  className={`flex-shrink-0 w-6  h-6 rounded-full flex items-center justify-center text-white ${item.color}`}
+                  className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white ${item.color}`}
                 >
                   <Check size={14} />
                 </div>
 
                 {/* TEXT CONTENT */}
                 <div>
-                 
-                  <p className="!text-lg text-gray-600 text-sm md:text-base leading-relaxed max-w-lg">
+                  <span className=" text-gray-600 text-sm md:text-base leading-relaxed max-w-lg">
                     {item.description}
-                  </p>
+                  </span>
                 </div>
 
               </div>

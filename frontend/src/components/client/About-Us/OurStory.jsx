@@ -1,42 +1,38 @@
 export default function OurStory() {
-  const timeline = [
-    {
-      year: "2019",
-      title: "Project Idea",
-      desc: "The initial concept took shape, outlining what would become the foundation of Oasis Ascend.",
-      accent: "#22c55e",
-      num: "01",
-    },
-    {
-      year: "2021",
-      title: "Business Conception",
-      desc: "The idea evolved into a structured business model with a clear vision and direction.",
-      accent: "#f97316",
-      num: "02",
-    },
-    {
-      year: "2022",
-      title: "Infrastructure Design",
-      desc: "Core systems and architecture were planned and designed to support long-term growth.",
-      accent: "#ec4899",
-      num: "03",
-    },
-    {
-      year: "2023",
-      title: "Company Established",
-      desc: "Oasis Ascend was formally registered and began operating as an official entity.",
-      accent: "#06b6d4",
-      num: "04",
-    },
-    {
-      year: "2024",
-      title: "Legal Review",
-      desc: "Compliance and legal frameworks were thoroughly reviewed and put in place.",
-      accent: "#6366f1",
-      num: "05",
-    },
-  ];
-
+const timeline = [
+  {
+    year: "2000",
+    title: "Kashmir Valley Networks",
+    desc:
+      "The founder began his journey by launching Kashmir Valley Networks, one of the early neighborhood-level ISPs in Kashmir.",
+    accent: "#06b6d4",
+    num: "01",
+  },
+  {
+    year: "2010",
+    title: "Srinagar Net Tech Pvt. Ltd.",
+    desc:
+      "The internet venture expanded into Srinagar Net Tech Pvt. Ltd., later growing into Jaztel, a PAN-India Category A ISP.",
+    accent: "#8b5cf6",
+    num: "02",
+  },
+  {
+    year: "2025",
+    title: "Oasis Ascend Founded",
+    desc:
+      "Oasis Ascend was officially founded as a digital marketing and technology company focused on branding, SEO, and web solutions.",
+    accent: "#ec4899",
+    num: "03",
+  },
+  {
+    year: "2025",
+    title: "International Expansion",
+    desc:
+      "The company expanded operations internationally, including hiring and business development activities in Dubai and Jammu.",
+    accent: "#f97316",
+    num: "04",
+  },
+];
   return (
     <section className="">
       <div className="container mx-auto">

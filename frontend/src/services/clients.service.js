@@ -1,8 +1,13 @@
 import customFetch from "@/lib/customFetch";
 
-export const getClientsService = async (params) => {
-  const { data } = await customFetch.get("/clients", { params });
-  return data;
+export const getAllClients = async () => {
+  try {
+    const response = await customFetch.get("/clients");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 };
 
 export const getClientByIdService = async (id) => {

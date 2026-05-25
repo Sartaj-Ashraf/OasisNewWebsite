@@ -7,7 +7,8 @@ import { ArrowRight } from "lucide-react";
 
 export const Customers = () => {
   return (
-    <div className="h-[300px] md:h-full relative md:col-span-1 bg-linear-to-br from-primary via-primary/70 to-primary/20 w-full p-4 rounded-3xl">
+    <div className="h-[300px] md:h-full relative md:col-span-1 bg-linear-to-br overflow-hidden from-primary via-primary/70 to-primary/20 w-full p-4 rounded-3xl">
+
       <div className="absolute top-0 right-0">
         <Image src={svgImg} alt="svg" className="w-full h-full " />
         <Link
@@ -19,10 +20,10 @@ export const Customers = () => {
           </span>
         </Link>
       </div>
-      <div className="flex flex-col justify-end h-full gap-4">
+      <div className="flex flex-col justify-end h-full gap-4 relative z-10">
         <h3 className="font-medium text-white">AI Innovation Globally Proven</h3>
         <p className="text-white">Used by 50k+ people around the world</p>
-        <LinkBtn link="/" children="Discover More" />
+        <LinkBtn link="/" children="Discover More" className="bg-linear-to-br from-secondary via-secondary to-secondary-dark hover:from-secondary-dark hover:via-secondary-dark hover:to-secondary" />
       </div>
     </div>
   );
