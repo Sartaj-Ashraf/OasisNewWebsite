@@ -4,23 +4,22 @@
    STATS GRID
 ══════════════════════════════════════════ */
 export const StatsGrid = ({ stats }) => (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-8 select-none">
         {[
-            { label: "Total Jobs",   value: stats.totalJobs,     color: "text-slate-800",   icon: "🗂" },
-            { label: "Active",       value: stats.activeJobs,    color: "text-emerald-600", icon: "✓" },
-            { label: "Inactive",     value: stats.inactiveJobs,  color: "text-rose-500",    icon: "✕" },
-            { label: "Vacancies",    value: stats.totalVacancies, color: "text-amber-600",  icon: "👥" },
-            { label: "New (30d)",    value: stats.recentJobs,    color: "text-sky-600",     icon: "🆕" },
-            { label: "Job Types",    value: stats.jobsByType?.length || 0, color: "text-violet-600", icon: "🏷" },
+            { label: "Total Jobs",   value: stats.totalJobs,     color: "text-slate-800" },
+            { label: "Active",       value: stats.activeJobs,    color: "text-emerald-600"},
+            { label: "Inactive",     value: stats.inactiveJobs,  color: "text-rose-500"},
+            { label: "Vacancies",    value: stats.totalVacancies, color: "text-amber-600"},
+            { label: "New (30d)",    value: stats.recentJobs,    color: "text-sky-600"},
+            { label: "Job Types",    value: stats.jobsByType?.length || 0, color: "text-violet-600"},
         ].map((s) => (
             <div key={s.label}
                 className="bg-white border border-slate-100 rounded-2xl px-4 py-4 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 relative overflow-hidden group cursor-default">
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-400 to-amber-300 opacity-60 group-hover:opacity-100 transition-opacity" />
+              
                 <div className="flex items-start justify-between mb-2">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{s.label}</div>
-                    <span className="text-sm opacity-40 group-hover:opacity-70 transition-opacity">{s.icon}</span>
+                    <div className="text-xs font-bold uppercase tracking-wider text-slate-400">{s.label}</div>
                 </div>
-                <div className={`text-3xl font-extrabold leading-none ${s.color}`}
+                <div className={`text-3xl font-font leading-none ${s.color}`}
                     style={{ fontFamily: "Syne, sans-serif" }}>{s.value}</div>
             </div>
         ))}
@@ -58,7 +57,6 @@ export const FiltersBar = ({
             <div className="flex flex-col xl:flex-row gap-3">
                 {/* Search */}
                 <div className="relative flex-1">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none">🔍</span>
                     <input
                         className="w-full bg-slate-50 border border-slate-200 focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-400/10 rounded-xl pl-9 pr-9 py-2.5 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400"
                         placeholder="Search title, description, location, qualification…"
@@ -76,8 +74,8 @@ export const FiltersBar = ({
                     <div className="flex gap-0.5 bg-slate-50 border border-slate-200 rounded-xl p-1">
                         {[
                             { val: "all",   label: "All" },
-                            { val: "true",  label: "✓ Active" },
-                            { val: "false", label: "✕ Inactive" },
+                            { val: "true",  label: "Active" },
+                            { val: "false", label: "Inactive" },
                         ].map(({ val, label }) => (
                             <button key={val} onClick={() => setStatusFilter(val)}
                                 className={`px-3.5 py-1.5 rounded-lg text-xs font-bold border-none cursor-pointer transition-all ${

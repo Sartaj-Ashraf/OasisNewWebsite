@@ -211,18 +211,18 @@ export const TestimonialsTable = ({
                                 {/* Actions */}
                                 <td className="px-5 py-4 align-middle text-right" onClick={(e) => e.stopPropagation()}>
                                     <div className="inline-flex gap-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
-                                        <button onClick={() => onView(t)}
+                                        {/* <button onClick={() => onView(t)}
                                             className="px-3 py-1.5 text-xs font-bold bg-accent-light border border-accent-dark text-text-secondary rounded-lg cursor-pointer hover:border-text-secondary hover:text-text-primary hover:bg-accent transition-all"
                                             title="View details">
-                                            👁 View
-                                        </button>
+                                            View
+                                        </button> */}
                                         <button onClick={() => onEdit(t)}
-                                            className="px-3 py-1.5 text-xs font-bold bg-accent-light border border-accent-dark text-text-secondary rounded-lg cursor-pointer hover:border-primary hover:text-primary-dark hover:bg-primary/10 transition-all">
-                                            ✏️ Edit
+                                            className="px-3 py-1.5 text-xs font-bold bg-amber-500 border border-amber-500 text-white rounded-lg cursor-pointer hover:border-amber-600 hover:text-amber-600 hover:bg-amber-50/60 transition-all">
+                                            Edit
                                         </button>
                                         <button onClick={() => onDelete(t)}
-                                            className="px-3 py-1.5 text-xs font-bold bg-accent-light border border-accent-dark text-text-secondary rounded-lg cursor-pointer hover:border-rose-400 hover:text-rose-600 hover:bg-rose-50/60 transition-all">
-                                            🗑
+                                            className="px-3 py-1.5 text-xs font-bold bg-red-500 border border-red-500 text-white rounded-lg cursor-pointer hover:border-rose-400 hover:text-rose-600 hover:bg-rose-50/60 transition-all">
+                                            Delete
                                         </button>
                                     </div>
                                 </td>

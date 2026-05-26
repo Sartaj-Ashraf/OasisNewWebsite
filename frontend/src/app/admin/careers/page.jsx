@@ -243,18 +243,15 @@ export default function CareersAdminPage() {
         <div className="min-h-screen bg-slate-50 p-4 sm:p-6 lg:p-8">
             <div className="max-w-7xl mx-auto">
                 {/* ── HEADER ── */}
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 mb-8">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 mb-8 select-none">
                     <div>
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-100 text-amber-700 text-xs font-bold mb-3">
                             💼 Careers Management
                         </div>
 
-                        <h1
-                            className="text-3xl! sm:text-3xl! font-black text-slate-900 tracking-tight"
-                            style={{ fontFamily: "Syne, sans-serif" }}
-                        >
-                            Careers Dashboard
-                        </h1>
+                        <h3 className="text-4xl! font-bold tracking-tight text-slate-800">
+                            Careers <span className="text-amber-500 italic">Hub</span>
+                        </h3>
 
                         <p className="text-slate-500 mt-2 text-sm sm:text-base max-w-2xl!">
                             Manage jobs, hiring visibility, vacancies, and career listings from one place.
@@ -263,7 +260,7 @@ export default function CareersAdminPage() {
 
                     <button
                         onClick={() => setCreateOpen(true)}
-                        className="h-12 px-5 rounded-2xl bg-amber-400 hover:bg-amber-500 text-white font-bold border-none cursor-pointer shadow-lg shadow-amber-400/20 transition-all hover:-translate-y-0.5"
+                        className="h-12 px-5 rounded-2xl bg-amber-400 hover:bg-amber-500 text-white font-bold border-none cursor-pointer shadow-xs shadow-amber-400/20 transition-all hover:-translate-y-0.5"
                     >
                         + Create Job
                     </button>

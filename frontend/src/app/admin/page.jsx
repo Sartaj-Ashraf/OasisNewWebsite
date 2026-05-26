@@ -100,7 +100,7 @@ const Page = () => {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-lg font-bold tracking-tight text-text-primary font-mono">WORKSPACE_ENGINE</h1>
+              <h1 className="text-lg! font-bold tracking-tight text-text-primary font-mono">WORKSPACE_ENGINE</h1>
               <span className="px-1.5 py-0.5 rounded bg-secondary/10 text-secondary font-mono text-[9px] font-bold uppercase tracking-widest border border-secondary/20">v4.1.0</span>
             </div>
             <p className="text-base! text-text-secondary">Distributing real-time verification modules and telemetry routing protocols.</p>

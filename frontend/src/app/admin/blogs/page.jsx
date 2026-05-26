@@ -141,7 +141,7 @@ export default function AdminBlogDashboard() {
               <FileText size={18} />
               <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Content Architecture</span>
             </div>
-            <h3 className="text-4xl font-bold tracking-tight text-slate-800">
+            <h3 className="text-4xl! font-bold tracking-tight text-slate-800">
               Blog <span className="text-amber-500 italic">Hub</span>
             </h3>
           </div>
@@ -163,15 +163,13 @@ export default function AdminBlogDashboard() {
           ].map((card, idx) => (
             <div 
               key={idx} 
-              className="bg-white border border-slate-200 rounded-2xl p-5 flex items-center justify-between shadow-sm"
+              className="bg-white border border-slate-200 rounded-2xl p-5 flex items-center justify-between   "
             >
               <div>
-                <p className="text-slate-400 text-base! font-bold uppercase tracking-wider">{card.title}</p>
-                <h3 className="text-3xl!   font-bold mt-1 text-slate-800">{loading ? "..." : card.count}</h3>
+                <p className="text-slate-400 text-sm! font-bold uppercase tracking-wider">{card.title}</p>
+                <h3 className="text-2xl! font-bold mt-1 text-slate-800">{loading ? "..." : card.count}</h3>
               </div>
-              <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                {card.icon}
-              </div>
+             
             </div>
           ))}
         </div>

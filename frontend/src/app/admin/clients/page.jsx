@@ -109,14 +109,14 @@ export default function ClientsPage() {
               <Database size={18} />
               <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Personnel Management</span>
             </div>
-            <h3 className="text-4xl font-bold tracking-tight text-slate-800">
+            <h3 className="text-3xl font-bold tracking-tight text-slate-800">
               Brand <span className="text-amber-500 italic">Clients</span>
             </h3>
           </div>
 
           <button
             onClick={() => router.push("/admin/clients/create")}
-            className="group flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-md active:scale-95"
+            className="group flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-md active:scale-95"
           >
             <Plus size={16} className="group-hover:rotate-90 transition-transform" />
             Register Client
@@ -144,9 +144,9 @@ export default function ClientsPage() {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-11 pr-8 text-sm outline-none cursor-pointer appearance-none hover:border-slate-300 transition-all shadow-sm text-slate-800"
               >
-                <option value="all">All Registered Nodes</option>
-                <option value="active">Active Records Only</option>
-                <option value="inactive">Inactive Records Only</option>
+                <option className="text-xs" value="all">All Registered Nodes</option>
+                <option className="text-xs" value="active">Active Records Only</option>
+                <option className="text-xs" value="inactive">Inactive Records Only</option>
               </select>
             </div>
 
@@ -253,17 +253,18 @@ export default function ClientsPage() {
                         <div className="inline-flex items-center gap-2">
                           <button
                             onClick={() => router.push(`/admin/clients/edit/${client._id}`)}
-                            className="p-2 rounded-xl bg-white border border-slate-200 text-slate-500 hover:text-slate-900 hover:border-slate-400 shadow-xs transition-all"
+                            className="px-2.5 py-1.5 text-xs font-bold bg-amber-500 border border-amber-500 text-white rounded-lg cursor-pointer hover:bg-amber-600 transition-all"
                             title="Modify Node Parameters"
                           >
-                            <Edit3 className="w-3.5 h-3.5" />
+                           Edit
                           </button>
+                        
                           <button
                             onClick={() => handleDelete(client._id)}
-                            className="p-2 rounded-xl bg-red-50 text-red-600 hover:text-red-700 hover:bg-red-100/60 transition-all"
+                            className="px-2.5 py-1.5 text-xs font-bold bg-red-500 border border-red-500 text-white rounded-lg cursor-pointer hover:bg-red-600 transition-all"
                             title="Purge Node Record"
                           >
-                            <Trash2 className="w-3.5 h-3.5" />
+                            Delete
                           </button>
                         </div>
                       </td>
