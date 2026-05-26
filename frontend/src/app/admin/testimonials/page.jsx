@@ -38,11 +38,11 @@ function useDebounce(value, delay = 400) {
 const StatsGrid = ({ stats }) => (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
         {[
-            { label: "Total", value: stats.total, color: "text-slate-800", icon: "🗂" },
-            { label: "Approved", value: stats.approved, color: "text-emerald-600", icon: "✓" },
-            { label: "Pending", value: stats.pending, color: "text-rose-500", icon: "⏳" },
-            { label: "Featured", value: stats.featured, color: "text-amber-500", icon: "★" },
-            { label: "Avg Rating", value: `${stats.averageRating}★`, color: "text-amber-500", icon: "⭐" },
+            { label: "Total", value: stats.total, color: "text-slate-800" },
+            { label: "Approved", value: stats.approved, color: "text-emerald-600" },
+            { label: "Pending", value: stats.pending, color: "text-rose-500" },
+            { label: "Featured", value: stats.featured, color: "text-amber-500" },
+            { label: "Avg Rating", value: `${stats.averageRating}★`, color: "text-amber-500" },
         ].map((s) => (
             <div key={s.label} className="bg-white border border-slate-100 rounded-2xl px-5 py-4 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 relative overflow-hidden group">
              
@@ -50,7 +50,7 @@ const StatsGrid = ({ stats }) => (
                     <div className="text-sm font-bold uppercase tracking-wider text-slate-400">{s.label}</div>
                     <span className="text-base opacity-40 group-hover:opacity-70 transition-opacity">{s.icon}</span>
                 </div>
-                <div className={`text-2xl font-extrabold leading-none ${s.color}`}
+                <div className={`text-2xl font-bold leading-none ${s.color}`}
                     >{s.value}</div>
             </div>
         ))}
@@ -80,9 +80,6 @@ const FiltersBar = ({
         
         {/* Search Input Container */}
         <div className="relative flex-1 max-w-xl">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none">
-            🔍
-          </span>
           <input
             type="text"
             className="w-full bg-gray-50/60 border border-gray-200/80 focus:border-gray-900 focus:bg-white focus:ring-1 focus:ring-gray-900 rounded-xl pl-10 pr-10 py-2.5 text-sm text-gray-800 outline-none transition-all placeholder:text-gray-400 font-normal"
@@ -329,10 +326,9 @@ export default function TestimonialsAdmin() {
                         <div>
                             <div className="flex items-center gap-3 mb-1">
                              
-                                <h1 className="text-3xl! font-bold text-primary "
-                                    >
-                                    Testimonials <span className="text-secondary">Admin</span>
-                                </h1>
+                            <h3 className="text-4xl! font-bold tracking text-slate-800">
+                            Testimonials <span className="text-amber-500 italic">Admin</span>
+                        </h3>
                             </div>
                             <p className="text-slate-500 text-sm!">
                                 {loading ? "Loading…" : `${total} record${total !== 1 ? "s" : ""} · page ${page} of ${totalPages}`}

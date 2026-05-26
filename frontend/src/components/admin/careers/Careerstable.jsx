@@ -47,9 +47,9 @@ export default function CareersTable({
     return (
         <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-                <table className="w-full border-collapse text-left min-w-[1040px]">
+                <table className="w-full border-collapse text-left min-w-260">
                     <thead>
-                        <tr className="border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
+                        <tr className="border-b border-slate-100 bg-linear-to-r from-slate-50 to-white">
                             {["Job", "Type", "Location", "Vacancies", "Salary", "Status", "Actions"].map((h, i) => (
                                 <th key={h}
                                     className={`px-5 py-4 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 ${i === 6 ? "text-right" : ""}`}
@@ -139,13 +139,13 @@ export default function CareersTable({
                                         <div className="inline-flex gap-1.5 opacity-90 group-hover:opacity-100 transition-opacity">
                                             <button onClick={() => onView(job)}
                                                 className="px-2.5 py-1.5 text-xs font-bold bg-white border border-slate-200 text-slate-600 rounded-lg cursor-pointer hover:border-slate-400 hover:bg-slate-50 transition-all"
-                                                title="View">👁</button>
+                                                title="View">View</button>
                                             <button onClick={() => onEdit(job)}
-                                                className="px-2.5 py-1.5 text-xs font-bold bg-white border border-slate-200 text-slate-600 rounded-lg cursor-pointer hover:border-amber-400 hover:text-amber-600 hover:bg-amber-50/60 transition-all"
-                                                title="Edit">✏️</button>
+                                                className="px-2.5 py-1.5 text-xs font-bold bg-amber-500 border border-amber-500 text-white rounded-lg cursor-pointer hover:bg-amber-600 transition-all"
+                                                title="Edit">Edit</button>
                                             <button onClick={() => onDelete(job)}
-                                                className="px-2.5 py-1.5 text-xs font-bold bg-white border border-slate-200 text-slate-600 rounded-lg cursor-pointer hover:border-rose-400 hover:text-rose-600 hover:bg-rose-50/60 transition-all"
-                                                title="Delete">🗑</button>
+                                                className="px-2.5 py-1.5 text-xs font-bold bg-red-500 border border-red-500 text-white rounded-lg cursor-pointer hover:bg-red-600 transition-all"
+                                                title="Delete">Delete</button>
                                         </div>
                                     </td>
                                 </tr>
