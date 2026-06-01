@@ -110,7 +110,7 @@ export const AdminSidebar = () => {
             {/* --- MOBILE OVERLAY --- */}
             {isMobileOpen && (
                 <div
-                    className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-[60] md:hidden"
+                    className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-60 md:hidden select-none"
                     onClick={() => setIsMobileOpen(false)}
                 />
             )}
@@ -118,13 +118,13 @@ export const AdminSidebar = () => {
             {/* --- SIDEBAR CONTAINER --- */}
             <aside
                 className={`
-                    fixed inset-y-0 left-0 z-[70] md:relative
+                    fixed inset-y-0 left-0 z-70 md:relative
                     ${isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
                     ${isOpen ? 'w-64' : 'md:w-20'} 
                     h-full flex flex-col
                     border-r border-slate-200 
                     bg-white
-                    transition-all duration-300 ease-in-out
+                    transition-all duration-300 ease-in-out select-none
                 `}
             >
                 {/* Desktop Toggle Button */}
@@ -161,7 +161,7 @@ export const AdminSidebar = () => {
                         <div key={group.category} className="mb-4">
 
                             {(isOpen || isMobileOpen) && (
-                                <h4 className="px-3 mb-2 text-sm! font-semibold uppercase tracking-wider text-slate-400">
+                                <h4 className="px-3 mb-2 text-xs! font-semibold uppercase tracking-wider text-secondary">
                                     {group.category}
                                 </h4>
                             )}
@@ -205,14 +205,14 @@ export const AdminSidebar = () => {
 
                 {/* Footer Section */}
                 <div className="p-4 border-t border-slate-100 space-y-2">
-                    <button className="flex items-center gap-3 w-full p-2 text-slate-500 hover:text-slate-900 transition-colors">
+                    {/* <button className="flex items-center gap-3 w-full p-2 text-slate-500 hover:text-slate-900 transition-colors">
                         <Settings size={18} />
                         <span className={`text-sm ${(!isOpen && !isMobileOpen) ? 'hidden md:opacity-0' : 'block'}`}>Settings</span>
-                    </button>
+                    </button> */}
 
-                    <button onClick={handleLogout} className="flex items-center gap-3 w-full p-2 text-rose-500 hover:text-rose-600 transition-colors">
+                    <button onClick={handleLogout} className="flex items-center gap-3 w-full p-2  text-rose-500 hover:text-rose-600 transition-colors">
                         <LogOut size={18} />
-                        <span className={`text-sm ${(!isOpen && !isMobileOpen) ? 'hidden md:opacity-0' : 'block'}`}>Logout</span>
+                        <span className={`text-sm  ${(!isOpen && !isMobileOpen) ? 'hidden md:opacity-0' : 'block'}`}>Logout</span>
                     </button>
                 </div>
             </aside>
