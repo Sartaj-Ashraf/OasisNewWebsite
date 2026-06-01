@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import Career from "../models/careersModel.js";
 import JobApplication from "../models/jobApplicationModel.js";
 import { uploadResumeToS3, deleteFromS3 } from "../utils/s3Upload.js";
-
+import { sendJobApplicationEmail, sendAdminJobApplicationEmail } from "../utils/sendJobApplicationEmail.js";
 export const sendJobApplication = async (req, res) => {
     try {
         const {
@@ -14,7 +14,7 @@ export const sendJobApplication = async (req, res) => {
             notes
         } = req.body;
 
-   
+
         if (!req.file) {
             return res.status(400).json({
                 message: "Resume is required"
@@ -52,7 +52,23 @@ export const sendJobApplication = async (req, res) => {
             notes,
             resume
         });
+        await Promise.all([
+            sendJobApplicationEmail({
+                fullName,
+                email,
+                position: careerObject.JobTitle
+            }),
 
+            sendAdminJobApplicationEmail({
+                fullName,
+                email,
+                phone,
+                experience,
+                notes,
+                position: careerObject.JobTitle,
+                resumeUrl: resume.url
+            })
+        ]);
         return res.status(201).json({
             success: true,
             message: "Application submitted successfully",
