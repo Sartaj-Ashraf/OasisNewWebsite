@@ -147,7 +147,7 @@ export default function AdminBlogDashboard() {
           </div>
 
           <Link href="/admin/blogs/create">
-            <button className="group flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-md active:scale-95">
+            <button className="group flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-md active:scale-95">
               <Plus size={16} className="group-hover:rotate-90 transition-transform" />
               Write Article
             </button>
@@ -166,8 +166,8 @@ export default function AdminBlogDashboard() {
               className="bg-white border border-slate-200 rounded-2xl p-5 flex items-center justify-between   "
             >
               <div>
-                <p className="text-slate-400 text-sm! font-bold uppercase tracking-wider">{card.title}</p>
-                <h3 className="text-2xl! font-bold mt-1 text-slate-800">{loading ? "..." : card.count}</h3>
+                <p className="text-slate-400 text-xs! font-bold uppercase tracking-wider">{card.title}</p>
+                <h3 className="text-xl! font-bold mt-1 text-slate-800">{loading ? "..." : card.count}</h3>
               </div>
              
             </div>

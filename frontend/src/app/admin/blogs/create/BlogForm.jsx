@@ -31,16 +31,16 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
   );
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState(null);
-const [coverImage, setCoverImage] = useState(
-  initialData?.coverImage
-    ? {
+  const [coverImage, setCoverImage] = useState(
+    initialData?.coverImage
+      ? {
         _file: null,
         _preview: null,
         url: initialData.coverImage.url,
         key: initialData.coverImage.key,
       }
-    : null
-);
+      : null
+  );
 
   const titleRef = useRef(null);
   const coverImageRef = useRef(null);
@@ -249,77 +249,90 @@ const [coverImage, setCoverImage] = useState(
 
               {/* Cover Image Upload */}
               <div className="mb-8">
-                <input
-                  ref={coverImageRef}
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={e => {
-                    const file = e.target.files[0];
-                    if (!file || !file.type.startsWith("image/")) return;
-                    setCoverImage({ _file: file, _preview: URL.createObjectURL(file), url: null });
-                  }}
-                />
-             {coverImage?._preview || coverImage?.url ? (
-  <div className="relative rounded-2xl overflow-hidden border border-border-custom group">
+           <input
+  ref={coverImageRef}
+  type="file"
+  accept=".jpg,.jpeg,image/jpeg"
+  className="hidden"
+  onChange={(e) => {
+    const file = e.target.files?.[0];
 
-    <div className="relative w-full h-56 bg-accent">
+    if (!file) return;
 
-      <Image
-        src={coverImage._preview || coverImage.url}
-        alt="Cover image"
-        fill
-        className="object-cover"
-      />
+    if (!["image/jpeg", "image/jpg"].includes(file.type)) {
+      alert("Only JPG/JPEG images are allowed");
+      e.target.value = "";
+      return;
+    }
 
-    </div>
+    setCoverImage({
+      _file: file,
+      _preview: URL.createObjectURL(file),
+      url: null,
+    });
+  }}
+/>
+                {coverImage?._preview || coverImage?.url ? (
+                  <div className="relative rounded-2xl overflow-hidden border border-border-custom group">
 
-    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all" />
+                    <div className="relative w-full h-56 bg-accent">
+                      {/* {console.log(coverImage._preview || coverImage.url)} */}
+                     
+                      <Image
+                        src={coverImage._preview || coverImage.url}
+                        alt="Cover image"
+                        fill
+                        className="object-cover"
+                      />
 
-    <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                    </div>
 
-      <button
-        onClick={() => coverImageRef.current?.click()}
-        className="bg-accent-light/95 text-text-secondary hover:bg-accent-dark px-3 py-1.5 rounded-lg shadow-sm border border-border-custom text-xs font-semibold transition-all cursor-pointer"
-      >
-        Replace
-      </button>
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all" />
 
-      <button
-        onClick={() => {
-          if (coverImage?._preview) {
-            URL.revokeObjectURL(coverImage._preview);
-          }
+                    <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
 
-          setCoverImage(null);
-        }}
-        className="bg-accent-light/95 text-red-500 hover:bg-red-50 p-1.5 rounded-lg shadow-sm border border-red-100 transition-all cursor-pointer"
-      >
-        <Trash2 size={13} />
-      </button>
+                      <button
+                        onClick={() => coverImageRef.current?.click()}
+                        className="bg-accent-light/95 text-text-secondary hover:bg-accent-dark px-3 py-1.5 rounded-lg shadow-sm border border-border-custom text-xs font-semibold transition-all cursor-pointer"
+                      >
+                        Replace
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (coverImage?._preview) {
+                            URL.revokeObjectURL(coverImage._preview);
+                          }
 
-    </div>
+                          setCoverImage(null);
+                        }}
+                        className="bg-accent-light/95 text-red-500 hover:bg-red-50 p-1.5 rounded-lg shadow-sm border border-red-100 transition-all cursor-pointer"
+                      >
+                        <Trash2 size={13} />
+                      </button>
 
-    <div className="absolute bottom-3 left-3 bg-accent-light/90 text-[10px] font-bold uppercase tracking-widest text-text-secondary/60 px-2.5 py-1 rounded-full border border-border-custom">
-      Cover Image
-    </div>
+                    </div>
 
-  </div>
-) : (
-  // upload button
-  <button
-    onClick={() => coverImageRef.current?.click()}
-    className="w-full h-32 rounded-2xl border-2 border-dashed border-border-custom hover:border-primary/60 bg-accent/40 hover:bg-primary/5 flex flex-col items-center justify-center gap-2 transition-all cursor-pointer group"
-  >
-    <div className="w-9 h-9 rounded-xl bg-accent-dark group-hover:bg-primary/10 flex items-center justify-center transition-all">
-      <ImageIcon size={18} className="text-text-secondary/50 group-hover:text-primary/70 transition-colors" />
-    </div>
-    <div className="text-center">
-      <p className="text-xs font-semibold text-text-primary/70">Add cover image</p>
-      <p className="text-[10px] text-text-secondary/40">PNG, JPG, WEBP — recommended 1200×630</p>
-    </div>
-  </button>
-)}
+                    <div className="absolute bottom-3 left-3 bg-accent-light/90 text-[10px] font-bold uppercase tracking-widest text-text-secondary/60 px-2.5 py-1 rounded-full border border-border-custom">
+                      Cover Image <span className="text-xs text-secondary">only jpg/jpeg</span>
+
+                    </div>
+
+                  </div>
+                ) : (
+                  // upload button
+                  <button
+                    onClick={() => coverImageRef.current?.click()}
+                    className="w-full h-32 rounded-2xl border-2 border-dashed border-border-custom hover:border-primary/60 bg-accent/40 hover:bg-primary/5 flex flex-col items-center justify-center gap-2 transition-all cursor-pointer group"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-accent-dark group-hover:bg-primary/10 flex items-center justify-center transition-all">
+                      <ImageIcon size={18} className="text-text-secondary/50 group-hover:text-primary/70 transition-colors" />
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xs font-semibold text-text-primary/70">Add cover image</p>
+                      <p className="text-[10px] text-text-secondary/40">PNG, JPG, WEBP — recommended 1200×630</p>
+                    </div>
+                  </button>
+                )}
               </div>
 
               {/* Post Title Container */}

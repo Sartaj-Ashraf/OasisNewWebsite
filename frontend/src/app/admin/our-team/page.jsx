@@ -98,7 +98,7 @@ export default function TeamPage() {
 
                     <button
                         onClick={() => router.push("/admin/our-team/create")}
-                        className="group flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-md active:scale-95"
+                        className="group flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all shadow-md active:scale-95"
                     >
                         <Plus size={16} className="group-hover:rotate-90 transition-transform" />
                         Onboard Member
