@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
-
 import svgImg from "@/assets/svg/angle-start.svg";
 import bgImage from "@/assets/testimonialBg.png";
 import quorte from "@/assets/svg/quotes.svg";
@@ -76,7 +75,7 @@ export const TestimonialCard = ({ testimonials = [] }) => {
                 {item?.testimonial}
               </span>
 
-              <div className="relative">
+              <div className="relative ">
                 <Image
                   src={svgImg}
                   alt="svg"
@@ -84,15 +83,18 @@ export const TestimonialCard = ({ testimonials = [] }) => {
                 />
 
                 {/* Desktop author */}
-                <div className="flex items-center gap-2 absolute  bottom-2 left-3 mt-4">
+                <div className="flex items-center gap-2 absolute bg-linear-to-r from-teal-500/30 via-teal-300/20 to-transparent w-[35%]  px-2 py-1 rounded-full bottom-0 left-3 mt-4">
+                 <div className="w-8 h-8 md:w-14 md:h-14 rounded-full  bg-white overflow-hidden flex items-center justify-center">
+
                   <Image
                     src={item?.image?.url || avatarDefault}
                     alt="image"
                     width={80}
                     height={80}
                     unoptimized
-                    className="w-8 h-8 md:w-14 md:h-14 rounded-full object-cover"
-                  />
+                    className="object-cover"
+                    />
+                    </div>
                   <p className="text-base! text-secondary capitalize font-bold">
                     {item?.name}
                   </p>

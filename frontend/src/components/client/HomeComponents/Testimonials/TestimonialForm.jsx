@@ -119,9 +119,9 @@ export default function TestimonialForm() {
     <div className="rounded-2xl border border-dashed border-primary p-4 flex-1">
       {/* Header */}
       <div className="mb-4">
-        <h2 className="text-base font-medium text-gray-900">
+        <h3 className="text-base font-medium text-gray-900">
           Share your experience
-        </h2>
+        </h3>
       </div>
 
       {/* Avatar upload */}

@@ -40,7 +40,7 @@ const HeroBanner = () => {
             benefits that can save time, boost rankings, and make your digital
             strategy way more efficient.
           </p>
-          <Button className="w-fit button md:ml-[20%]">Get Started</Button>
+          <Button className="w-fit button md:ml-[20%] bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary text-white transition-all duration-300 ease-in-out">Get Started</Button>
         </div>
       </div>
 
