@@ -7,7 +7,7 @@ import {
     BarChart3,
     MessageSquareQuote,
     CreditCard,
-    Building2 ,
+    Building2,
     Briefcase,
     Users,
     Mail,
@@ -29,54 +29,60 @@ export const AdminSidebar = () => {
     const router = useRouter();
 
 
-const menuItems = [
-  {
-    title: "Our Team",
-    link: "/admin/our-team",
-    icon: <Palette size={20} />,
-  },
+    const menuItems = [
+        {
+            category: "Content Management",
+            items: [
+                {
+                    title: "Our Team",
+                    link: "/admin/our-team",
+                    icon: <Palette size={20} />,
+                },
+                {
+                    title: "Blog / Articles",
+                    link: "/admin/blogs",
+                    icon: <FileText size={19} />,
+                },
+                {
+                    title: "Testimonials",
+                    link: "/admin/testimonials",
+                    icon: <MessageSquareQuote size={20} />,
+                },
+            ],
+        },
 
-  {
-    title: "Blog / Articles",
-    link: "/admin/blogs",
-    icon: <FileText size={19} />,
-  },
+        {
+            category: "Career Management",
+            items: [
+                {
+                    title: "Careers",
+                    link: "/admin/careers",
+                    icon: <Building2 size={19} />,
+                },
+                {
+                    title: "Job Applications",
+                    link: "/admin/Job-Application",
+                    icon: <Briefcase size={19} />,
+                },
+            ],
+        },
 
-  // {
-  //   title: "Case Studies",
-  //   link: "/admin/cases",
-  //   icon: <BarChart3 size={19} />,
-  // },
-
-  {
-    title: "Portfolio / Projects",
-    link: "/admin/portfolio",
-    icon: <Briefcase size={19} />,
-  },
-  {
-    title: "Careers",
-    link: "/admin/careers",
-    icon: <Building2  size={19} />,
-  },
-
-  {
-    title: "Clients",
-    link: "/admin/clients",
-    icon: <Users size={20} />,
-  },
-
-  {
-    title: "Testimonials",
-    link: "/admin/testimonials",
-    icon: <MessageSquareQuote size={20} />,
-  },
-
-  {
-    title: "Contacts",
-    link: "/admin/contacts",
-    icon: <Mail size={20} />,
-  },
-];
+        {
+            category: "CRM",
+            items: [
+                {
+                    title: "Clients",
+                    link: "/admin/clients",
+                    icon: <Users size={20} />,
+                },
+                {
+                    title: "Contacts",
+                    link: "/admin/contacts",
+                    icon: <Mail size={20} />,
+                },
+            ],
+        },
+    ];
 
     const handleLogout = async () => {
         toast.loading("Logging out...");
@@ -151,30 +157,50 @@ const menuItems = [
 
                 {/* Navigation Items */}
                 <nav className="flex-1 overflow-y-auto px-2 space-y-1 custom-scroll">
-                    {menuItems.map((item) => {
-                        const isActive = activeTab === item.title;
-                        return (
-                            <button
-                                key={item.title}
-                                onClick={() => {
-                                    setActiveTab(item.title);
-                                    if (item.link) router.push(item.link);
-                                    setIsMobileOpen(false);
-                                }}
-                                className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-all duration-200
-                                    ${isActive
-                                        ? 'bg-yellow-400 text-slate-900 shadow-md shadow-yellow-400/10'
-                                        : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
-                                    }`}
-                            >
-                                <span className="shrink-0">{item.icon}</span>
-                                <span className={`text-sm font-medium whitespace-nowrap transition-opacity duration-300
-                                    ${(!isOpen && !isMobileOpen) ? 'hidden md:opacity-0' : 'block opacity-100'}`}>
-                                    {item.title}
-                                </span>
-                            </button>
-                        );
-                    })}
+                    {menuItems.map((group) => (
+                        <div key={group.category} className="mb-4">
+
+                            {(isOpen || isMobileOpen) && (
+                                <h4 className="px-3 mb-2 text-sm! font-semibold uppercase tracking-wider text-slate-400">
+                                    {group.category}
+                                </h4>
+                            )}
+
+                            <div className="space-y-1">
+                                {group.items.map((item) => {
+                                    const isActive = activeTab === item.title;
+
+                                    return (
+                                        <button
+                                            key={item.title}
+                                            onClick={() => {
+                                                setActiveTab(item.title);
+                                                if (item.link) router.push(item.link);
+                                                setIsMobileOpen(false);
+                                            }}
+                                            className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-all duration-200
+              ${isActive
+                                                    ? "bg-yellow-400 text-slate-900 shadow-md shadow-yellow-400/10"
+                                                    : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                                                }`}
+                                        >
+                                            <span className="shrink-0">{item.icon}</span>
+
+                                            <span
+                                                className={`text-sm font-medium whitespace-nowrap transition-opacity duration-300
+              ${!isOpen && !isMobileOpen
+                                                        ? "hidden md:opacity-0"
+                                                        : "block opacity-100"
+                                                    }`}
+                                            >
+                                                {item.title}
+                                            </span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ))}
                 </nav>
 
                 {/* Footer Section */}
