@@ -2,7 +2,6 @@ import customFetch from "@/lib/customFetch";
 
 export const createContactApi = async (data) => {
   const response = await customFetch.post("/contacts", data);
-
   return response.data;
 };
 

@@ -1,12 +1,12 @@
 
 import { Home, Search, Info, User } from "lucide-react";
-import { X ,Facebook, Instagram, LinkedIn } from "./SocialIcons";
+import { X ,Facebook, Instagram, LinkedIn, WhatsApp  } from "./SocialIcons";
 export const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about-us' },
   { name: 'Our Team', path: '/our-team' },
   { name: 'Services', path: '/services' },
-  { name: 'Blog', path: '/blog' },
+  { name: 'Blogs', path: '/blogs' },
   { name: 'Contact', path: '/contact-us' },
 ];
 export const bottomNavItems = [
@@ -21,39 +21,43 @@ export const bottomNavItems = [
 export const contactLinks = [
   {
     label: "Email Address",
-    value: "info@oasis.com",
-    href: "mailto:info@oasis.com",
+    value: "sales@oasisascend.com",
+    href: "mailto:sales@oasisascend.com",
   },
   {
     label: "Phone Number",
-    value: "+1234567890",
-    href: "tel:+1234567890",
+    value: "+91 84910 12121",
+    href: "tel:+918491012121",
   },
   {
+    label: "WhatsApp",
+    value: "+91 84910 12121",
+    href: "https://wa.me/918491012121",
+  },  
+  {
     label: "Address",
-    value: "123 Main St, Anytown, USA",
+    value: "Srinagar, Kashmir, India",
   },
 ];
-
 export const socailLinks = [
   {
     name: "Facebook",
-    path: "https://facebook.com",
+    path: "https://www.facebook.com/oasisascend",
     icon: Facebook,
   },
   {
-    name: "X",
-    path: "https://twitter.com",
-    icon: X,
-  },
-  {
     name: "Instagram",
-    path: "https://instagram.com",
+    path: "https://www.instagram.com/oasisascend",
     icon: Instagram,
   },
   {
     name: "LinkedIn",
-    path: "https://linkedin.com",
+    path: "https://www.linkedin.com/company/oasisascend",
     icon: LinkedIn,
+  },
+  {
+    name: "WhatsApp",
+    path: "https://wa.me/918491012121",
+    icon: WhatsApp,
   },
 ];
