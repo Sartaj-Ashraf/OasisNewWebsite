@@ -21,7 +21,7 @@ export default function ApplySidebar({ job }) {
         />
 
         {/* Header */}
-        <div className="relative px-6 pt-6 pb-5 border-b border-slate-50">
+        <div className="relative px-4 pt-6 pb-5 border-b border-slate-50">
           <div className="flex items-start gap-3">
             <div
               className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 text-base"
@@ -30,9 +30,9 @@ export default function ApplySidebar({ job }) {
               ✦
             </div>
             <div>
-              <h4 className="text-[17px] font-extrabold text-slate-900 leading-tight">Apply for this Role</h4>
+              <h4 className="text-xl! font-medium text-slate-900 leading-tight">Apply for this Role</h4>
               <p className="text-[12px] text-slate-400 mt-0.5">Fill out the form below to get started</p>
-            </div>
+            </div>  
           </div>
 
           {/* Job pill */}

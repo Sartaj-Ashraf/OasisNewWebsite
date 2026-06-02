@@ -63,7 +63,7 @@ export default function VideoSection() {
 
   return (
     <section className="">
-      <div className="container max-w-6xl mx-auto relative">
+      <div className=" relative">
 
         {/* CAROUSEL */}
         <div className="relative group">

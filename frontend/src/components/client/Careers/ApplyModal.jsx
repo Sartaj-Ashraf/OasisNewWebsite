@@ -89,9 +89,9 @@ export default function ApplyModal({ job, onClose }) {
       <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
 
         {/* Header */}
-        <div className="bg-[#1a2e44] px-7 py-5 flex items-start justify-between flex-shrink-0">
+        <div className="bg-[#1a2e44] px-4 py-5 flex items-start justify-between flex-shrink-0">
           <div>
-            <p className="text-[10px] tracking-[0.2em] uppercase text-[#c8963e] font-semibold mb-1">Apply Now</p>
+            <p className="text-[10px] tracking-[0.2em] uppercase text-[#c8963e] font-medium mb-1">Apply Now</p>
             <h2 className="text-white font-bold text-[17px] leading-snug">{job.title}</h2>
             <p className="text-white/40 text-[12px] mt-0.5">{job.type} · {job.location}</p>
           </div>

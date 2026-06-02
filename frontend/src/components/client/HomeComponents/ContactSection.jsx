@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 import bgImage from "@/assets/svg/download.svg";
 import contactBg from "@/assets/bgcontact.jpg";
@@ -10,6 +9,7 @@ import contactBg from "@/assets/bgcontact.jpg";
 import { Button } from "@/shared/ClickAble";
 // import { socailLinks, contactLinks } from "@/utils/navLink";
 import { createContactApi } from "@/services/contact.service";
+import bgImage2 from "@/assets/contactSvg.png";
 
 export const ContactSection = () => {
   const [form, setForm] = useState({
@@ -102,10 +102,10 @@ export const ContactSection = () => {
       >
         <div className="absolute inset-0 bg-linear-to-r from-white/50 to-transparent"></div>
 
-        <div className="grid lg:grid-cols-2 gap-8 relative z-10">
+        <div className=" grid lg:grid-cols-2 gap-8 relative z-10">
           {/* LEFT CONTENT */}
-          <div className="text-white space-y-8 relative z-10">
-            <h2 className="text-secondary-dark font-medium leading-tight">
+          <div className="  text-white relative z-10">
+            <h2 className=" relative z-10 text-secondary-dark font-medium leading-tight">
               We’re here to{" "}
               <span className="italic text-transparent bg-clip-text bg-linear-to-r from-primary to-primary-dark px-1">
                 help
@@ -116,7 +116,10 @@ export const ContactSection = () => {
               </span>
               .
             </h2>
-
+            
+          <div className="w-full h-full  ">
+            <Image src={bgImage2} alt="bgimage" className="object-cover"/>
+          </div>
         
           </div>
 
@@ -128,19 +131,19 @@ export const ContactSection = () => {
                 src={bgImage}
                 alt="form bg"
                 fill
-                className="object-cover rounded-3xl opacity-50"
+                className="object-cover rounded-3xl opacity-80"
               />
             </div>
 
             {/* FORM CONTAINER */}
             <div
               className="rounded-3xl p-6 flex flex-col justify-between h-full min-h-[420px] max-h-[550px]"
-              style={{
-                backgroundImage: `url(${bgImage.src})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
+              // style={{
+              //   backgroundImage: `url(${bgImage.src})`,
+              //   backgroundSize: "cover",
+              //   backgroundPosition: "center",
+              //   backgroundRepeat: "no-repeat",
+              // }}
             >
               <h2 className="font-medium mb-4">Get In Touch</h2>
 

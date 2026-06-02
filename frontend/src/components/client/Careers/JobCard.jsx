@@ -56,7 +56,7 @@ export default function JobCard({ job }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-[15px] font-extrabold text-[#1a2e44] leading-snug mb-1">
+        <h3 className="text-[15px] font-medium text-secondary-dark leading-snug mb-1">
           {job.title}
         </h3>
         {job.vacancies > 0 && (

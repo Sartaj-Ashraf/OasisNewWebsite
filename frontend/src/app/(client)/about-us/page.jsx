@@ -4,6 +4,7 @@ import StatsSection from "@/components/client/About-Us/StatsSection";
 import VideoSection from "@/components/client/About-Us/VideoSection";
 import WhyChooseUs from "@/components/client/About-Us/WhyChooseUs";
 import { TestimonialSection } from "@/components/client/HomeComponents/TestimonialSection";
+import OurTeam from "@/shared/OurTeam";
 import PageHeader from "@/shared/PageHeader";
 import React from "react";
 
@@ -16,6 +17,7 @@ export const page = () => {
         <VideoSection />
         <StatsSection />
         {/* <OurStory /> */}
+          <OurTeam/>
         <WhyChooseUs />
         <TestimonialSection />
       </div>

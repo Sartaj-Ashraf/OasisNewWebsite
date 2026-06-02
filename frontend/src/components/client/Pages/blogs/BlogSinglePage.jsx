@@ -38,9 +38,9 @@ export const BlogSinglePage = ({ slug }) => {
   }
 
   return (
-    <>
+    <main className="container">
       <BlogHeader title={blog?.title} />
-      <div className=" grid grid-cols-6 px-4 md:px-8 items-center">
+      <div className=" grid grid-cols-6 items-center">
         <div className="col-span-4">
           <ContentRenderer sections={blog?.content || []} />
         </div>
@@ -52,6 +52,6 @@ export const BlogSinglePage = ({ slug }) => {
           ))}
         </div>
       </div>
-    </>
+    </main>
   );
 };

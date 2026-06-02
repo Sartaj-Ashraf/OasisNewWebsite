@@ -3,10 +3,12 @@ import PageHeader from '@/shared/PageHeader'
 
 const page = () => {
   return (
-    <div>
+    <>
+    <div className='container'>
       <PageHeader title="Blogs" />
-      <BlogsPage />
     </div>
+      <BlogsPage />
+    </>
   )
 }
 

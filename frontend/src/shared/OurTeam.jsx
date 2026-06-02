@@ -55,12 +55,11 @@ fetchTeamMembers();
 if(!mounted) return null;
 
   return (
-    <main className=" ">
-    <section className="py-10 rounded-xl mt-5 ">
-      <div className="container px-6 text-center">
+      <section className="text-center">
+      <div className="">
 
         {/* Header */}
-        <p className="text-[11px] tracking-[0.18em] text-gray-400 uppercase font-medium mb-3">
+        <p className="text-[11px] tracking-[0.18em] text-gray-400 uppercase font-medium ">
           Our Team
         </p>
 
@@ -68,7 +67,7 @@ if(!mounted) return null;
           Our Professionals
         </h2>
 
-        <p className="text-gray-400 text-[15px] max-w-md mx-auto mb-14 leading-relaxed">
+        <p className="text-gray-400 text-[15px] max-w-md mx-auto mb-4 leading-relaxed">
           Ne summo dictas pertinacia nam. Illum cetero vocent ei vim,
           case regione signiferumque vim te.
         </p>
@@ -154,6 +153,5 @@ if(!mounted) return null;
 
       </div>
     </section>
-    </main>
   );
 }

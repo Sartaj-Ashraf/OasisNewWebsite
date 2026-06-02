@@ -1,7 +1,7 @@
 export default function StatsSection() {
   return (
-    <section className="py-10 ">
-      <div className="container max-w-7xl mx-auto rounded-3xl p-10 md:p-16 relative overflow-hidden text-white">
+    <section className=" ">
+      <div className="rounded-3xl p-10 md:p-16 relative overflow-hidden text-white">
 
         {/* BACKGROUND GRADIENT */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0b0b2b] via-[#1a0b3b] to-[#050510]" />

@@ -1,6 +1,6 @@
 import React from 'react'
-import bgImage1 from "@/assets/Status1.jpg";
-import bgImage2 from "@/assets/Status2.jpg";
+import bgImage1 from "@/assets/Status1.webp";
+import bgImage2 from "@/assets/Status2.webp";
 
 export const Status = () => {
   return (

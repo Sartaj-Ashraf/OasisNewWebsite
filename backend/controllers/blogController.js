@@ -427,7 +427,7 @@ export const getAllBlogs = async (req, res) => {
 
     const [blogs, total] = await Promise.all([
       Blog.find(filter)
-        .select("publishedAt title slug excerpt")
+        .select("publishedAt title slug excerpt coverImage")
         .sort({ publishedAt: -1 })
         .skip(skip)
         .limit(limitNumber)
