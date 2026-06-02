@@ -9,7 +9,7 @@ import svgImg from '@/assets/svg/angle-header.svg'
 
 const HeroBanner = () => {
   return (
-    <section className="relative h-[60vh] md:h-screen md:max-h-200  mt-8">
+    <section className="relative  md:h-screen md:max-h-200  mt-8">
       {/* Logo */}
       <div className="absolute -top-px left-0 z-10">
         <Image src={svgImg} alt="svg" className="md:w-full md:h-full " />
@@ -37,7 +37,7 @@ const HeroBanner = () => {
           <p className="md:ml-[20%] px-4 md:px-0 text-black/70 lg:w-2xl my-4">
             Transform your business with cutting-edge software, high-performance websites, strategic digital marketing, and engaging creative content. We help brands grow faster, attract more customers, and build a powerful online presence through innovative technology and data-driven marketing.
           </p>
-          <Button link="/contact" className="w-fit button md:ml-[20%] bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary text-white transition-all duration-300 ease-in-out">Contact Us</Button>
+          <Button link="/contact" className="ml-4 w-fit button md:ml-[20%] bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary text-white transition-all duration-300 ease-in-out">Contact Us</Button>
         </div>
       </div>
 

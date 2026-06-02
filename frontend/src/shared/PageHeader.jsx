@@ -38,7 +38,7 @@ const PageHeader = ({title}) => {
         <NavBar />
 
         {/* Centered Title */}
-        <div className="flex-1 flex flex-col items-center justify-center">
+        <div className="flex-1 flex flex-col items-center justify-center gap-4">
           <h1 className="font-semibold text-2xl md:text-7xl! text-black/80 text-center">
             {title}
           </h1>

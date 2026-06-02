@@ -44,7 +44,7 @@ export default function JobSection({ title, description, list, color, isLast = f
   const meta = SECTION_META[title] || { emoji: "•", subtitle: "Details" };
 
   return (
-    <div className={`px-10 py-9 ${!isLast ? "border-b border-slate-100" : ""}`}>
+    <div className={`px-6 py-4 ${!isLast ? "border-b border-slate-100" : ""}`}>
       {/* Section header */}
       <div className="flex items-center gap-3 mb-5">
         <div
@@ -54,7 +54,7 @@ export default function JobSection({ title, description, list, color, isLast = f
           {meta.emoji}
         </div>
         <div>
-          <h2 className="text-[17px] font-medium text-slate-900 leading-tight">{title}</h2>
+          <h3 className="text-[17px] font-medium text-slate-900 leading-tight">{title}</h3>
           <p className="text-[11.5px] text-slate-400 font-medium mt-0.5">{meta.subtitle}</p>
         </div>
       </div>

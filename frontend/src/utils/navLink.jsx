@@ -1,11 +1,12 @@
 
-import { Home, Search, Info, User } from "lucide-react";
+import { Home, Search, Info, User,Briefcase } from "lucide-react";
 import { X ,Facebook, Instagram, LinkedIn, WhatsApp  } from "./SocialIcons";
 export const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about-us' },
   { name: 'Our Team', path: '/our-team' },
   { name: 'Services', path: '/services' },
+  {name:'Career',path:'/careers'},
   { name: 'Blogs', path: '/blogs' },
 ];
 export const bottomNavItems = [
@@ -13,6 +14,7 @@ export const bottomNavItems = [
   { name: "Search",  href: "/search", icon: Search },
   { name: "About",   href: "/about",  icon: Info   },
   { name: "Profile", href: "/profile",icon: User   },
+  {name:'Career',href:'/career' ,icon:Briefcase}
 ];
 
 

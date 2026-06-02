@@ -41,9 +41,9 @@ export default function JobDetailHeader({ job }) {
   const cfg = TYPE_CONFIG[job.type] || { color: "#6b7280", bg: "rgba(107,114,128,0.10)", label: job.type };
 
   return (
-    <div>
+    <div className="p-4">
       {/* Type badge */}
-      <div className="mb-5">
+      <div className=" mb-5">
         <span
           className="inline-flex items-center gap-2 text-[11px] font-bold px-4 py-1.5 rounded-full tracking-wide uppercase"
           style={{ color: cfg.color, backgroundColor: cfg.bg }}
@@ -54,9 +54,9 @@ export default function JobDetailHeader({ job }) {
       </div>
 
       {/* Title */}
-      <h1 className="text-[36px] md:text-[44px] font-medium text-slate-900 leading-[1.05] tracking-tight mb-5">
+      <hh2 className="text-[36px] md:text-[44px] font-medium text-slate-900 leading-[1.05] tracking-tight mb-5">
         {job.title}
-      </h1>
+      </hh2>
 
       {/* Meta badges */}
       <div className="flex flex-wrap gap-2 mb-8">

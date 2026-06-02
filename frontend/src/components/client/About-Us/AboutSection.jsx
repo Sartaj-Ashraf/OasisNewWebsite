@@ -6,7 +6,7 @@ export default function AboutSection() {
   return (
     
     <section className="">
-      <div className="container max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center select-none">
+      <div className="grid md:grid-cols-2 gap-16 items-center select-none">
 
         {/* LEFT */}
         <div className="max-w-xl">

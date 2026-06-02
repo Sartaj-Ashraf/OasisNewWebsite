@@ -31,8 +31,8 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-8">
-      <div className="container mx-auto grid md:grid-cols-2 gap-10 items-center">
+    <section className="">
+      <div className=" mx-auto grid md:grid-cols-2 gap-10 items-center">
 
         {/* LEFT IMAGE */}
         <div className="relative w-full h-[350px] md:h-[450px] rounded-3xl overflow-hidden">
