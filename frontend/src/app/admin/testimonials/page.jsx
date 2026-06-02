@@ -241,7 +241,9 @@ export default function TestimonialsAdmin() {
             toast.success("Testimonial created ✓");
             closeModal();
             fetchData();
-        } catch (err) { toast.error(err.message); }
+        } catch (err) {
+            // console.error(err);
+            toast.error(err.response?.data?.message || err.message); }
         finally { setSaving(false); }
     };
 

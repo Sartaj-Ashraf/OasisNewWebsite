@@ -2,21 +2,17 @@ import "express-async-errors";
 // config env
 import * as dotenv from "dotenv";
 dotenv.config();
-
 // create app
 import express from "express";
 const app = express();
-
 // packages
 import morgan from "morgan";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
-
 // Router imports goes here...
 import userRouter from "./routes/userRouter.js";
 import testimonialRouter from "./routes/testimonialRouter.js";
