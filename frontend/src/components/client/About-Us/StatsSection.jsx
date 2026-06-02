@@ -26,18 +26,18 @@ export default function StatsSection() {
           <div>
             <div className="flex items-center gap-4 mb-4">
               <span className="text-4xl text-purple-400">↗</span>
-              <h2 className="text-5xl font-semibold">+150K</h2>
+              <h2 className="text-5xl font-semibold">+300</h2>
             </div>
-            <p className="text-gray-300">Monthly Active Users</p>
+            <p className="text-gray-300">Successful Projects Delivered</p>
           </div>
 
           {/* ITEM 3 */}
           <div>
             <div className="flex items-center gap-4 mb-4">
               <span className="text-4xl text-orange-400">↗</span>
-              <h2 className="text-5xl font-semibold">+15K</h2>
+              <h2 className="text-5xl font-semibold">+10K</h2>
             </div>
-            <p className="text-gray-300">Active Followers</p>
+            <p className="text-gray-300">Leads Generated for Clients</p>
           </div>
         </div>
       </div>

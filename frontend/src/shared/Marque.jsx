@@ -8,16 +8,19 @@ import "@splidejs/splide/css";
 export default function Marque() {
   const splideRef = useRef(null);
 
-  const words = [
-    "Web Development",
-    "Digital Marketing",
-    "SEO",
-    "SMM",
-    "E-commerce",
-    "Business",
-    "Crypto",
-    "Creative",
-  ];
+const words = [
+  "Web Development",
+  "Custom Software",
+  "Mobile Apps",
+  "Digital Marketing",
+  "Social Media Marketing",
+  "Video Production",
+  "Brand Strategy",
+  "UI/UX Design",
+  "E-Commerce Solutions",
+  "AI Automation",
+  "Paid Advertising",
+];
 
   useEffect(() => {
     const splide = new Splide(splideRef.current, {

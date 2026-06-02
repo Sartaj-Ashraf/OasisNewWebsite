@@ -8,13 +8,11 @@ export default function TextSlider() {
   const splideRef = useRef(null);
 
   const words = [
+    "Software Development",
+    "Website Development",
     "Digital Marketing",
-    "Crypto",
-    "SMM",
-    "Business",
-    "E-commerce",
-    "Creative",
-    "SEO",
+    "Social Media Growth",
+    "Creative Video Production",
   ];
 
  useEffect(() => {

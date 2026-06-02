@@ -7,7 +7,6 @@ export const navLinks = [
   { name: 'Our Team', path: '/our-team' },
   { name: 'Services', path: '/services' },
   { name: 'Blogs', path: '/blogs' },
-  { name: 'Contact', path: '/contact-us' },
 ];
 export const bottomNavItems = [
   { name: "Home",    href: "/",       icon: Home   },
@@ -23,7 +22,7 @@ export const contactLinks = [
     label: "Email Address",
     value: "sales@oasisascend.com",
     href: "mailto:sales@oasisascend.com",
-  },
+  },  
   {
     label: "Phone Number",
     value: "+91 84910 12121",
