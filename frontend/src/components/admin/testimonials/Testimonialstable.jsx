@@ -9,10 +9,9 @@ export const ViewTestimonialContent = ({ t, onEdit, onDelete, onToggleApproval, 
     return (
         <div className="flex flex-col gap-6">
             {/* Hero card - Swapped slate-900 mesh to secondary-dark */}
-            <div className="relative rounded-2xl overflow-hidden bg-linear-to-br from-secondary-dark via-slate-800 to-secondary-dark p-6 text-text-light">
+            <div className="relative rounded-2xl overflow-hidden bg-linear-to-br  p-6 text-secondary">
                 {/* Decorative blobs - Dynamic alpha overlays over mapped global primary */}
-                <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-primary/5 translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+               
 
                 <div className="relative flex items-center gap-4 mb-5">
                     <div className="w-16 h-16 rounded-full border-2 border-primary/50 bg-primary/20 flex items-center justify-center overflow-hidden shrink-0 shadow-lg">
@@ -22,7 +21,7 @@ export const ViewTestimonialContent = ({ t, onEdit, onDelete, onToggleApproval, 
                         }
                     </div>
                     <div>
-                        <div className="font-extrabold text-lg text-text-light leading-tight" >{t.name}</div>
+                        <div className="font-extrabold text-lg text-secondary leading-tight" >{t.name}</div>
                         {t.company && (
                             <div className="text-sm text-text-secondary mt-0.5 flex items-center gap-1.5">
                                 <span className="text-primary">🏢</span>{t.company}
@@ -57,7 +56,7 @@ export const ViewTestimonialContent = ({ t, onEdit, onDelete, onToggleApproval, 
 
                 {/* Quote */}
                 <div className="relative">
-                    <p className="text-sm! text-text-light/80 leading-relaxed pl-5 pr-2 italic">{t.testimonial}</p>
+                    <p className="text-sm! leading-relaxed pl-5 pr-2 italic">{t.testimonial}</p>
                 </div>
             </div>
 

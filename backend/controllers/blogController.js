@@ -1,6 +1,7 @@
 import Blog from "../models/blogsModel.js";
 import { makeSlug } from "../utils/slugUtils.js";
 import { uploadToS3, deleteFromS3 } from "../utils/s3Upload.js";
+import mongoose from "mongoose";
 /* =========================
    CREATE BLOG
 ========================= */
@@ -339,6 +340,7 @@ export const updateBlog = async (req, res) => {
         });
     }
 };
+
 /* =========================
    DELETE BLOG
 ========================= */
@@ -550,4 +552,31 @@ export const getBlogStats = async (req, res) => {
             message: error.message,
         });
     }
+};
+export const getRandomBlog = async (req, res) => {
+  try {
+    const { blogId } = req.params;
+
+    const randomBlogs = await Blog.aggregate([
+      {
+        $match: {
+          isPublished: true,
+          _id: { $ne: new mongoose.Types.ObjectId(blogId) }
+        }
+      },
+      {
+        $sample: { size: 3 }
+      }
+    ]);
+
+    res.json({
+      success: true,
+      data: randomBlogs,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };

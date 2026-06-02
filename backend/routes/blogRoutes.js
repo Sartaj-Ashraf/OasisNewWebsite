@@ -3,7 +3,7 @@ import {
     getAllBlogs,
     getAllBlogsAdmin,
     getBlogBySlug,
-
+    getRandomBlog,
     createBlog,
     updateBlog,
     deleteBlog,
@@ -22,7 +22,7 @@ const router = express.Router();
 ========================= */
 router.get("/", getAllBlogs);
 router.get("/slug/:slug", getBlogBySlug);
-
+router.get("/random",  getRandomBlog);
 
 router.get("/admin", getAllBlogsAdmin);
 router.get("/stats", getBlogStats);

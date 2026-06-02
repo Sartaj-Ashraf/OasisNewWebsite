@@ -251,6 +251,7 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
               <div className="mb-8">
            <input
   ref={coverImageRef}
+  
   type="file"
   accept=".jpg,.jpeg,image/jpeg"
   className="hidden"

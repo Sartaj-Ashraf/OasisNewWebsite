@@ -32,8 +32,8 @@ export const validateCreateTestimonial = (req, res, next) => {
     ========================= */
     if (!testimonial || !testimonial.trim()) {
         errors.push("Testimonial text is required");
-    } else if (testimonial.trim().length > 2000) {
-        errors.push("Testimonial cannot exceed 2000 characters");
+    } else if (testimonial.trim().length > 300) {
+        errors.push("Testimonial cannot exceed 300 characters");
     }
 
     if (errors.length > 0) {
@@ -77,8 +77,8 @@ export const validateUpdateTestimonial = (req, res, next) => {
     if (req.body.testimonial !== undefined) {
         if (!req.body.testimonial.trim()) {
             errors.push("Testimonial text cannot be empty");
-        } else if (req.body.testimonial.trim().length > 2000) {
-            errors.push("Testimonial cannot exceed 2000 characters");
+        } else if (req.body.testimonial.trim().length > 300) {
+            errors.push("Testimonial cannot exceed 300 characters");
         }
     }
 
