@@ -14,7 +14,7 @@ export const Status = () => {
               backgroundRepeat: "no-repeat",
             }}
         >
-            <h2 className='font-medium'>+150k</h2>
+            <h2 className='font-medium'>+99</h2>
             <p>Happy Customers</p>
         </div>
         <div className='bg-primary/20 p-4 rounded-2xl h-full flex flex-col justify-end' 
@@ -27,7 +27,7 @@ export const Status = () => {
             }}
         >
           
-            <h2 className='font-medium'>+500</h2>
+            <h2 className='font-medium'>+40</h2>
             <p>Active Partners</p>
         </div>
     </section>

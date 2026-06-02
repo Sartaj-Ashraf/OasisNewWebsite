@@ -9,20 +9,20 @@ import svgImg from '@/assets/svg/angle-header.svg'
 
 const HeroBanner = () => {
   return (
-    <section className="relative h-[60vh] md:h-screen md:max-h-[800px]  mt-8">
+    <section className="relative h-[60vh] md:h-screen md:max-h-200  mt-8">
       {/* Logo */}
-       <div className="absolute -top-[1px] left-0 z-10">
-                     <Image src={svgImg} alt="svg" className="md:w-full md:h-full " />
-                     <div className="flex items-center gap-2 absolute md:top-5 top-0 md:left-10 left-5">
-                        <Image
-                         src={logo}
-                         alt="logo"
-                         width={100}
-                         height={100}
-                         className="w-36 md:w-48"
-                       />
-                     </div>
-                   </div>
+      <div className="absolute -top-px left-0 z-10">
+        <Image src={svgImg} alt="svg" className="md:w-full md:h-full " />
+        <div className="flex items-center gap-2 absolute md:top-5 top-0 md:left-10 left-5">
+          <Image
+            src={logo}
+            alt="logo"
+            width={100}
+            height={100}
+            className="w-36 md:w-48"
+          />
+        </div>
+      </div>
       <div className=" bg-accent corner-shape-scoop absolute inset-0 rounded-3xl" />
 
       {/* Content Layer */}
@@ -33,14 +33,11 @@ const HeroBanner = () => {
 
           <TextSlider />
           <h1 className=" md:ml-[20%] px-4 md:px-0 font-medium text-gray-600">
-            Smart Solutions
-          </h1>
-          <p className="md:ml-[20%] px-4 md:px-0 text-black/70 lg:w-xl">
-            AI-powered SEO (Search Engine Optimization) offers a bunch of
-            benefits that can save time, boost rankings, and make your digital
-            strategy way more efficient.
+           Crafted For Impact           </h1>
+          <p className="md:ml-[20%] px-4 md:px-0 text-black/70 lg:w-2xl my-4">
+            Transform your business with cutting-edge software, high-performance websites, strategic digital marketing, and engaging creative content. We help brands grow faster, attract more customers, and build a powerful online presence through innovative technology and data-driven marketing.
           </p>
-          <Button className="w-fit button md:ml-[20%] bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary text-white transition-all duration-300 ease-in-out">Get Started</Button>
+          <Button link="/contact" className="w-fit button md:ml-[20%] bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary text-white transition-all duration-300 ease-in-out">Contact Us</Button>
         </div>
       </div>
 

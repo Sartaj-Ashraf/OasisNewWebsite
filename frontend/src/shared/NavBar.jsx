@@ -34,7 +34,7 @@ export const NavBar = () => {
 
       {/* Desktop CTA */}
       <div className="hidden md:block transition hover:scale-105 active:scale-95">
-        <LinkBtn link="#" children="Get Started" className={`bg-linear-to-br from-primary via-primary to-primary-dark hover:from-primary-dark hover:via-primary-dark  hover:to-primary`}/>
+        <LinkBtn link="/contact-us" children="Contact-us" className={`bg-linear-to-br from-primary via-primary to-primary-dark hover:from-primary-dark hover:via-primary-dark  hover:to-primary`}/>
       </div>
 
       {/* 🔥 Overlay */}
@@ -79,7 +79,7 @@ export const NavBar = () => {
 
         {/* CTA */}
         <div className="px-6 mt-4">
-          <LinkBtn link="#" children="Get Started" className={`bg-linear-to-br from-primary via-primary to-primary-dark hover:from-primary hover:via-primary hover:to-primary-dark`}/>
+          <LinkBtn link="/contact-us" children="Get Started" className={`bg-linear-to-br from-primary via-primary to-primary-dark hover:from-primary hover:via-primary hover:to-primary-dark`}/>
         </div>
       </div>
     </nav>
