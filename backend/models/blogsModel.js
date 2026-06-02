@@ -90,19 +90,23 @@ coverImage: {
       default: null,
       index: true,
     },
+    isFeatured: {
+  type: Boolean,
+  default: false,
+  index: true,
+},
   },
   {
     timestamps: true,
   }
 );
 
-/* =========================
+/* =========================  
    INDEXES (PERFORMANCE)
 ========================= */
 
 // Latest blogs
 BlogSchema.index({ createdAt: -1 });
-
 // Published blogs listing
 BlogSchema.index({ isPublished: 1, publishedAt: -1 });
 
@@ -111,7 +115,8 @@ BlogSchema.index({ title: "text", excerpt: "text" });
 
 // Compound for fast filtering
 BlogSchema.index({ isPublished: 1, createdAt: -1 });
-
+// Blog.find({ isPublished: true, isFeatured: true })
+//   .sort({ publishedAt: -1 })
 /* =========================
    EXPORT
 ========================= */

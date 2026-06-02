@@ -4,8 +4,20 @@ const API = "/blogs";
 /* =========================
    PUBLIC
 ========================= */
-export const getAllBlogs = () => customFetch.get(API);
-
+export const getAllBlogs = ({
+  search,
+  isFeatured,
+  page = 1,
+  limit = 10,
+} = {}) =>
+  customFetch.get(API, {
+    params: {
+      search,
+      isFeatured,
+      page,
+      limit,
+    },
+  });
 export const getBlogBySlug = (slug) => {
  const response = customFetch.get(`${API}/slug/${slug}`);
  return response;
@@ -13,10 +25,24 @@ export const getBlogBySlug = (slug) => {
 /* =========================
    ADMIN
 ========================= */
-export const getAllBlogsAdmin = async () => {
- const response = await customFetch.get(`${API}/admin`);
- console.log(response.data);
- return response.data;
+export const getAllBlogsAdmin = async ({
+  page = 1,
+  limit = 10,
+  search,
+  isPublished,
+  isFeatured,
+}) => {
+  const response = await customFetch.get(`${API}/admin`, {
+    params: {
+      page,
+      limit,
+      search,
+      isPublished,
+      isFeatured,
+    },
+  });
+
+  return response.data;
 };
 
 
