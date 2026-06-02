@@ -1,6 +1,3 @@
-
-// services/admin/careers.service.js
-
 import customFetch from "@/lib/customFetch";
 
 const BASE = "/careers";
@@ -10,25 +7,19 @@ const BASE = "/careers";
 ───────────────────────────── */
 export function getAllCareersAdmin(params = {}) {
   const q = new URLSearchParams();
-
   Object.entries(params).forEach(([key, value]) => {
-    if (
-      value !== undefined &&
-      value !== "" &&
-      value !== "all"
-    ) {
+    if (value !== undefined && value !== "" && value !== "all") {
       q.set(key, value);
     }
   });
-
-  return customFetch(`${BASE}/admin?${q.toString()}`);
+  return customFetch.get(`${BASE}/admin?${q.toString()}`);
 }
 
 /* ─────────────────────────────
    SINGLE
 ───────────────────────────── */
 export function getCareerByIdAdmin(id) {
-  return customFetch(`${BASE}/${id}`);
+  return customFetch.get(`${BASE}/admin/${id}`);
 }
 
 /* ─────────────────────────────
@@ -42,40 +33,60 @@ export function createCareerAdmin(body) {
    UPDATE
 ───────────────────────────── */
 export function updateCareerAdmin(id, body) {
-  return customFetch(`${BASE}/admin/${id}`, {
-    method: "PUT",
-    body,
-  });
+  return customFetch.put(`${BASE}/admin/${id}`, body);
 }
 
 /* ─────────────────────────────
    DELETE
 ───────────────────────────── */
 export function deleteCareerAdmin(id) {
-  return customFetch(`${BASE}/admin/${id}`, {
-    method: "DELETE",
-  });
+  return customFetch.delete(`${BASE}/admin/${id}`);
 }
 
 /* ─────────────────────────────
    TOGGLE STATUS
 ───────────────────────────── */
 export function toggleCareerStatusAdmin(id) {
-  return customFetch(`${BASE}/admin/${id}/toggle-status`, {
-    method: "PATCH",
-  });
+  return customFetch.patch(`${BASE}/admin/${id}/toggle-status`);
 }
 
 /* ─────────────────────────────
    STATS
 ───────────────────────────── */
 export function getCareerStatsAdmin() {
-  return customFetch(`${BASE}/admin/stats`);
+  return customFetch.get(`${BASE}/admin/stats`);
 }
 
 /* ─────────────────────────────
    FILTERS
 ───────────────────────────── */
 export function getCareerFiltersAdmin() {
-  return customFetch(`${BASE}/admin/filters`);
+  return customFetch.get(`${BASE}/admin/filters`);
+}
+
+/* ─────────────────────────────
+   LIST (public, active only)
+───────────────────────────── */
+export function getAllCareers(params = {}) {
+  const q = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== "" && value !== "all") {
+      q.set(key, value);
+    }
+  });
+  return customFetch.get(`${BASE}?${q.toString()}`);
+}
+
+/* ─────────────────────────────
+   SINGLE BY SLUG (public)
+───────────────────────────── */
+export function getCareerBySlug(slug) {
+  return customFetch.get(`${BASE}/slug/${slug}`);
+}
+
+/* ─────────────────────────────
+   FILTERS (public)
+───────────────────────────── */
+export function getCareerFilters() {
+  return customFetch.get(`${BASE}/filters`);
 }
