@@ -19,6 +19,7 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
   const [slugLocked, setSlugLocked] = useState(isEdit);
   const [excerpt, setExcerpt] = useState(initialData?.excerpt || "");
   const [isPublished, setPublished] = useState(initialData?.isPublished || false);
+  const [isFeatured, setIsFeatured] = useState(initialData?.isFeatured || false);
   const [blocks, setBlocks] = useState(
     initialData?.content?.map(b => ({
       ...b,
@@ -117,7 +118,7 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
       fd.append("slug", slug.trim());
       fd.append("excerpt", excerpt.trim());
       fd.append("isPublished", String(isPublished));
-
+      fd.append("isFeatured", String(isFeatured));
       if (isPublished && !initialData?.publishedAt) {
         fd.append("publishedAt", new Date().toISOString());
       }
@@ -249,36 +250,36 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
 
               {/* Cover Image Upload */}
               <div className="mb-8">
-           <input
-  ref={coverImageRef}
-  
-  type="file"
-  accept=".jpg,.jpeg,image/jpeg"
-  className="hidden"
-  onChange={(e) => {
-    const file = e.target.files?.[0];
+                <input
+                  ref={coverImageRef}
+                  required
+                  type="file"
+                  accept=".jpg,.jpeg,image/jpeg"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
 
-    if (!file) return;
+                    if (!file) return;
 
-    if (!["image/jpeg", "image/jpg"].includes(file.type)) {
-      alert("Only JPG/JPEG images are allowed");
-      e.target.value = "";
-      return;
-    }
+                    if (!["image/jpeg", "image/jpg"].includes(file.type)) {
+                      alert("Only JPG/JPEG images are allowed");
+                      e.target.value = "";
+                      return;
+                    }
 
-    setCoverImage({
-      _file: file,
-      _preview: URL.createObjectURL(file),
-      url: null,
-    });
-  }}
-/>
+                    setCoverImage({
+                      _file: file,
+                      _preview: URL.createObjectURL(file),
+                      url: null,
+                    });
+                  }}
+                />
                 {coverImage?._preview || coverImage?.url ? (
                   <div className="relative rounded-2xl overflow-hidden border border-border-custom group">
 
                     <div className="relative w-full h-56 bg-accent">
                       {/* {console.log(coverImage._preview || coverImage.url)} */}
-                     
+
                       <Image
                         src={coverImage._preview || coverImage.url}
                         alt="Cover image"
@@ -508,12 +509,16 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
 
                   {/* Master Execution Action Trigger */}
                   <button
-                    onClick={handleSubmit}
-                    disabled={loading}
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-secondary-dark hover:bg-secondary text-text-light text-xs font-bold tracking-wide uppercase transition-all disabled:opacity-50 shadow-sm shadow-secondary-dark/10 cursor-pointer"
+                    onClick={() => setIsFeatured(p => !p)}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs font-bold tracking-wide uppercase transition-all cursor-pointer ${isPublished
+                      ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-700"
+                      : "border-border-custom bg-accent text-text-secondary hover:border-primary/40"
+                      } ${isFeatured
+                        ? "bg-yellow-500/10 text-yellow-600 border-yellow-500/20"
+                        : "bg-accent-dark text-text-secondary border-border-custom"
+                      }`}
                   >
-                    {loading ? <RotateCcw size={13} className="animate-spin" /> : <Send size={13} />}
-                    {isEdit ? "Update Post" : "Publish Post"}
+                    {isFeatured ? "★ Featured" : "Not Featured"}
                   </button>
                 </div>
               </div>

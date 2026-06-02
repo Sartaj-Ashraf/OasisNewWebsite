@@ -9,7 +9,7 @@ export const createBlog = async (req, res) => {
     const uploadedKeys = []; // ✅ track for rollback
 
     try {
-        const { title, excerpt, content, isPublished } = req.body;
+        const { title, excerpt, content, isPublished,isFeatured } = req.body;
 
         if (!title) {
             return res.status(400).json({
@@ -17,6 +17,7 @@ export const createBlog = async (req, res) => {
                 message: "Title is required",
             });
         }
+
 
         /* =========================
            PARSE CONTENT
@@ -91,11 +92,15 @@ export const createBlog = async (req, res) => {
         );
         let coverImageData = { url: "", key: "" };
         const coverFile = fileMap["coverImage"];
-        if (coverFile) {
-            const uploaded = await uploadToS3(coverFile);
-            uploadedKeys.push(uploaded.key);
-            coverImageData = { url: uploaded.url, key: uploaded.key };
+        if (!coverFile) {
+            return res.status(400).json({
+                success: false,
+                message: "Cover image is required",
+            });
         }
+        const uploaded = await uploadToS3(coverFile);
+        uploadedKeys.push(uploaded.key);
+        coverImageData = { url: uploaded.url, key: uploaded.key };
         /* =========================
            CREATE BLOG
         ========================= */
@@ -106,6 +111,7 @@ export const createBlog = async (req, res) => {
             content: updatedContent,
             coverImage: coverImageData,
             isPublished: isPublished === "true",
+            isFeatured: isFeatured === "true",
             publishedAt: isPublished === "true" ? new Date() : null,
         });
 
@@ -139,7 +145,6 @@ export const createBlog = async (req, res) => {
 export const updateBlog = async (req, res) => {
     try {
         const { id } = req.params;
-
         const existing = await Blog.findById(id);
 
         if (!existing) {
@@ -317,6 +322,11 @@ export const updateBlog = async (req, res) => {
                     req.body.isPublished === "true"
                         ? existing.publishedAt || new Date()
                         : null,
+                
+                isFeatured:
+                    req.body.isFeatured !== undefined
+                        ? req.body.isFeatured === "true"
+                        : existing.isFeatured,
             },
             {
                 new: true,
@@ -386,50 +396,138 @@ export const deleteBlog = async (req, res) => {
    GET ALL BLOGS (PUBLIC)   
 ========================= */
 export const getAllBlogs = async (req, res) => {
-    try {
-        const { search } = req.query;
+  try {
+    const {
+      search,
+      isFeatured,
+      page = 1,
+      limit = 10,
+    } = req.query;
 
-        const filter = { isPublished: true };
+    const filter = {
+      isPublished: true,
+    };
 
-        if (search) {
-            filter.$text = { $search: search };
-        }
-
-        const blogs = await Blog.find(filter)
-            .sort({ publishedAt: -1 })
-            .lean();
-
-        res.json({
-            success: true,
-            data: blogs,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
+    // Featured filter
+    if (isFeatured === "true") {
+      filter.isFeatured = true;
     }
+
+    // Search filter
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { excerpt: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    const pageNumber = Math.max(parseInt(page) || 1, 1);
+    const limitNumber = Math.max(parseInt(limit) || 10, 1);
+    const skip = (pageNumber - 1) * limitNumber;
+
+    const [blogs, total] = await Promise.all([
+      Blog.find(filter)
+        .select("publishedAt title slug excerpt")
+        .sort({ publishedAt: -1 })
+        .skip(skip)
+        .limit(limitNumber)
+        .lean(),
+
+      Blog.countDocuments(filter),
+    ]);
+
+    res.json({
+      success: true,
+      data: blogs,
+      pagination: {
+        total,
+        page: pageNumber,
+        limit: limitNumber,
+        totalPages: Math.ceil(total / limitNumber),
+        hasNextPage: pageNumber * limitNumber < total,
+        hasPrevPage: pageNumber > 1,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 /* =========================
    ADMIN GET ALL
 ========================= */
 export const getAllBlogsAdmin = async (req, res) => {
-    try {
-        const blogs = await Blog.find()
-            .sort({ createdAt: -1 })
-            .lean();
+  try {
+    const {
+      isFeatured,
+      isPublished,
+      search,
+      page = 1,
+      limit = 10,
+    } = req.query;
 
-        res.json({
-            success: true,
-            data: blogs,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
+    const filter = {};
+
+    // ─── FEATURED FILTER ───
+    if (isFeatured === "true") {
+      filter.isFeatured = true;
     }
+    if (isFeatured === "false") {
+      filter.isFeatured = false;
+    }
+
+    // ─── PUBLISHED FILTER ───
+    if (isPublished === "true") {
+      filter.isPublished = true;
+    }
+    if (isPublished === "false") {
+      filter.isPublished = false;
+    }
+
+    // ─── SEARCH FILTER ───
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { excerpt: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    const pageNumber = Math.max(parseInt(page) || 1, 1);
+    const limitNumber = Math.max(parseInt(limit) || 10, 1);
+    const skip = (pageNumber - 1) * limitNumber;
+
+    const [blogs, total] = await Promise.all([
+      Blog.find(filter)
+        .sort({ createdAt: -1 })
+        .select("title slug excerpt isPublished isFeatured")
+        .skip(skip)
+        .limit(limitNumber)
+        .lean(),
+
+      Blog.countDocuments(filter),
+    ]);
+
+    res.json({
+      success: true,
+      data: blogs,
+      pagination: {
+        total,
+        page: pageNumber,
+        limit: limitNumber,
+        totalPages: Math.ceil(total / limitNumber),
+        hasNextPage: pageNumber * limitNumber < total,
+        hasPrevPage: pageNumber > 1,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 /* =========================
