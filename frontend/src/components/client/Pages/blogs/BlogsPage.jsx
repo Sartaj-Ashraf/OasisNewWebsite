@@ -7,17 +7,42 @@ import { BlogCard } from "../../HomeComponents/Blogs/BlogCard";
 import { DetailedBlogCard } from "../../HomeComponents/Blogs/DetailedBlogCard";
 import Image from "next/image";
 import Link from "next/link";
+import { RandomBlog } from "../../HomeComponents/Blogs/RandomBlog";
 
 export const BlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
+  const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState("list"); // 'grid' | 'list'
+
+  // New state for Search and Pagination
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Debounce the search input to avoid spamming the API
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+      setPage(1); 
+    }, 200);
+
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
 
   const fetchBlogs = async () => {
     try {
       setLoading(true);
-      const { data } = await getAllBlogs();
+      const { data } = await getAllBlogs({ 
+        search: debouncedSearch, 
+        page, 
+        limit: 10 
+      });
+      
       setBlogs(data?.data || []);
+      setTotalPages(data?.totalPages || 1); 
+      
     } catch (error) {
       console.error("Error fetching blogs:", error);
     } finally {
@@ -25,11 +50,28 @@ export const BlogsPage = () => {
     }
   };
 
+  const fetchFeaturedBlogs = async () => {
+    try {
+      const data = await getAllBlogs({ isFeatured: true });
+      setFeatured(data?.data?.data || []);
+    } catch (error) {
+      console.error("Error fetching featured blogs:", error);
+    }
+  };
+
+  // Fetch featured blogs only once on mount
   useEffect(() => {
-    fetchBlogs();
+    fetchFeaturedBlogs();
   }, []);
 
-  if (loading) {
+  // Fetch main blogs whenever search or page changes
+  useEffect(() => {
+    fetchBlogs();
+  }, [debouncedSearch, page]);
+
+  // If loading and no blogs are present, show spinner. 
+  // (Optional: remove `&& blogs.length === 0` if you want a full spinner on every page turn)
+  if (loading && blogs.length === 0) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#002B49]"></div>
@@ -38,7 +80,7 @@ export const BlogsPage = () => {
   }
 
   return (
-    <div className="container mx-auto bg-accent-dark font-sans py-8">
+    <div className="container mx-auto bg-accent-dark font-sans py-8 px-6">
       
       {/* Dynamic layout: row for list view (main + sidebar), col for grid view (full width) */}
       <div className={`flex flex-col ${view === 'list' ? 'lg:flex-row' : ''} gap-12`}>
@@ -49,8 +91,8 @@ export const BlogsPage = () => {
         <div className={`w-full ${view === 'list' ? 'lg:w-[95%]' : ''} flex flex-col gap-6`}>
           
           {/* Header & View Toggle */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-4 border-gray-100 gap-4">
-            <h2 className=" font-medium">All Posts</h2>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b  border-gray-100 gap-4 pb-4">
+            <h3 className=" font-medium px-2">All Blogs</h3>
             
             <div className="flex flex-wrap items-center gap-4">
               
@@ -59,6 +101,8 @@ export const BlogsPage = () => {
                 <div className="relative w-full sm:w-64">
                   <input
                     type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search posts..."
                     className="w-full rounded-full border border-gray-300 py-[8px] pl-4 pr-10 focus:outline-none focus:border-[#002B49] text-gray-700 text-sm"
                   />
@@ -97,9 +141,14 @@ export const BlogsPage = () => {
           </div>
 
           {/* Blogs Render Area */}
-          <div className="mt-4 bg-accent-dark ">
+          <div className=" bg-accent-dark ">
+            {/* Show a subtle loading indicator while fetching pages/searches */}
+            {loading && blogs.length > 0 && (
+               <div className="text-center py-4 text-sm text-gray-500">Updating results...</div>
+            )}
+
             {view === "grid" ? (
-              // GRID VIEW (Full width, 3 columns on large screens)
+              // GRID VIEW
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {blogs.map((blog) => (
                   <BlogCard key={blog._id} blog={blog} />
@@ -114,8 +163,34 @@ export const BlogsPage = () => {
               </div>
             )}
             
-            {blogs.length === 0 && (
+            {blogs.length === 0 && !loading && (
               <p className="text-gray-500 text-center py-12">No blogs found.</p>
+            )}
+
+            {/* ======================================================== */}
+            {/* PAGINATION CONTROLS                                      */}
+            {/* ======================================================== */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-4 mt-12 mb-8">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1 || loading}
+                  className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  Previous
+                </button>
+                <span className="text-sm text-gray-600">
+                  Page <span className="font-semibold text-gray-900">{page}</span> of{" "}
+                  <span className="font-semibold text-gray-900">{totalPages}</span>
+                </span>
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages || loading}
+                  className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  Next
+                </button>
+              </div>
             )}
           </div>
         </div>
@@ -124,12 +199,14 @@ export const BlogsPage = () => {
         {/* SIDEBAR: ONLY VISIBLE IN LIST VIEW                       */}
         {/* ======================================================== */}
         {view === "list" && (
-          <aside className="w-full lg:w-[35%] flex flex-col gap-12 pt-4">
+          <aside className="w-full lg:w-[35%] flex flex-col gap-12">
             
             {/* Sidebar Search Bar */}
             <div className="relative">
               <input
                 type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search..."
                 className="w-full rounded-full border border-gray-300 py-3 pl-6 pr-12 focus:outline-none focus:border-[#002B49] text-gray-700"
               />
@@ -139,23 +216,14 @@ export const BlogsPage = () => {
             </div>
 
             {/* Recent Posts */}
-            <div className="flex flex-col gap-6">
-              <h3 className=" font-bold text-[#002B49]">Recent Posts</h3>
-              <div className="flex flex-col gap-5">
-                {[1, 2, 3].map((item) => (
-                  <div key={item} className="flex gap-4 items-center group cursor-pointer">
-                  
-                    <div className="flex flex-col">
-                      <span className="text-[12px] text-gray-500 mb-1">May 7, 2025</span>
-                      <h4 className="text-[15px]! leading-tight font-medium text-[#002B49] group-hover:text-blue-600 transition-colors">
-                        10 Principles Of Effective Web Design
-                      </h4>
-                    </div>
-                  </div>
+            <div className="sticky top-5">
+              <div className="flex flex-col gap-6">
+                <h4 className=" font-medium text-secondary-dark">Featured Posts</h4>
+                {featured.map((blog) => (
+                  <RandomBlog key={blog._id} blog={blog} />
                 ))}
               </div>
             </div>
-
 
           </aside>
         )}
