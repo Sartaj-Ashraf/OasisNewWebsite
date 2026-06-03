@@ -16,12 +16,12 @@ export const DetailedBlogCard = ({ blog }) => {
   const imageUrl = blog?.coverImage?.url;
 
   return (
-    <div className="flex flex-col w-full font-sans">
+    <div className="flex flex-col w-full px-2 ">
       
       {/* 1. Cover Image Section */}
     <Link 
   href={`/blogs/${blog?.slug || '#'}`} 
-  className="relative w-full aspect-video  rounded-2xl overflow-hidden block mb-6"
+  className="relative w-full aspect-video  rounded-2xl overflow-hidden block mb-5"
 >
   <Image 
     src={imageUrl} 
@@ -32,7 +32,7 @@ export const DetailedBlogCard = ({ blog }) => {
   />
 </Link>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         {/* 2. Meta Info (Date, Author, Category) */}
         <div className="text-[13px] text-gray-500 font-medium tracking-wide">
           <span>{formattedDate}</span>

@@ -19,9 +19,9 @@ export const getAllBlogs = ({
     },
   });
 export const getBlogBySlug = (slug) => {
- const response = customFetch.get(`${API}/slug/${slug}`);
- return response;
-}
+  const response = customFetch.get(`${API}/slug/${slug}`);
+  return response;
+};
 /* =========================
    ADMIN
 ========================= */
@@ -45,9 +45,7 @@ export const getAllBlogsAdmin = async ({
   return response.data;
 };
 
-
-export const getBlogStats = () =>
-  customFetch.get(`${API}/stats`);
+export const getBlogStats = () => customFetch.get(`${API}/stats`);
 
 /* =========================
    CREATE BLOG
@@ -72,8 +70,7 @@ export const updateBlog = (id, formData) =>
 /* =========================
    DELETE BLOG
 ========================= */
-export const deleteBlog = (id) =>
-  customFetch.delete(`${API}/admin/${id}`);
+export const deleteBlog = (id) => customFetch.delete(`${API}/admin/${id}`);
 
 /* =========================
    TOGGLE STATUS
@@ -88,3 +85,8 @@ export const reorderContentSections = (id, sectionOrder) =>
   customFetch.patch(`${API}/admin/${id}/reorder-sections`, {
     sectionOrder,
   });
+
+// Random Blogs
+
+export const getRandomBlogs = (blogId) =>
+  customFetch.get(`${API}/random?blogId=${blogId}`);

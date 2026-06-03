@@ -130,10 +130,6 @@ export const Footer = () => {
 
             {/* SOCIAL */}
             <div className="md:absolute right-10 bottom-25 flex flex-col gap-3">
-              <span className="text-lg md:text-3xl font-medium text-primary-light">
-                Social Links
-              </span>
-
               <div className="flex items-center gap-4">
                 {socailLinks.map((link, index) => (
                   <a
