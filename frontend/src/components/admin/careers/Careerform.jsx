@@ -93,9 +93,11 @@ export default function CareerForm({ initial, onSubmit, onCancel, loading }) {
                             placeholder="e.g. New York, NY" required className={inputCls} />
                     </Field>
                     <Field label="Total Vacancies" required>
-                        <input type="number" value={form.TotalVacancies} min={1}
-                            onChange={(e) => set("TotalVacancies", Number(e.target.value))}
-                            required className={inputCls} />
+                        <input type="number" 
+                        value={form.TotalVacancies} 
+                        min={1}
+                        onChange={(e) => set("TotalVacancies", e.target.value)}
+                        required className={inputCls} />
                     </Field>
                 </div>
             </div>
