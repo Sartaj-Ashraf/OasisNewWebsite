@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getApplications, deleteApplication } from "@/services/jobApplication.service";
-
+import { DeleteModal } from "@/components/admin/DeleteModal";
 import { Modal, Spinner } from "@/components/admin/job-applications/ApplicationsUi";
 import { ApplicationDetail } from "@/components/admin/job-applications/ApplicationModals";
 import { ApplicationsFilters, ApplicationsTable, ApplicationsPagination } from "@/components/admin/job-applications/Applicationstable";
@@ -137,31 +137,13 @@ export default function JobApplicationsPage() {
       </Modal>
 
       {/* Delete confirm */}
-      <Modal open={!!deleteTarget} onClose={() => setDeleteTarget(null)} title="Delete application">
-        <div className="space-y-4">
-          <p className="text-sm text-gray-700">
-            Are you sure you want to delete{" "}
-            <span className="font-semibold">{deleteTarget?.fullName}</span>'s application?
-            This will also remove their resume from storage and cannot be undone.
-          </p>
-          <div className="flex justify-end gap-3">
-            <button
-              onClick={() => setDeleteTarget(null)}
-              className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 transition"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleDelete}
-              disabled={deleting}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition disabled:opacity-60"
-            >
-              {deleting && <Spinner />}
-              Delete
-            </button>
-          </div>
-        </div>
-      </Modal>
+      
+    <DeleteModal
+  isOpen={!!deleteTarget}
+  onClose={() => setDeleteTarget(null)}
+  onConfirm={handleDelete}
+  title={deleteTarget?.fullName || "Application"}
+/>
     </div>
   );
 }
