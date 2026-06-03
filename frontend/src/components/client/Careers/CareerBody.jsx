@@ -96,7 +96,10 @@ export default function CareersBody() {
     return () => clearTimeout(timer);
   }, [fetchJobs]);
 
-  const hasFilters = search || jobType || location;
+  const hasFilters = search || jobType
+   || location;
+
+
   const clearAll   = () => { setSearch(""); setJobType(""); setLocation(""); };
 
   return (

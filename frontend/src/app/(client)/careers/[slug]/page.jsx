@@ -30,11 +30,10 @@ export default async function JobDetailPage({ params }) {
   const { slug } = await params;
   const job = await getJob(slug);
   if (!job) notFound();
-  return 
   return(
     <>
       <div className="container space-y-16">
-        <PageHeader title="About Us" />
+        <PageHeader title="Careers" />
         <JobDetailClient job={job} />
       </div>
     </>
