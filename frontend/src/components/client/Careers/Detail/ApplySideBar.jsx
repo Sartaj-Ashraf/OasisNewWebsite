@@ -36,22 +36,7 @@ export default function ApplySidebar({ job }) {
           </div>
 
           {/* Job pill */}
-          <div className="mt-4 flex items-center gap-3 rounded-2xl bg-slate-50 border border-slate-100 px-4 py-3">
-            <div
-              className="w-2 h-8 rounded-full flex-shrink-0"
-              style={{ backgroundColor: cfg.color }}
-            />
-            <div className="min-w-0">
-              <p className="text-[10px] uppercase tracking-widest text-slate-400 font-semibold mb-0.5">Position</p>
-              <p className="text-[13px] font-bold text-slate-800 truncate">{job.title}</p>
-            </div>
-            <span
-              className="ml-auto text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0"
-              style={{ color: cfg.color, backgroundColor: `${cfg.color}12` }}
-            >
-              {job.type}
-            </span>
-          </div>
+     
         </div>
 
         {/* Form */}
