@@ -12,7 +12,7 @@ const UploadIcon = () => (
 
 export default function ApplyForm({ job, accentColor = "#c8963e" }) {
   const fileRef                     = useRef(null);
-  const [form, setForm]             = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm]             = useState({ name: "", email: "", phone: "", experience: "", message: "" });
   const [file, setFile]             = useState(null);
   const [errors, setErrors]         = useState({});
   const [loading, setLoading]       = useState(false);
@@ -29,7 +29,10 @@ export default function ApplyForm({ job, accentColor = "#c8963e" }) {
     if (!form.name.trim())  e.name  = "Full name is required";
     if (!form.email.trim()) e.email = "Email is required";
     else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = "Enter a valid email";
+    
     if (!form.phone.trim()) e.phone = "Phone number is required";
+    if (!form.experience.trim())
+  e.experience = "Experience is required";
     if (!file) e.file = "Please attach your resume or CV";
     return e;
   };
@@ -60,7 +63,7 @@ export default function ApplyForm({ job, accentColor = "#c8963e" }) {
       );
       formData.append("notes", form.message);
       formData.append("career", job._id);
-      formData.append("experience", "");
+      formData.append("experience", form.experience);
       formData.append("resume",  file);
       formData.append("jobTitle", job.JobTitle);
 
@@ -146,6 +149,28 @@ export default function ApplyForm({ job, accentColor = "#c8963e" }) {
           onChange={(e) => set("email", e.target.value)} className={inputClass("email")} />
         {errors.email && <p className="text-[11px] text-red-400 mt-1">{errors.email}</p>}
       </div>
+      {/* Experience */}
+<div>
+  <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">
+    Experience (Years)
+    <span style={{ color: accentColor }}>*</span>
+  </label>
+
+  <input
+    type="number"
+    min="0"
+    placeholder="e.g. 2"
+    value={form.experience}
+    onChange={(e) => set("experience", e.target.value)}
+    className={inputClass("experience")}
+  />
+  
+  {errors.experience && (
+    <p className="text-[11px] text-red-400 mt-1">
+      {errors.experience}
+    </p>
+  )}
+</div>
 
       {/* Message */}
       <div>
