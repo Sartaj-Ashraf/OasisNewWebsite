@@ -63,9 +63,9 @@ export default function JobDetailHeader({ job }) {
       </div>
 
       {/* Title */}
-      <h1 className="text-[32px] md:text-[42px] font-extrabold text-slate-900 leading-[1.05] tracking-tight mb-5">
+      <h2 className="text-[32px] md:text-[42px] font-extrabold text-slate-900 leading-[1.05] tracking-tight mb-5">
         {job.JobTitle}
-      </h1>
+      </h2>
 
       {/* Meta badges */}
       <div className="flex flex-wrap gap-2 mb-8">

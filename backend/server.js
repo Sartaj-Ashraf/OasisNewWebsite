@@ -86,6 +86,7 @@ app.use("/api/blogs", blogRouter);
 app.use("/api/contacts", contactRouter);
 app.use("/api/careers", careerRouter);
 app.use("/api/job-applications", jobApplicationRouter);
+console.log("Job routes mounted");
 
 app.use("*", (req, res) => {
   res.status(404).json({

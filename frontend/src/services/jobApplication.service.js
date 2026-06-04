@@ -1,11 +1,19 @@
 import customFetch from "@/lib/customFetch";
 const base="/job-applications";
+
 export const applyForJob = async (formData) => {
-    const response = await customFetch(base+"/apply", {
-        method: "POST",
-        body: formData
-    });
-    return response.json();
+  const response = await customFetch(
+    base + "/apply",
+    {
+      method: "POST",
+      data: formData, // NOT body
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+
+  return response.data;
 };
 export const getApplications = async (params = {}) => {
 

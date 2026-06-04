@@ -35,20 +35,33 @@ export default function ApplyForm({ job, accentColor = "#c8963e" }) {
   };
 
   const handleSubmit = async () => {
-    const e = validate();
-    if (Object.keys(e).length) { setErrors(e); return; }
+      console.log("SUBMIT CLICKED");
 
+
+     const e = validate();
+
+     console.log("CALLING API");
+
+    if (Object.keys(e).length) {
+    setErrors(e);
+    return;
+  }
     setLoading(true);
     setApiError(null);
 
     try {
       const formData = new FormData();
-      formData.append("name",    form.name);
-      formData.append("email",   form.email);
-      formData.append("phone",   form.phone);
-      formData.append("message", form.message);
+
+
+      formData.append("fullName", form.name);
+      formData.append("email", form.email);
+      formData.append("phone",
+      form.phone.replace(/\D/g, "").slice(-10)
+      );
+      formData.append("notes", form.message);
+      formData.append("career", job._id);
+      formData.append("experience", "");
       formData.append("resume",  file);
-      formData.append("jobId",   job._id);
       formData.append("jobTitle", job.JobTitle);
 
       await applyForJob(formData);
@@ -161,9 +174,20 @@ export default function ApplyForm({ job, accentColor = "#c8963e" }) {
               : "border-slate-200 hover:border-[#c8963e]/40 hover:bg-slate-50"
           }`}
         >
-          <input ref={fileRef} type="file" className="hidden" accept=".pdf,.doc,.docx"
-            onChange={(e) => { setFile(e.target.files[0]); setErrors((p) => ({ ...p, file: "" })); }}
-          />
+
+          <input ref={fileRef} type="file"
+            className="hidden" accept=".pdf,.doc,.docx"
+            onChange={(e) => {
+            const selectedFile = e.target.files?.[0];
+            console.log("Selected file:", selectedFile);
+            setFile(selectedFile);
+            setErrors((p) => ({
+              ...p,
+              file: "",
+            }));
+          }}
+
+          />  
           <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors"
             style={{ backgroundColor: file ? `${accentColor}15` : "#f1f5f9", color: file ? accentColor : "#94a3b8" }}>
             <UploadIcon />

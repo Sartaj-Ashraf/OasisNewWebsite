@@ -10,7 +10,7 @@ export const metadata = {
 export default function CareersPage() {
   return (
     <div className="container space-y-16">
-        <PageHeader title="About Us" /> 
+        <PageHeader title="Career" /> 
         <CareersBody />
     </div>
 
