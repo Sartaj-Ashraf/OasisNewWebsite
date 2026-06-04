@@ -211,7 +211,7 @@ export default function CareersBody() {
 
       {/* CTA Banner */}
       {!loading && (
-        <div className="mt-16 relative bg-[#1a2e44] rounded-2xl overflow-hidden p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-16 relative bg-secondary-dark rounded-2xl overflow-hidden p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="absolute top-0 right-0 w-72 h-72 bg-[#c8963e]/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none" />
           <div className="relative">
             <h3 className="text-[18px] font-bold text-white mb-1.5">Don&apos;t see a fit?</h3>
