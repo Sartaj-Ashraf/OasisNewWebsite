@@ -34,10 +34,26 @@ export const TYPE_CONFIG = {
 };
 
 function formatSalary(salary) {
-  if (!salary?.min && !salary?.max) return "N/A";
-  const fmt = (n) => n >= 1000 ? `$${(n / 1000).toFixed(0)}K` : `$${n}`;
-  if (salary.min && salary.max) return `${fmt(salary.min)} – ${fmt(salary.max)}`;
-  if (salary.min) return `From ${fmt(salary.min)}`;
+  if (!salary?.min && !salary?.max) return null;
+
+  const fmt = (n) => {
+    if (n >= 100000) {
+      return `₹${(n / 100000).toFixed(1)}L`;
+    }
+
+    if (n >= 1000) {
+      return `₹${(n / 1000).toFixed(0)}K`;
+    }
+
+    return `₹${n}`;
+  };
+
+  if (salary.min && salary.max)
+    return `${fmt(salary.min)} – ${fmt(salary.max)}`;
+
+  if (salary.min)
+    return `From ${fmt(salary.min)}`;
+
   return `Up to ${fmt(salary.max)}`;
 }
 
