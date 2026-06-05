@@ -1,6 +1,6 @@
 import Image from "next/image";
 import AboutImage from "@/assets/AboutImage.png";
-import { Button } from "@/shared/ClickAble"
+import { Button, LinkBtn } from "@/shared/ClickAble"
 import Link from "next/link";
 export default function AboutSection() {
   return (
@@ -32,7 +32,7 @@ export default function AboutSection() {
 
           {/* Button */}
          <div className="flex justify-start">
-          <Button  className="w-fit button bg-[#007bff] text-white hover:bg-[#0056b3] cursor-pointer"> <Link href="/contact-us">Contact Us</Link> </Button>
+          <LinkBtn link="/contact-us"  className="bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:primary" />
           </div>
         </div>
 

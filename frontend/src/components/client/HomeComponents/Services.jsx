@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Loader, X, Plus, Megaphone, Palette, Headphones } from "lucide-react";
+import { X, Plus, Megaphone, Code2 , Headphones } from "lucide-react";
 import bgImage from "@/assets/svg/download.svg";
-import { Button, LinkBtn } from "@/shared/ClickAble";
+import {LinkBtn } from "@/shared/ClickAble";
 const services = [
   {
     id: "marketing",
@@ -27,7 +27,7 @@ const services = [
     descColor: "text-[#3a1860]",
     btnBorder: "border-[#c080e0] text-[#2a1040]",
     iconColor: "#2a1040",
-    ServiceIcon: Palette,
+    ServiceIcon: Code2,
   },
   {
     id: "social-media-marketing",
@@ -115,7 +115,6 @@ export default function  Services() {
               style={{ minWidth: 0 }}
             >
               <RibbonShape />
-
               {/* ── MOBILE: collapsed bar label (horizontal) ── */}
               <div
                 className={`
@@ -124,9 +123,9 @@ export default function  Services() {
                   ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}
                 `}
               >
-                <div className="flex items-center gap-3 ">
+                <div className="flex items-center gap-3 mb-auto">
                   <ServiceIcon
-                    size={32}
+                    size={40}
                     strokeWidth={1.8}
                     color={s.iconColor}
                     className="opacity-70"
@@ -207,7 +206,7 @@ export default function  Services() {
                     {s.description}
                   </p>
                   <LinkBtn
-                   link="/services" children=" Discover More" className="mt-8" />
+                   link="/services" children=" Discover More" className="mt-8 bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary transition-all duration-300" />
                    
                  
                 </div>

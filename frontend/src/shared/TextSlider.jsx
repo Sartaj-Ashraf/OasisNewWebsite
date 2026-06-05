@@ -66,7 +66,7 @@ export default function TextSlider() {
             {words.map((word, i) => (
               <li
                 key={i}
-                className="splide__slide whitespace-nowrap text-4xl md:text-6xl md:h-[100px] flex items-center font-bold
+                className="splide__slide whitespace-nowrap text-3xl md:text-6xl md:h-20 flex items-center font-bold
                            text-black/10 [&.is-active]:text-transparent
                            [&.is-active]:bg-linear-to-r
                            [&.is-active]:from-secondary

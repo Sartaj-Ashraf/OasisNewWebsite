@@ -51,14 +51,14 @@ export const BlogSinglePage = ({ slug }) => {
   return (
     <main className="container">
       <BlogHeader title={blog?.title} />
-      <div className=" grid grid-cols-6 w-full gap-6 ">
+      <div className=" grid grid-cols-1 md:grid-cols-6 w-full gap-6 ">
         <div className="col-span-4">
           <ContentRenderer sections={blog?.content || []} />
         </div>
         <div className="relative h-full w-full col-span-2 ">
           <div className="flex flex-col py-8 gap-4 sticky top-5 w-full ">
             <h4 className="text-xl font-medium text-secondary-dark">
-              Related Blogs
+              Other Blogs
             </h4>
             {RandomBlogs.map((blog) => (
               <RandomBlog key={blog._id} blog={blog} />

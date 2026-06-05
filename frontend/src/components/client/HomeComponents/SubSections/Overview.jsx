@@ -13,16 +13,18 @@ export const Overview = () => {
       {/* Background Image */}
       <div
         className="absolute inset-0"
-        style={{
-          backgroundImage: `url(${bgImage.src})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
       />
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-linear-to-br from-black/10 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-br from-black/10 via-black/10 to-transparent" >
+      <Image
+        src={bgImage}
+        width={100}
+        height={100}
+        className="w-full h-full object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-between h-full p-6 md:p-10">
@@ -50,15 +52,6 @@ export const Overview = () => {
             experiences that attract audiences, strengthen brands, and
             accelerate business growth globally.
           </p>
-
-          {/* Button */}
-          <div className="mt-8">
-            <LinkBtn
-              link="/"
-              children="Explore Now"
-              className="bg-linear-to-r from-primary via-primary to-primary-dark text-white px-7 py-3 rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl shadow-primary/30"
-            />
-          </div>
         </div>
 
         {/* Bottom Right Arrow */}

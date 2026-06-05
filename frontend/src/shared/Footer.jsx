@@ -51,7 +51,7 @@ export const Footer = () => {
           <div className="flex flex-wrap items-start gap-10 md:gap-20 h-full py-24 md:py-20">
             {/* QUICK LINKS */}
             <div className="flex flex-col gap-3">
-              <span className="text-lg md:text-3xl font-medium text-primary-light">
+              <span className="text-lg md:text-3xl font-medium text-white">
                 Quick Links
               </span>
 
@@ -71,7 +71,7 @@ export const Footer = () => {
 
             {/* CONTACT */}
             <div className="flex flex-col gap-3">
-              <span className="text-lg md:text-3xl font-medium text-primary-light">
+              <span className="text-lg md:text-3xl font-medium text-white">
                 Contact Us
               </span>
 
