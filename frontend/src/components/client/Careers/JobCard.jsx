@@ -217,7 +217,7 @@ export default function JobCard({ job }) {
            type="submit"
            className="button mb-1 bg-linear-to-br from-primary via-primary to-primary-dark hover:primary-dark hover:via-primary hover:to-primary disabled:opacity-70"  
         >
-          View Details →
+          View Details 
         </Button>
 
       </div>
