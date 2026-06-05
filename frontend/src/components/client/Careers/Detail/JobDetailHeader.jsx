@@ -1,3 +1,4 @@
+import { IndianRupee } from "lucide-react";
 const ClockIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
@@ -99,9 +100,9 @@ export default function JobDetailHeader({ job }) {
       {/* Stat cards */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { icon: <UsersIcon />,  label: "Vacancies",  value: `${job.TotalVacancies ?? 0} open`, accent: false },
-          { icon: <DollarIcon />, label: "Salary",     value: salary,                             accent: true  },
-          { icon: <ClockIcon />,  label: "Work Hours", value: hours,                              accent: true  },
+          { icon: <UsersIcon />,  label: "Vacancies",  value: `${job.TotalVacancies ?? 0} open`,accent: false },
+          { icon: <IndianRupee size={15} />, label: "Salary",     value: salary,accent: true  },
+          { icon: <ClockIcon />,  label: "Work Hours", value: hours, accent: true  },
         ].map(({ icon, label, value, accent }) => (
           <div key={label} className="flex flex-col gap-2 rounded-2xl p-4 border border-slate-100 bg-slate-50/60">
             <div className="w-8 h-8 rounded-xl flex items-center justify-center"

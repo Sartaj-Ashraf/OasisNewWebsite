@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import JobCard from "./JobCard";
 import { getAllCareers, getCareerFilters } from "@/services/careers.service";
+import { Button } from "@/shared/ClickAble";
 
 const SearchIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -13,12 +14,6 @@ const ChevronDown = () => (
     <path d="M6 9l6 6 6-6"/>
   </svg>
 );
-const ArrowIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M7 17L17 7M17 7H7M17 7v10"/>
-  </svg>
-);
-
 function SkeletonCard() {
   return (
     <div className="bg-white rounded-3xl border border-gray-100 p-5 animate-pulse">
@@ -220,11 +215,12 @@ export default function CareersBody() {
             </p>
           </div>
           
-          <a  href="mailto:careers@oasisascend.in"
-            className="relative flex-shrink-0 inline-flex items-center gap-2 bg-[#c8963e] hover:bg-[#b8842e] text-white text-[13px] font-bold px-6 py-3 rounded-xl transition-colors"
+          <Button
+            onClick={() => window.location.href = "mailto:careers@oasisascend.in"}
+            className="button mb-1 bg-linear-to-br from-primary via-primary to-primary-dark hover:primary-dark hover:via-primary hover:to-primary disabled:opacity-70"  
           >
-            Send Open Application <ArrowIcon />
-          </a>
+            Send Open Application 
+          </Button>
         </div>
       )}
 

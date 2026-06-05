@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import { applyForJob } from "@/services/jobApplication.service";
+import { Button } from "@/shared/ClickAble";
 
 const UploadIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -38,12 +39,8 @@ export default function ApplyForm({ job, accentColor = "#c8963e" }) {
   };
 
   const handleSubmit = async () => {
-      console.log("SUBMIT CLICKED");
-
-
-     const e = validate();
-
-     console.log("CALLING API");
+     
+    const e = validate();
 
     if (Object.keys(e).length) {
     setErrors(e);
@@ -164,7 +161,7 @@ export default function ApplyForm({ job, accentColor = "#c8963e" }) {
     onChange={(e) => set("experience", e.target.value)}
     className={inputClass("experience")}
   />
-  
+
   {errors.experience && (
     <p className="text-[11px] text-red-400 mt-1">
       {errors.experience}
@@ -226,39 +223,34 @@ export default function ApplyForm({ job, accentColor = "#c8963e" }) {
             </p>
           </div>
           {file && (
-            <button onClick={(e) => { e.stopPropagation(); setFile(null); }}
-              className="ml-auto text-slate-300 hover:text-red-400 transition-colors flex-shrink-0">
+            <Button  onClick={(e) => { e.stopPropagation(); setFile(null); }}
+              className="button mb-1 bg-linear-to-br from-primary via-primary to-primary-dark hover:primary-dark hover:via-primary hover:to-primary disabled:opacity-70">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M18 6L6 18M6 6l12 12"/>
               </svg>
-            </button>
+            </Button>
           )}
         </div>
         {errors.file && <p className="text-[11px] text-red-400 mt-1">{errors.file}</p>}
       </div>
 
       {/* Submit */}
-      <button onClick={handleSubmit} disabled={loading}
-        className="w-full py-3.5 rounded-xl text-[13.5px] font-bold text-white transition-all duration-200 disabled:opacity-60 flex items-center justify-center gap-2"
+      <Button  handleClick={handleSubmit} disabled={loading}
+        className="button mb-1 bg-linear-to-br from-primary via-primary to-primary-dark hover:primary-dark hover:via-primary hover:to-primary disabled:opacity-70"
         style={{ backgroundColor: accentColor }}
       >
         {loading ? (
           <>
-            <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-            </svg>
+           
             Submitting…
           </>
         ) : (
           <>
             Submit Application
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M7 17L17 7M17 7H7M17 7v10"/>
-            </svg>
+           
           </>
         )}
-      </button>
+      </Button>
 
     </div>
   );
