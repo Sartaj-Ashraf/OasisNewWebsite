@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function MediaSection({ content, meta, isGrid = false }) {
+export default function     MediaSection({ content, meta, isGrid = false }) {
   return (
     <figure className={isGrid ? "m-0" : "my-10"}>
       <Image

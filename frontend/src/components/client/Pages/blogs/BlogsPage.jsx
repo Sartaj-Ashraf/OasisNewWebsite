@@ -80,10 +80,10 @@ export const BlogsPage = () => {
   }
 
   return (
-    <div className="container mx-auto bg-accent-dark font-sans py-8 px-6">
+    <div className=" bg-accent-dark font-sans py-8 ">
       
       {/* Dynamic layout: row for list view (main + sidebar), col for grid view (full width) */}
-      <div className={`flex flex-col ${view === 'list' ? 'lg:flex-row' : ''} gap-12`}>
+      <div className={`container flex md:flex-row flex-col ${view === 'list' ? 'lg:flex-row' : ''} gap-12`}>
         
         {/* ======================================================== */}
         {/* MAIN CONTENT (Dynamically resizes based on view)         */}
@@ -97,7 +97,7 @@ export const BlogsPage = () => {
             <div className="flex flex-wrap items-center gap-4">
               
               {/* TOP SEARCH BAR: ONLY VISIBLE IN GRID VIEW */}
-              {view === "grid" && (
+              
                 <div className="relative w-full sm:w-64">
                   <input
                     type="text"
@@ -110,7 +110,6 @@ export const BlogsPage = () => {
                     <Search size={16} />
                   </button>
                 </div>
-              )}
 
               {/* View Toggles */}
               <div className="flex items-center bg-gray-50 rounded-lg p-1 border border-white">
@@ -141,7 +140,7 @@ export const BlogsPage = () => {
           </div>
 
           {/* Blogs Render Area */}
-          <div className=" bg-accent-dark ">
+          <div >
             {/* Show a subtle loading indicator while fetching pages/searches */}
             {loading && blogs.length > 0 && (
                <div className="text-center py-4 text-sm text-gray-500">Updating results...</div>
@@ -201,20 +200,6 @@ export const BlogsPage = () => {
         {view === "list" && (
           <aside className="w-full lg:w-[35%] flex flex-col gap-12">
             
-            {/* Sidebar Search Bar */}
-            <div className="relative">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search..."
-                className="w-full rounded-full border border-gray-300 py-3 pl-6 pr-12 focus:outline-none focus:border-[#002B49] text-gray-700"
-              />
-              <button className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#002B49]">
-                <Search size={20} />
-              </button>
-            </div>
-
             {/* Recent Posts */}
             <div className="sticky top-5">
               <div className="flex flex-col gap-6">

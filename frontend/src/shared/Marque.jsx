@@ -45,7 +45,7 @@ const words = [
   }, []);
 
   return (
-    <div className="w-full overflow-hidden py-4 relative pt-10">
+    <div className="w-full overflow-hidden py-4 relative ">
       
       {/* LEFT FADE */}
       <div className="hidden lg:block pointer-events-none absolute left-0 top-0 h-full w-24 z-10

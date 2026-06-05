@@ -4,18 +4,18 @@ import { X ,Facebook, Instagram, LinkedIn, WhatsApp  } from "./SocialIcons";
 export const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about-us' },
-  { name: 'Our Team', path: '/our-team' },
+  // { name: 'Our Team', path: '/our-team' },
   { name: 'Services', path: '/services' },
   {name:'Career',path:'/careers'},
   { name: 'Blogs', path: '/blogs' },
 ];
-export const bottomNavItems = [
-  { name: "Home",    href: "/",       icon: Home   },
-  { name: "Search",  href: "/search", icon: Search },
-  { name: "About",   href: "/about",  icon: Info   },
-  { name: "Profile", href: "/profile",icon: User   },
-  {name:'Career',href:'/career' ,icon:Briefcase}
-];
+// export const bottomNavItems = [
+//   { name: "Home",    href: "/",       icon: Home   },
+//   { name: "Search",  href: "/search", icon: Search },
+//   { name: "About",   href: "/about",  icon: Info   },
+//   { name: "Profile", href: "/profile",icon: User   },
+//   {name:'Career',href:'/careers' ,icon:Briefcase}
+// ];
 
 
 

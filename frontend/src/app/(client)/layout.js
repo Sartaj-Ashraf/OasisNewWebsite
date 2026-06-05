@@ -1,4 +1,5 @@
 import { Footer } from "@/shared/Footer";
+import LenisProvider from "@/utils/LenisProvider";
 import { Inter, Poppins } from "next/font/google";
 
 const inter = Inter({
@@ -17,6 +18,7 @@ const poppins = Poppins({
 export default function ClientLayout({ children }) {
   return (
     <div className={`${inter.variable} ${poppins.variable}`}>
+      <LenisProvider />
       <main className="font-sans">
         {children}
       </main>

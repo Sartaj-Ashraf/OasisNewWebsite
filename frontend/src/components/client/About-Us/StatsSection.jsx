@@ -1,3 +1,5 @@
+import { ArrowRight } from "lucide-react";
+
 export default function StatsSection() {
   return (
     <section className=" ">
@@ -16,8 +18,8 @@ export default function StatsSection() {
           {/* ITEM 1 */}
           <div>
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-4xl text-teal-400">↗</span>
-              <h2 className="text-5xl font-semibold">+130%</h2>
+              <span className="text-4xl text-teal-400 -rotate-45 translate"><ArrowRight size={52}/></span>
+              <h2 className="text-5xl font-medium">+130%</h2>
             </div>
             <p className="text-gray-300">Conversion Rate Increased</p>
           </div>
@@ -25,17 +27,17 @@ export default function StatsSection() {
           {/* ITEM 2 */}
           <div>
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-4xl text-purple-400">↗</span>
-              <h2 className="text-5xl font-semibold">+300</h2>
+              <span className="text-4xl text-purple-400 -rotate-45 translate"><ArrowRight size={52}/></span>
+              <h2 className="text-5xl font-medium">+300</h2>
             </div>
             <p className="text-gray-300">Successful Projects Delivered</p>
           </div>
 
           {/* ITEM 3 */}
-          <div>
+          <div> 
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-4xl text-orange-400">↗</span>
-              <h2 className="text-5xl font-semibold">+10K</h2>
+              <span className="text-4xl text-orange-400 -rotate-45 translate"><ArrowRight size={52}/></span>
+              <h2 className="text-5xl font-medium">+10K</h2>
             </div>
             <p className="text-gray-300">Leads Generated for Clients</p>
           </div>

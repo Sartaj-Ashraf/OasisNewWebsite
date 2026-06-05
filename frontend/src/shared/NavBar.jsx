@@ -12,7 +12,7 @@ export const NavBar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="relative w-full flex items-center justify-end gap-6 px-5 md:px-10 lg:gap-25">
+    <nav className="relative w-full flex items-center justify-end gap-6 px-5 md:px-10 lg:gap-25 ">
       {/* Desktop Links */}
       <ul className="hidden lg:flex items-center gap-8">
         {navLinks.map((link) => (
@@ -53,7 +53,7 @@ export const NavBar = () => {
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 pb-0">
-          <Image src={logo} alt="Logo" width={120} height={120} />
+          <Link href="/"><Image src={logo} alt="Logo" width={120} height={120} /></Link>
           <button onClick={() => setIsOpen(false)}>
             <X size={26} />
           </button>
@@ -64,7 +64,8 @@ export const NavBar = () => {
           {navLinks.map((link) => {
             const isActive = pathname === link.path;
             return (
-              <li
+              <Link
+              href={link.path}
                 key={link.name}
                 onClick={() => setIsOpen(false)}
                 className={`text-lg font-medium transition cursor-pointer ${
@@ -72,7 +73,7 @@ export const NavBar = () => {
                 } hover:text-black`}
               >
                 {link.name}
-              </li>
+              </Link>
             );
           })}
         </ul>

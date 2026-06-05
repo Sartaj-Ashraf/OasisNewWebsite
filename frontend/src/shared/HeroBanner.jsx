@@ -5,22 +5,24 @@ import Image from "next/image";
 import logo from "@/assets/logoColored.png";
 import TextSlider from "./TextSlider";
 import { Button } from "./ClickAble";
-import svgImg from '@/assets/svg/angle-header.svg'
+import svgImg from "@/assets/svg/angle-header.svg";
 
 const HeroBanner = () => {
   return (
     <section className="relative  md:h-screen md:max-h-200  mt-8 ">
       {/* Logo */}
-      <div className="absolute -top-px left-0 z-10">
+      <div className="absolute -top-px left-0 z-20">
         <Image src={svgImg} alt="svg" className="md:w-full md:h-full " />
         <div className="flex items-center gap-2 absolute md:top-5 top-0 md:left-10 left-5">
-          <Image
+       <Link href="/" > 
+        <Image
             src={logo}
             alt="logo"
             width={100}
             height={100}
-            className="w-36 md:w-48"
+            className="w-36 md:w-48  scale-105 relative z-20"
           />
+          </Link>
         </div>
       </div>
       <div className=" bg-accent corner-shape-scoop absolute inset-0 rounded-3xl" />
@@ -29,19 +31,26 @@ const HeroBanner = () => {
       <div className="  relative z-10  py-4 md:py-8 h-full ">
         <NavBar />
         <div className="flex flex-col justify-center mt-8 h-full ">
-          <h1 className=" md:ml-[20%] px-4 md:px-0 pt-4 font-medium text-gray-600">AI-Powered</h1>
+          <h2 className=" md:ml-[20%] px-4 md:px-0 pt-4 font-medium text-gray-600">
+            AI-Powered
+          </h2>
 
           <TextSlider />
-          <h1 className=" md:ml-[20%] px-4 md:px-0 font-medium text-gray-600">
-           Crafted For Impact           </h1>
+          <h2 className=" md:ml-[20%] px-4 md:px-0 font-medium text-gray-600">
+            Crafted For Impact{" "}
+          </h2>
           <p className="md:ml-[20%] px-4 md:px-0 text-black/70 lg:w-2xl my-4">
-            Transform your business with cutting-edge software, high-performance websites, strategic digital marketing, and engaging creative content. We help brands grow faster, attract more customers, and build a powerful online presence through innovative technology and data-driven marketing.
-          </p> 
-          <Button link="/contact" className="mb-4 ml-4 w-fit button md:ml-[20%] bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary text-white transition-all duration-300 ease-in-out">Contact Us</Button>
+            From custom software to digital marketing, we create solutions that
+            accelerate growth and deliver measurable results.{" "}
+          </p>
+          <Button
+            link="/contact"
+            className="mb-4 ml-4 w-fit button md:ml-[20%] bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary text-white transition-all duration-300 ease-in-out"
+          >
+            Contact Us
+          </Button>
         </div>
       </div>
-
-  
     </section>
   );
 };

@@ -33,7 +33,7 @@ export default async function JobDetailPage({ params }) {
   return(
     <>
       <div className="container space-y-16">
-        <PageHeader title="Careers" />
+        <PageHeader title="Career" />
         <JobDetailClient job={job} />
       </div>
     </>
