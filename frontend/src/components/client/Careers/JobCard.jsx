@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { Button } from "@/shared/ClickAble";
 
 // ─── Constants ───────────────────────────────────────────────
 const C = {
@@ -211,21 +212,13 @@ export default function JobCard({ job }) {
         </div>
 
         {/* CTA */}
-        <button
+        <Button
           onClick={(e) => { e.stopPropagation(); router.push(`/careers/${job.slug}`); }}
-          className="flex-shrink-0 text-[11.5px] font-extrabold px-4 py-2 rounded-[10px] transition-all duration-200"
-          style={{ background: C.secondaryDark, color: C.primary, border: "none" }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = C.primary;
-            e.currentTarget.style.color      = C.secondaryDark;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = C.secondaryDark;
-            e.currentTarget.style.color      = C.primary;
-          }}
+           type="submit"
+           className="button mb-1 bg-linear-to-br from-primary via-primary to-primary-dark hover:primary-dark hover:via-primary hover:to-primary disabled:opacity-70"  
         >
           View Details →
-        </button>
+        </Button>
 
       </div>
     </div>
