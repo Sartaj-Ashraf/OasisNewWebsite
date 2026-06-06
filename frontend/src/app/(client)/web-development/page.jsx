@@ -1,4 +1,4 @@
-import { WebDevPage } from '@/components/client/Pages/WebDevPage'
+import { WebDevPage } from '@/components/client/Pages/services/WebDevPage'
 import PageHeader from '@/shared/PageHeader'
 import React from 'react'
 

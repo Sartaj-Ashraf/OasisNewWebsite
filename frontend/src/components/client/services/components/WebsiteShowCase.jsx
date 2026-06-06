@@ -91,9 +91,6 @@ const projects = [
     textLight: false,
   },
 ];
-
-const categories = ["All", "Web Dev", "UI/UX", "Branding", "Web App"];
-
 // ─── Auto-span algorithm ──────────────────────────────────────────────────────
 // Cycles through a repeating tile pattern of 5 cards:
 //   [hero(2×2), tall(1×2), normal(1×1), normal(1×1), normal(1×1)]  
@@ -216,10 +213,10 @@ function ProjectCard({ project, spanInfo, onOpen }) {
       </div>
 
       {/* Footer */}
-      <div className={`relative z-10 flex items-center justify-between mt-6 pt-4 border-t ${borderColor}`}>
+      <div className={`relative z-10 flex items-center justify-between mt-6 pt-4 border-t  ${borderColor}`}>
         <span className={`text-xs font-medium ${textMuted}`}>View Project</span>
         <div
-          className="w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:rotate-0 -rotate-45"
+          className=" rounded-full flex items-center button p-3 justify-center transition-transform duration-300 group-hover:rotate-0 "
           style={{ background: project.accent }}
         >
           <ArrowRight size={14} color="#fff" />
@@ -279,7 +276,7 @@ function ProjectModal({ project, onClose }) {
 }
 
 // ─── Main page ────────────────────────────────────────────────────────────────
-export default function ProjectsPage() {
+export const WebsiteShowCase = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [selected, setSelected] = useState(null);
 
@@ -290,30 +287,46 @@ export default function ProjectsPage() {
 
   return (
     <>
-      <section className="px-4 md:px-8 py-12">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <section className="py-12">
+
+       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-widest uppercase mb-4">
               ✦ Our Work
             </span>
-            <h1 className="text-4xl md:text-6xl font-semibold leading-tight tracking-tight text-black">
+            <h2 className="text-4xl md:text-6xl font-medium text-black">
               Projects We're
               <span className="block italic text-primary">Proud Of</span>
-            </h1>
+            </h2>
           </div>
           <p className="text-black/60 max-w-sm leading-relaxed md:text-right">
-            From ambitious startups to established brands — here's what we've been building.
+            From ambitious startups to established brands  here's what we've been building.
           </p>
         </div>
 
-
-        {/* ── Auto-bento grid ─────────────────────────────────────────────────
-            - 3-column on md+
-            - grid-auto-flow: dense fills gaps automatically
-            - Each card's col/row span is derived from its filtered index
-            - No manual size property needed on project data
-        ──────────────────────────────────────────────────────────────────── */}
+        
+       
+        {/* Filters */}
+        {/* <div className="flex items-center gap-2 flex-wrap mb-8">
+          <Filter size={14} className="text-black/30 mr-1" />
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className={`
+                px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase
+                border transition-all duration-200
+                ${
+                  activeFilter === cat
+                    ? "bg-black text-white border-black"
+                    : "bg-transparent text-black/50 border-black/15 hover:border-black/40 hover:text-black"
+                }
+              `}
+            >
+              {cat}
+            </button>
+          ))}
+        </div> */}
         <div
           className="grid grid-cols-1 md:grid-cols-3 gap-4"
           style={{ gridAutoFlow: "dense", gridAutoRows: "minmax(160px, auto)" }}
@@ -339,7 +352,7 @@ export default function ProjectsPage() {
           })}
         </div>
 
-        {/* CTA */}
+        {/* CTA
         <div className="mt-10 bg-accent-dark rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="text-2xl md:text-3xl font-semibold text-black">
@@ -353,7 +366,7 @@ export default function ProjectsPage() {
           >
             Start a Project <ArrowRight size={16} />
           </Link>
-        </div>
+        </div> */}
       </section>
 
       {selected && (
