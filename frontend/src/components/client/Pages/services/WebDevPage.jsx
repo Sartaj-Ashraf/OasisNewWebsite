@@ -1,5 +1,7 @@
 import React from 'react'
-import { ServiceDetail } from '../services/components/ServiceDetail'
+import { ServiceDetail } from '../../services/components/ServiceDetail'
+import { WebsiteShowCase } from '../../services/components/WebsiteShowCase';
+import Cta from '@/shared/Cta';
 const servicesContent = {
 
   webDevelopment: {
@@ -33,6 +35,9 @@ const servicesContent = {
 };
 export const WebDevPage = () => {
   return (
-    <div><ServiceDetail content={servicesContent}/></div>
+    <div><ServiceDetail content={servicesContent.webDevelopment}/>
+    <WebsiteShowCase/>
+    <Cta/>
+    </div>
   )
 }

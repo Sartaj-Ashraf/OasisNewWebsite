@@ -55,14 +55,14 @@ export const Overview = () => {
         </div>
 
         {/* Bottom Right Arrow */}
-        <div className="absolute bottom-0 right-0">
+        <div className="absolute bottom-0 right-0 ">
           <Image src={svgImg} alt="svg" className="w-full h-full" />
 
           <Link
-            href="/"
-            className="absolute bottom-2 right-2 w-22 h-22 bg-black rounded-3xl flex items-center justify-center"
+            href="/about-us"
+            className="absolute bottom-2 right-2 w-22 h-22 bg-black rounded-3xl flex items-center justify-center z-10 group"
           >
-            <span className="text-white -rotate-45 hover:rotate-0 transition-transform duration-300 ease-in-out">
+            <span className="text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300 ease-in-out">
               <ArrowRight size={40} />
             </span>
           </Link>

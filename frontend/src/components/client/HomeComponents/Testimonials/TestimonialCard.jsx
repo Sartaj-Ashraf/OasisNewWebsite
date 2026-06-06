@@ -41,7 +41,7 @@ export const TestimonialCard = ({ testimonials = [] }) => {
           backgroundImage: `url(${bgImage.src})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.5,
+          opacity: 0.9,
         }}
       />
     <div className="w-30 h-30 md:w-40 md:h-40 ">
@@ -78,8 +78,8 @@ export const TestimonialCard = ({ testimonials = [] }) => {
             >
               {/* Fixed Height Testimonial Section */}
               <div className="px-8 h-[180px] md:h-full flex items-center overflow-hidden">
-                <span className="text-lg md:text-3xl text-secondary-dark font-semibold line-clamp-4 md:line-clamp-none">
-                  {item?.testimonial}
+                <span className="text-lg md:text-3xl text-secondary-dark font-medium line-clamp-4 md:line-clamp-none">
+                  "{item?.testimonial}" 
                 </span>
               </div>
 

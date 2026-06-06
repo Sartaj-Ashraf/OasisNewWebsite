@@ -11,10 +11,10 @@ export const Customers = () => {
       <div className="absolute top-0 right-0">
         <Image src={svgImg} alt="svg" className="w-full h-full " />
         <Link
-          href="/"
-          className="absolute top-2 right-2 w-22 h-22 bg-black rounded-3xl flex items-center justify-center"
+          href="/about-us"
+            className="absolute top-2 right-2 w-22 h-22 bg-black rounded-3xl flex items-center justify-center z-10 group"
         >
-          <span className="text-white -rotate-45 hover:rotate-0 transition-transform duration-300 ease-in-out cursor-pointer">
+          <span className="text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300 ease-in-out cursor-pointer">
             <ArrowRight size={44} />
           </span>
         </Link>

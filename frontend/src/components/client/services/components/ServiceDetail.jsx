@@ -11,7 +11,6 @@ export const ServiceDetail = ({ content }) => {
         backgroundImage: `url(${bgImage.src})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        opacity: 0.9,
       }}
     >
       <div className="absolute right-0 top-0 bottom-0 items-center select-none z-1 hidden sm:flex">

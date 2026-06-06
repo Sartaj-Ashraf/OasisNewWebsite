@@ -1,5 +1,7 @@
 import React from "react";
 import {  ServiceDetail } from "../../services/components/ServiceDetail";
+import MarketingDetails from "../../services/components/MarketingDetails";
+import Cta from "@/shared/Cta";
 const servicesContent = {
   marketing: {
     label: "WHAT WE OFFER",
@@ -31,10 +33,12 @@ const servicesContent = {
 //     sideText: "Development",
 //   },
 };
-export const DegitalMarketing = () => {
+export const DigitalMarketing = () => {
   return (
     <div>
       <ServiceDetail content={servicesContent.marketing} />{" "}
+      <MarketingDetails/>
+      <Cta/>
     </div>
   );
 };
