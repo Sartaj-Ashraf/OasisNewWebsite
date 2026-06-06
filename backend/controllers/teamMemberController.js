@@ -3,8 +3,6 @@ import { uploadToS3, deleteFromS3 } from "../utils/s3Upload.js";
 
 // ─── CREATE ───────────────────────────────────────────────────────────────────
 export const createTeamMember = async (req, res) => {
-
-  console.log(req.body);
   const { name, designation, linkedin, instagram, website, isActive, showOnWebsiteOnly } = req.body;
 
   if (!name || !designation) return res.status(400).json({ success: false, message: "Name and Designation are required" });
@@ -31,7 +29,7 @@ export const createTeamMember = async (req, res) => {
 // ─── GET ALL (no pagination) ──────────────────────────────────────────────────
 export const getTeamMembers = async (req, res) => {
   try {
-    const teamMembers = await TeamMember.find().sort({ order: 1 });
+    const teamMembers = await TeamMember.find().sort({ order: 1 }).select("-__v -updatedAt");
     res.json({ success: true, data: teamMembers });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
