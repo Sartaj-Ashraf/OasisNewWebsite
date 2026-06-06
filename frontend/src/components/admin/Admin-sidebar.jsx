@@ -10,6 +10,7 @@ import {
     Building2,
     Briefcase,
     Users,
+    Package,
     Mail,
     HelpCircle,
     Settings,
@@ -42,6 +43,11 @@ export const AdminSidebar = () => {
                     title: "Blog / Articles",
                     link: "/admin/blogs",
                     icon: <FileText size={19} />,
+                },
+                {
+                    title: "Projects",
+                    link: "/admin/projects",
+                    icon: <Package size={19} />,
                 },
                 {
                     title: "Testimonials",

@@ -24,7 +24,7 @@ import blogRouter from "./routes/blogRoutes.js";
 import contactRouter from "./routes/contactRoutes.js";
 import careerRouter from "./routes/careerRoutes.js";
 import jobApplicationRouter from "./routes/jobApplicationRoutes.js";
-// import projectsRouter from "./routes/projectsRoutes.js";
+import projectsRouter from "./routes/projectsRoutes.js";
 // public
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -87,9 +87,7 @@ app.use("/api/blogs", blogRouter);
 app.use("/api/contacts", contactRouter);
 app.use("/api/careers", careerRouter);
 app.use("/api/job-applications", jobApplicationRouter);
-// app.use("/api/projects", projectsRouter);
-console.log("Job routes mounted");
-
+app.use("/api/projects", projectsRouter);
 app.use("*", (req, res) => {
   res.status(404).json({
     message: "Route not found",
