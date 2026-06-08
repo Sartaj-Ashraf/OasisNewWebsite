@@ -35,9 +35,9 @@ import errorHandlerMiddleware from "./middlewares/errorhandlerMiddleware.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const allowedOrigins = process.env.NODE_ENV === "production" ? [
-  "https://medicogroup.in",
-  "https://www.medicogroup.in",
-] : true;
+  "http://localhost:3000",
+  "https://localhost:5000",
+] : ["http://localhost:3000", "http://localhost:5173"];
 
 app.use(helmet(({
   crossOriginResourcePolicy: { policy: "cross-origin" } // allow frontend to load images
