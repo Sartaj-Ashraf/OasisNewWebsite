@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Users, Plus, Search, Filter, RotateCcw } from "lucide-react";
-import { TeamTable } from "@/components/admin/Team-members/Team-table.jsx";
+import { TeamTable } from "@/components/admin/Team-members/team-table.jsx";
 import { getTeamMembers, deleteTeamMember } from "@/services/team.service";
 import { toast } from "sonner";
 import { DeleteModal } from "@/components/admin/DeleteModal";
