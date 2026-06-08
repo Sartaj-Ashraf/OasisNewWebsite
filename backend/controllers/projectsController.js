@@ -7,7 +7,9 @@ import { uploadToS3, deleteFromS3 } from "../utils/s3Upload.js";
  */
 export const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find({ isActive: true }).sort({ createdAt: -1 }).select("-__v -updatedAt ");
+    const { page = 1, limit = 10 } = req.query;
+    
+    const projects = await Project.find({ isActive: true }).sort({ createdAt: -1 }).select("-__v -updatedAt ").limit(limit * 1).skip((page - 1) * limit);
     return res.status(200).json({ success: true, count: projects.length, data: projects });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
