@@ -33,12 +33,18 @@ import { fileURLToPath } from "url";
 import errorHandlerMiddleware from "./middlewares/errorhandlerMiddleware.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const allowedOrigins = process.env.NODE_ENV === "production" ? [
-  "http://localhost:3000",
-  "https://localhost:5000",
-] : ["http://localhost:3000", "http://localhost:5173"];
-
+const allowedOrigins =
+  process.env.NODE_ENV === "production"
+    ? [
+        "http://65.2.42.195",
+        "http://ec2-65-2-42-195.ap-south-1.compute.amazonaws.com",
+        "https://65.2.42.195",
+        "https://ec2-65-2-42-195.ap-south-1.compute.amazonaws.com"
+      ]
+    : [
+        "http://localhost:3000",
+        "http://localhost:5173"
+      ];
 app.use(helmet(({
   crossOriginResourcePolicy: { policy: "cross-origin" } // allow frontend to load images
 })));
