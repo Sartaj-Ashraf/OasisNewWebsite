@@ -2,8 +2,11 @@ import React from 'react'
 import { ServiceDetail } from '../../services/components/ServiceDetail'
 import { SocialMediaDetails } from '../../services/components/SocailMediaDetials';
 import PageHeader from '@/shared/PageHeader';
+import socialMedia from "@/assets/MarketingBg.png";
+
 
 const servicesContent = {
+  bgImage:socialMedia,
   organicSocial: {
     label: "WHAT WE OFFER",
     title: "Build a Cult-Like Following with Oasis Ascend!",

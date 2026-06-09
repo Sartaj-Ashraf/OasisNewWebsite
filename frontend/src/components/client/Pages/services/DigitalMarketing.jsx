@@ -1,7 +1,10 @@
 import React from "react";
 import {  ServiceDetail } from "../../services/components/ServiceDetail";
 import MarketingDetails from "../../services/components/MarketingDetails";
+import marketingBG from "@/assets/MarketingBg.png";
 import Cta from "@/shared/Cta";
+
+
 const servicesContent = {
   marketing: {
     label: "WHAT WE OFFER",
@@ -16,22 +19,10 @@ const servicesContent = {
     ],
     buttonText: "Discover More",
     sideText: "Marketing",
+    bgImage:marketingBG
   }
 
-//   webDevelopment: {
-//     label: "WHAT WE OFFER",
-//     title: "Build Powerful & Scalable Web Solutions with Oasis Ascend!",
-//     description:
-//       "Oasis Ascend delivers cutting-edge web development services—from custom web applications and e-commerce platforms to responsive UI/UX design—built to enhance user experience, ensure optimal performance, and drive your digital transformation online.",
-//     features: [
-//       "Custom Web Development",
-//       "E-Commerce Solutions",
-//       "Responsive UI/UX Design",
-//       "API & Backend Integration",
-//     ],
-//     buttonText: "Discover More",
-//     sideText: "Development",
-//   },
+
 };
 export const DigitalMarketing = () => {
   return (

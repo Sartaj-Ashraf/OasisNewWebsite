@@ -1,18 +1,20 @@
 import React from "react";
-import bgImage from "@/assets/MarketingBg.png";
 import bgShape from "@/assets/svg/service-block-cover.svg";
 import { CheckIcon } from "lucide-react";
+import Image from "next/image";
 
 export const ServiceDetail = ({ content }) => {
   return (
-    <div
-      className="w-full md:h-screen rounded-2xl p-4 md:p-8 relative flex"
-      style={{
-        backgroundImage: `url(${bgImage.src})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-    >
+    <div className="w-full md:h-screen rounded-3xl overflow-hidden p-4 md:p-8 relative flex">
+      <div className="absolute inset-0 w-full h-full rounded-3xl">
+        <Image
+          src={content.bgImage}
+          alt="Background image"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover "
+        />
+      </div>
       <div className="absolute right-0 top-0 bottom-0 items-center select-none z-1 hidden sm:flex">
         <span
           className="font-medium tracking-tighter text-8xl text-white/30 p-6"
