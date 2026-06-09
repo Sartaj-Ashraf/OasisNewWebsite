@@ -27,7 +27,7 @@ const FEATURES = [
 export default function ProductSection() {
   return (
     <section className="py-16 md:py-24" >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="mx-auto ">
 
         {/* ── Label ── */}
         <div className="flex items-center gap-3 mb-4">
@@ -38,7 +38,7 @@ export default function ProductSection() {
         </div>
 
         {/* ── Main grid ── */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 items-center">
 
           {/* ── LEFT: text ── */}
           <div>
@@ -77,11 +77,11 @@ export default function ProductSection() {
               className="text-[14px] leading-[1.85] mb-7"
               style={{ color: "var(--text-secondary)" }}
             >
-              MangoReview helps businesses collect, manage, and showcase Google reviews completely on autopilot. Stop chasing customers for feedback — let AI handle your reputation while you focus on running your business.
+              MangoReview helps businesses collect, manage, and showcase Google reviews completely on autopilot. Stop chasing customers for feedback  let AI handle your reputation while you focus on running your business.
             </p>
 
             {/* Features */}
-            <div className="flex flex-col gap-2.5 mb-8">
+            <div className="flex flex-col gap-2 mb-8">
               {FEATURES.map((f, i) => (
                 <div key={i} className="flex items-center gap-2.5">
                   <div
@@ -120,8 +120,8 @@ export default function ProductSection() {
           {/* ── RIGHT: image ── */}
           <div className="hidden lg:block w-full">
             <div
-              className="relative w-full aspect-video overflow-hidden rounded-2xl"
-              style={{ paddingBottom: "70%" }}
+              className="relative w-xl aspect-video shadow-xl overflow-hidden rounded-2xl"
+             
             >
               <Image
                 src={AnalysisImage}
@@ -129,8 +129,9 @@ export default function ProductSection() {
                 fill
                 priority
                 quality={100}
-                className="object-contain object-left-top"
-                sizes="(max-width: 1024px) 0px, 50vw"
+                className="object-contain "
+                sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
+               
               />
             </div>
           </div>
