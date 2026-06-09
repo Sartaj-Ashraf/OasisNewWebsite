@@ -10,14 +10,14 @@ import { Autoplay, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination'; //
+
+import { Share2, TrendingUp, Newspaper, Mail, BarChart3, Search } from "lucide-react";
 const stats = [
   { number: "250+", label: "Campaigns Delivered" },
   { number: "95%",  label: "Client Satisfaction" },
   { number: "5M+",  label: "Audience Reached" },
   { number: "3X",   label: "Average ROI" },
 ];
-
-import { Share2, TrendingUp, Newspaper, Mail, BarChart3, Search } from "lucide-react";
 
 const services = [
   {

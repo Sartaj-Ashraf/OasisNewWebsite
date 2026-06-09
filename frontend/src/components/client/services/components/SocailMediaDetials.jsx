@@ -7,7 +7,6 @@ import angletop from "@/assets/svg/angle-top-right.svg";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import required modules: Autoplay and Pagination (bubbles)
 import { Autoplay, Pagination } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/pagination";
 

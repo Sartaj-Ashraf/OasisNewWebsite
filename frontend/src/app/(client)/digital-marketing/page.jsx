@@ -1,4 +1,4 @@
-import { DigitalMarketing } from '@/components/client/Pages/digital-marketing/DigitalMarketing'
+import { DigitalMarketing } from '@/components/client/Pages/services/DigitalMarketing'
 import PageHeader from '@/shared/PageHeader'
 import React from 'react'
 

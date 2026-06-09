@@ -13,7 +13,7 @@ export const ServiceCard = ({ service }) => {
     btnBorder,
     iconColor,
     ServiceIcon,
-  } = service;
+x  } = service;
 
   return (
     <div
@@ -40,7 +40,7 @@ export const ServiceCard = ({ service }) => {
 
       {/* button */}
       <LinkBtn
-        link="#"
+        link={service.link}
         className="flex items-center gap-1 button bg-primary/90 "
       >
         Learn More <ArrowRight size={18} />

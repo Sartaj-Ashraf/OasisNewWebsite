@@ -1,0 +1,240 @@
+
+name: Deploy Application
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: true
+
+jobs:
+  deploy-application:
+    runs-on: ubuntu-latest
+
+    steps:
+      ##################################################
+      # CHECKOUT
+      ##################################################
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      ##################################################
+      # SYNC REPOSITORY ON SERVER
+      ##################################################
+
+      - name: Clone or Update Repository
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            if [ ! -d "/home/ubuntu/oasis-ascend/.git" ]; then
+              git clone https://github.com/Sartaj-Ashraf/OasisNewWebsite.git /home/ubuntu/oasis-ascend
+            else
+              cd /home/ubuntu/oasis-ascend
+              git fetch origin
+              git reset --hard origin/main
+            fi
+
+      ##################################################
+      # BUILD FRONTEND LOCALLY (OPTIONAL VALIDATION)
+      ##################################################
+
+      - name: Install Frontend Dependencies
+        working-directory: frontend
+        run: npm install
+
+      - name: Build Frontend
+        working-directory: frontend
+        run: npm run build
+
+      ##################################################
+      # BUILD BACKEND LOCALLY (OPTIONAL VALIDATION)
+      ##################################################
+
+      - name: Install Backend Dependencies
+        working-directory: backend
+        run: npm install
+
+      ##################################################
+      # DEPLOY BACKEND SOURCE
+      ##################################################
+
+      - name: Deploy Backend
+        uses: easingthemes/ssh-deploy@v5.1.0
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.EC2_HOST }}
+          REMOTE_USER: ubuntu
+          SOURCE: "backend/"
+          TARGET: "/home/ubuntu/oasis-ascend/backend/"
+
+      ##################################################
+      # DEPLOY FRONTEND SOURCE
+      ##################################################
+
+      - name: Deploy Frontend
+        uses: easingthemes/ssh-deploy@v5.1.0
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.EC2_HOST }}
+          REMOTE_USER: ubuntu
+          SOURCE: "frontend/"
+          TARGET: "/home/ubuntu/oasis-ascend/frontend/"
+
+      ##################################################
+      # CONFIGURE SERVER
+      ##################################################
+
+      - name: Configure Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+
+            ##################################################
+            # LOAD NVM
+            ##################################################
+
+            export NVM_DIR="$HOME/.nvm"
+
+            if [ -s "$NVM_DIR/nvm.sh" ]; then
+              . "$NVM_DIR/nvm.sh"
+            fi
+
+            node -v
+            npm -v
+            pm2 -v
+
+            ##################################################
+            # CREATE BACKEND ENV
+            ##################################################
+
+            cat > /home/ubuntu/oasis-ascend/backend/.env << EOF
+            PORT=5000
+            NODE_ENV=${{ secrets.NODE_ENV }}
+
+            MONGO_URL=${{ secrets.MONGO_URL }}
+
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            JWT_EXPIRES_IN=${{ secrets.JWT_EXPIRES_IN }}
+
+            EMAIL_USER=${{ secrets.EMAIL_USER }}
+            EMAIL_PASS=${{ secrets.EMAIL_PASS }}
+
+            CLIENT_URL=${{ secrets.CLIENT_URL }}
+
+            AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}
+            AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }}
+            AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }}
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            EOF
+
+            ##################################################
+            # CREATE FRONTEND ENV
+            ##################################################
+
+            cat > /home/ubuntu/oasis-ascend/frontend/.env << EOF
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            EOF
+
+            ##################################################
+            # BACKEND SETUP
+            ##################################################
+
+            cd /home/ubuntu/oasis-ascend/backend
+
+            npm install --production
+
+            pm2 delete backend || true
+
+            PORT=5000 pm2 start server.js \
+              --name backend
+
+            ##################################################
+            # FRONTEND SETUP (NEXT.JS)
+            ##################################################
+
+            cd /home/ubuntu/oasis-ascend/frontend
+
+            npm install
+
+            npm run build
+
+            pm2 delete frontend || true
+
+            PORT=3000 pm2 start npm \
+              --name frontend \
+              -- start
+
+            ##################################################
+            # SAVE PM2 CONFIGURATION
+            ##################################################
+
+            pm2 save
+
+            ##################################################
+            # NGINX CONFIGURATION
+            ##################################################
+
+            sudo tee /etc/nginx/sites-available/cicd > /dev/null <<'EOF'
+            server {
+                listen 80;
+                server_name _;
+
+                location / {
+                    proxy_pass http://localhost:3000;
+                    proxy_http_version 1.1;
+
+                    proxy_set_header Upgrade $http_upgrade;
+                    proxy_set_header Connection "upgrade";
+                    proxy_set_header Host $host;
+                    proxy_cache_bypass $http_upgrade;
+                }
+
+                location /api/ {
+                    proxy_pass http://localhost:5000/api/;
+                    proxy_http_version 1.1;
+
+                    proxy_set_header Upgrade $http_upgrade;
+                    proxy_set_header Connection "upgrade";
+                    proxy_set_header Host $host;
+                    proxy_cache_bypass $http_upgrade;
+                }
+            }
+            EOF
+
+            sudo ln -sf \
+              /etc/nginx/sites-available/cicd \
+              /etc/nginx/sites-enabled/cicd
+
+            sudo rm -f /etc/nginx/sites-enabled/default
+
+            ##################################################
+            # VALIDATE NGINX
+            ##################################################
+
+            sudo nginx -t
+
+            ##################################################
+            # RELOAD NGINX
+            ##################################################
+
+            sudo systemctl reload nginx
+
+            ##################################################
+            # STATUS OUTPUT
+            ##################################################
+
+            echo "===== PM2 STATUS ====="
+            pm2 status
+
+            echo "===== NGINX STATUS ====="
+            sudo systemctl status nginx --no-pager

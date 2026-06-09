@@ -1,4 +1,4 @@
-import Industry from "../models/industryModel.js";
+import Industry from "../models/Industrymodel.js";
 import Client from "../models/clientModel.js";
 import { uploadToS3, deleteFromS3 } from "../utils/s3Upload.js";
 import { getPaginationParams, getPaginationInfo } from "../utils/pagination.js";

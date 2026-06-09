@@ -9,7 +9,7 @@ import Cta from "@/shared/Cta";
 const services = [
   {
     id: "marketing",
-    title: "Marketing",
+    title: "Digital Marketing",
     description:
       "We specialize in creating, developing, and managing a brand's identity to help businesses stand out in the marketplace and connect with their target audience.",
     bg: "bg-gradient-to-br from-[#cce8f8] via-[#a8d4f0] to-[#7bbde8]",
@@ -18,6 +18,7 @@ const services = [
     btnBorder: "border-[#a088cc] text-[#2a1a60]",
     iconColor: "#1a2a3a",
     ServiceIcon: Megaphone,
+    link:"digital-marketing"
   },
   {
     id: "web-development",
@@ -30,6 +31,7 @@ const services = [
     btnBorder: "border-[#c080e0] text-[#2a1040]",
     iconColor: "#2a1040",
     ServiceIcon: Code2,
+    link:"web-development"
   },
   {
     id: "social-media-marketing",
@@ -42,6 +44,7 @@ const services = [
     btnBorder: "border-[#8090a0] text-[#1a2530]",
     iconColor: "#1a2530",
     ServiceIcon: Headphones,
+    link:"social-media-marketing"
   },
 ];
 export const ServicesPage = () => {
