@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import JobDetailHeader, { TYPE_CONFIG } from "./detail/JobDetailHeader";
-import JobSection from "./detail/JobSection";
-import ApplySidebar from "./detail/ApplySideBar";
+import JobDetailHeader, { TYPE_CONFIG } from "./Detail/JobDetailHeader";
+import JobSection from "./Detail/JobSection";
+import ApplySidebar from "./Detail/ApplySideBar";
 
 const BackIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

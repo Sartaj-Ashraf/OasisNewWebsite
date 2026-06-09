@@ -7,7 +7,7 @@ import {
   getIndustryBySlug,
   updateIndustry,
   deleteIndustry,
-} from "../controllers/industryController.js";
+} from "../controllers/Industrycontroller.js";
 import { upload } from "../middlewares/multer.js";
 import { authenticateUser } from "../middlewares/authMiddleware.js";
 
