@@ -11,14 +11,20 @@ import Link from "next/link";
 const PageHeader = ({title}) => {
   return (
     <section className="relative h-screen max-h-[55vh] my-8">  
+
+      {/* Background */}
+      <div className="bg-accent corner-shape-scoop absolute inset-0 rounded-3xl" />
+
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col py-4 md:py-8">
       {/* Top SVG + Logo */}
-      <div className="absolute -top-[1px] left-0 z-20">
+      <Link href='/' className="absolute -top-px left-0 z-10">
         <Image
           src={svgImg}
           alt="svg"
           className=" w-full md:w-full md:h-full"
         />
-        <Link href='/' className="flex items-center gap-2 absolute md:top-5 top-2 md:left-10 left-5 z-40">
+        <div className="flex items-center gap-2 absolute md:top-5 top-2 md:left-10 left-5 z-40">
        <Image
             src={logo}
             alt="logo"
@@ -27,14 +33,8 @@ const PageHeader = ({title}) => {
             className="w-44 md:w-48"
           />
        
-        </Link>
-      </div>
-
-      {/* Background */}
-      <div className="bg-accent corner-shape-scoop absolute inset-0 rounded-3xl" />
-
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col py-4 md:py-8">
+        </div>
+      </Link>
         
         {/* Navbar */}
         <NavBar />

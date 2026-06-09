@@ -31,19 +31,19 @@ const services = [
     ServiceIcon: Code2,
     link:"/web-development"
   },
-  {
-    id: "social-media-marketing",
-    title: "Social Media Marketing",
-    description:
-      "We provide dedicated, around-the-clock support to ensure your business runs smoothly — resolving issues swiftly and keeping your customers satisfied.",
-    bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
-    titleColor: "text-[#1a2530]",
-    descColor: "text-[#2a3845]",
-    btnBorder: "border-[#8090a0] text-[#1a2530]",
-    iconColor: "#1a2530",
-    ServiceIcon: Headphones,
-    link:"/social-media-marketing"
-  },
+{
+  id: "video-graphic",
+  title: "Video & Graphic Design",
+  description:
+    "We create engaging videos, eye-catching graphics, and brand-focused visual content that helps businesses stand out and connect with their audience.",
+  bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
+  titleColor: "text-[#1a2530]",
+  descColor: "text-[#2a3845]",
+  btnBorder: "border-[#8090a0] text-[#1a2530]",
+  iconColor: "#1a2530",
+  ServiceIcon: Headphones,
+  link: "/video-&-graphic"        
+}
 ];
 
 function RibbonShape() {
@@ -225,7 +225,7 @@ export default function  Services() {
                 `}
               >
                 <span
-                  className="text-2xl font-medium tracking-widest uppercase text-white/80"
+                  className="text-2xl font-medium tracking-widest text-wrape uppercase text-white/80"
                   style={{
                     writingMode: "vertical-rl",
                     transform: "rotate(180deg)",

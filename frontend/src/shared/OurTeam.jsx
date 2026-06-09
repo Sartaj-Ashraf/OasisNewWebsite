@@ -1,20 +1,20 @@
 "use client"
 import Image from "next/image";
-import Asif from "@/assets/OurTeam/asif.jpeg";
-import Mehran from "@/assets/OurTeam/mehran.jpeg";
-import Shahid from "@/assets/OurTeam/shahid.jpeg";
+// import Asif from "@/assets/OurTeam/asif.jpeg";
+// import Mehran from "@/assets/OurTeam/mehran.jpeg";
+// import Shahid from "@/assets/OurTeam/shahid.jpeg";
 import { useEffect, useState } from "react";
 import { getTeamMembers } from "@/services/team.service";
 import Link from "next/link";
   
-const teamMembers = [
-  { name: "Victor Lewis", role: "General Manager", image: Asif },
-  { name: "Sandra Watson", role: "Chief Operating Officer", image: Shahid },
-  { name: "Dan Breks", role: "Senior Digital Strategist", image: Mehran },
-  { name: "Angela Lung", role: "Managing Director", image: Asif },
-  { name: "John Carter", role: "SEO Specialist", image: Shahid },
-  { name: "Emma Stone", role: "Marketing Lead", image: Mehran },
-];
+// const teamMembers = [
+//   { name: "Victor Lewis", role: "General Manager", image: Asif },
+//   { name: "Sandra Watson", role: "Chief Operating Officer", image: Shahid },
+//   { name: "Dan Breks", role: "Senior Digital Strategist", image: Mehran },
+//   { name: "Angela Lung", role: "Managing Director", image: Asif },
+//   { name: "John Carter", role: "SEO Specialist", image: Shahid },
+//   { name: "Emma Stone", role: "Marketing Lead", image: Mehran },
+// ];
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">

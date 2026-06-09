@@ -1,18 +1,20 @@
 import React from "react";
-import bgImage from "@/assets/MarketingBg.png";
 import bgShape from "@/assets/svg/service-block-cover.svg";
 import { CheckIcon } from "lucide-react";
+import Image from "next/image";
 
 export const ServiceDetail = ({ content }) => {
   return (
-    <div
-      className="w-full md:h-screen rounded-2xl p-4 md:p-8 relative flex"
-      style={{
-        backgroundImage: `url(${bgImage.src})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-    >
+    <div className="w-full md:h-screen rounded-3xl overflow-hidden p-4 md:p-8 relative flex">
+      <div className="absolute inset-0 w-full h-full rounded-3xl">
+        <Image
+          src={content?.bgImage}
+          alt="Background image"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover "
+        />
+      </div>
       <div className="absolute right-0 top-0 bottom-0 items-center select-none z-1 hidden sm:flex">
         <span
           className="font-medium tracking-tighter text-8xl text-white/30 p-6"
@@ -21,7 +23,7 @@ export const ServiceDetail = ({ content }) => {
             transform: "rotate(180deg)",
           }}
         >
-          {content.sideText}
+          {content?.sideText}
         </span>
       </div>
 
@@ -34,7 +36,7 @@ export const ServiceDetail = ({ content }) => {
           }}
         >
           <p className="text-xs font-bold tracking-[0.15em] text-purple-800 mb-4">
-            {content.label}
+            {content?.label}
           </p>
 
           <h2
@@ -44,15 +46,15 @@ export const ServiceDetail = ({ content }) => {
               letterSpacing: "-0.5px",
             }}
           >
-            {content.title}
+            {content?.title}
           </h2>
 
           <p className="text-sm leading-relaxed text-[#3a3a4a] mb-7 max-w-xl">
-            {content.description}
+            {content?.description}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            {content.features.map((item) => (
+            {content?.features.map((item) => (
               <div key={item} className="flex items-center gap-2 w-fit">
                 <CheckIcon size={18} />
                 <span className="text-sm font-medium text-[#1a1a2e]">
@@ -63,7 +65,7 @@ export const ServiceDetail = ({ content }) => {
           </div>
 
           <button className="px-7 py-3 rounded-full text-sm font-semibold border border-violet-700 text-purple-900 bg-transparent transition-all duration-200 hover:bg-violet-700 hover:text-white cursor-pointer tracking-wide w-fit">
-            {content.buttonText}
+            {content?.buttonText}
           </button>
         </div>
       </div>

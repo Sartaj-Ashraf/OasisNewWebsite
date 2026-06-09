@@ -1,10 +1,13 @@
-import React from 'react'
-import { ServiceDetail } from '../../services/components/ServiceDetail'
-import { WebsiteShowCase } from '../../services/components/WebsiteShowCase';
-import Cta from '@/shared/Cta';
+"use client";
+import React, { useEffect, useState } from "react";
+import { ServiceDetail } from "../../services/components/ServiceDetail";
+import { WebsiteShowCase } from "../../services/components/WebsiteShowCase";
+import Cta from "@/shared/Cta";
+import DevBG from "@/assets/Webdev.webp";
+import { fetchAllProjects } from "@/services/Projects.service";
 const servicesContent = {
-
   webDevelopment: {
+    bgImage: DevBG,
     label: "WHAT WE OFFER",
     title: "Build Powerful & Scalable Web Solutions with Oasis Ascend!",
     description:
@@ -18,7 +21,7 @@ const servicesContent = {
     buttonText: "Discover More",
     sideText: "Development",
   },
-    socialMedia: {
+  socialMedia: {
     label: "WHAT WE OFFER",
     title: "Build a Strong Social Presence with Oasis Ascend!",
     description:
@@ -33,11 +36,27 @@ const servicesContent = {
     sideText: "Social Media",
   },
 };
+
 export const WebDevPage = () => {
+  const [projects, setProjects] = useState([]);
+  const fetchProject = async () => {
+    try {
+      const { data } = await fetchAllProjects();
+      setProjects(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProject();
+  }, []);
+console.log(projects)
   return (
-    <div><ServiceDetail content={servicesContent.webDevelopment}/>
-    <WebsiteShowCase/>
-    <Cta/>
+    <div>
+      <ServiceDetail content={servicesContent.webDevelopment} />
+      <WebsiteShowCase projects={projects} />
+      <Cta />
     </div>
-  )
-}
+  );
+};

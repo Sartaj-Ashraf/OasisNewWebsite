@@ -14,12 +14,12 @@ export const HomePage = () => {
     <div>
       <HeroBanner />
       <AboutSection/>
-      <ProductSection/>
       <Marque/>
       <Services/>
       <ClientsSlider/>
       <TestimonialSection/>
       <BlogSection/>
+      <ProductSection/>
       <ContactSection/>
     </div>
   )

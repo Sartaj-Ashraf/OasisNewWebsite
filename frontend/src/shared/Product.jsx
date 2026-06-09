@@ -85,8 +85,8 @@ export default function ProductSection() {
               {FEATURES.map((f, i) => (
                 <div key={i} className="flex items-center gap-2.5">
                   <div
-                    className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0"
-                    style={{ background: "var(--secondary-dark)", color: "var(--primary)" }}
+                    className="w-5 h-5 rounded-md flex items-center justify-center bg-secondary/20 text-secondary-dark"
+               
                   >
                     <CheckIcon />
                   </div>
@@ -120,7 +120,7 @@ export default function ProductSection() {
           {/* ── RIGHT: image ── */}
           <div className="hidden lg:block w-full">
             <div
-              className="relative w-full overflow-hidden rounded-2xl"
+              className="relative w-full aspect-video overflow-hidden rounded-2xl"
               style={{ paddingBottom: "70%" }}
             >
               <Image
@@ -129,7 +129,7 @@ export default function ProductSection() {
                 fill
                 priority
                 quality={100}
-                className="object-cover object-left-top"
+                className="object-contain object-left-top"
                 sizes="(max-width: 1024px) 0px, 50vw"
               />
             </div>

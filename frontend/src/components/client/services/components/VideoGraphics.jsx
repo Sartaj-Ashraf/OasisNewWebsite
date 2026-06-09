@@ -7,7 +7,6 @@ import angletop from "@/assets/svg/angle-top-right.svg";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import required modules: Autoplay and Pagination (bubbles)
 import { Autoplay, Pagination } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -21,73 +20,73 @@ import {
 } from "lucide-react";
 
 const stats = [
-  { number: "50M+", label: "Impressions Generated" },
-  { number: "4.6%", label: "Avg. Engagement Rate" },
-  { number: "200+", label: "Creator Partnerships" },
-  { number: "8X", label: "Average Follower ROI" },
+  { number: "500+", label: "Projects Delivered" },
+  { number: "10M+", label: "Views Generated" },
+  { number: "300+", label: "Creative Assets Designed" },
+  { number: "98%", label: "Client Satisfaction" },
 ];
 
 const services = [
   {
     icon: <Video className="w-6 h-6" />,
-    title: "Short-Form Video Production",
-    desc: "Produce thumb-stopping Reels, TikToks, and Shorts designed for organic virality and brand affinity.",
+    title: "Professional Video Editing",
+    desc: "Transform raw footage into engaging videos optimized for marketing, social media, and brand storytelling.",
     Image:
-      "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1000&auto=format&fit=crop", // Dynamic modern digital interface
+      "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1000&auto=format&fit=crop",
   },
   {
-    icon: <Users className="w-6 h-6" />,
-    title: "Community Management",
-    desc: "Foster real-time conversations, turn comments into customers, and build a cult-like brand following.",
+    icon: <Video className="w-6 h-6" />,
+    title: "Motion Graphics",
+    desc: "Bring ideas to life with dynamic animations, transitions, titles, and visual effects.",
     Image:
-      "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1000&auto=format&fit=crop", // Warm collaborative abstract connection
-  },
-  {
-    icon: <Sparkles className="w-6 h-6" />,
-    title: "Influencer & Creator Strategy",
-    desc: "Partner with heavily vetted creators who match your aesthetic and hold genuine influence over your audience.",
-    Image:
-      "https://images.unsplash.com/photo-1560253023-3ec5d502959f?q=80&w=1000&auto=format&fit=crop", // Neon studio setup vibes
-  },
-  {
-    icon: <Megaphone className="w-6 h-6" />,
-    title: "Paid Social & Amplification",
-    desc: "Scale winning organic content through hyper-targeted Meta, TikTok, and LinkedIn ad configurations.",
-    Image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1000&auto=format&fit=crop", // Cyber-punk digital workstation
-  },
-  {
-    icon: <MessageSquare className="w-6 h-6" />,
-    title: "Social Listening & Trends",
-    desc: "Monitor industry conversations and intercept culture-defining moments before they happen.",
-    Image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop", // Flowing fluid data visual
+      "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000&auto=format&fit=crop",
   },
   {
     icon: <Palette className="w-6 h-6" />,
-    title: "Visual Identity & Grid Styling",
-    desc: "Establish a cohesive, premium visual ecosystem across all platforms with custom high-end graphic assets.",
+    title: "Brand Identity Design",
+    desc: "Create memorable logos, brand systems, typography, and visual guidelines that define your business.",
     Image:
-      "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1000&auto=format&fit=crop", // Pastel geometric aesthetic rendering
+      "https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    icon: <Palette className="w-6 h-6" />,
+    title: "Social Media Design",
+    desc: "Design eye-catching posts, stories, banners, and ad creatives tailored for every platform.",
+    Image:
+      "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    icon: <Palette className="w-6 h-6" />,
+    title: "Marketing Materials",
+    desc: "Create brochures, flyers, presentations, and promotional assets that strengthen your brand.",
+    Image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    icon: <Video className="w-6 h-6" />,
+    title: "Commercial Video Production",
+    desc: "Produce professional promotional videos, product showcases, and advertising content.",
+    Image:
+      "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1000&auto=format&fit=crop",
   },
 ];
 
 const reasons = [
   {
-    title: "Platform-Native Content",
-    desc: "We don't cross-post blindly. Every asset is tailored to match the unique algorithm and psychology of each specific platform.",
+    title: "Creative-First Approach",
+    desc: "Every design and video is crafted with storytelling, branding, and audience engagement at its core.",
   },
   {
-    title: "Velocity & Trend Interception",
-    desc: "Social moves at lightning speed. Our agile production process allows us to capitalize on macro trends within hours, not weeks.",
+    title: "Premium Visual Quality",
+    desc: "From color grading and motion graphics to polished brand assets, we deliver professional-quality creative work.",
   },
   {
-    title: "Vetted Creator Networks",
-    desc: "No vanity metrics. We only work with creators who generate provable, highly converting engagement with real audiences.",
+    title: "Multi-Platform Optimization",
+    desc: "We create content tailored for social media, websites, advertisements, presentations, and marketing campaigns.",
   },
   {
-    title: "Cultivating Community, Not Just Reach",
-    desc: "Impressions look good on paper, but loyal communities scale businesses. We build real, active customer advocacy.",
+    title: "Fast & Reliable Delivery",
+    desc: "Our streamlined creative process ensures high-quality output delivered on time without compromising quality.",
   },
 ];
 
@@ -131,7 +130,7 @@ function Counter({ value }) {
   return <span ref={ref}>{display}</span>;
 }
 
-export const SocialMediaDetails = () => {
+export const VideoGraphics = () => {
   const [statsRef, statsIn] = useInView(0.1);
   const [servicesRef, servicesIn] = useInView(0.05);
   const [whyRef, whyIn] = useInView(0.1);
@@ -170,13 +169,12 @@ export const SocialMediaDetails = () => {
           <div
             className={`text-center max-w-3xl mx-auto mb-12 transition-all duration-700 ${servicesIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
-            <h2 className="text-3xl md:text-4xl font-medium mb-4">
-              Platform Domination
+            <h2 className="text-3xl md:text-4xl font-medium mb-6 leading-tight">
+              Creative excellence designed for{" "}
+              <span className="text-primary italic">
+                impactful brand storytelling.
+              </span>
             </h2>
-            <p className="text-lg text-slate-600">
-              Native social strategies designed to capture human attention and
-              spark virality.
-            </p>
           </div>
 
           {/* Swiper Slider Wrapper */}
@@ -271,20 +269,23 @@ export const SocialMediaDetails = () => {
               </span>
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed mb-8">
-              Oasis Ascend breaks through the digital static. We don't just
-              accumulate hollow analytics or vanity likes; we turn attention
-              into currency by treating social media as your primary mechanism
-              for community growth and commercial intent.
+              Oasis Ascend helps businesses elevate their brand through
+              professional video editing and graphic design services. From
+              engaging social media content and promotional videos to complete
+              brand identities and marketing materials, we create visuals that
+              capture attention, communicate your message, and leave a lasting
+              impression.
             </p>
 
             <div className="p-6 bg-slate-50 border border-slate-100 rounded-xl border-l-4 border-l-sky-500">
               <p className="text-slate-700 font-medium italic">
-                "They stopped treating our channels like digital billboards and
-                started building an asset. Our organic video pipeline alone
-                scaled our DTC checkouts by 4.5X."
+                "The Oasis Ascend creative team transformed our brand presence.
+                Their video editing and graphic design work helped us create
+                more engaging content, improve brand consistency, and achieve
+                significantly higher audience engagement."
               </p>
               <div className="mt-4 font-bold text-slate-900 text-sm">
-                VP of Growth, NeoAesthetic Brands
+                Creative Director, Client Partner
               </div>
             </div>
           </div>
