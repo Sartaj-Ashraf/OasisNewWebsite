@@ -8,21 +8,21 @@ import Cta from "@/shared/Cta";
 const servicesContent = {
   marketing: {
     label: "WHAT WE OFFER",
-    title: "Accelerate Your Brand's Digital Growth with Oasis Ascend!",
+    title: "Digital Media Marketing That Drives Real Business Growth",
     description:
-      "Oasis Ascend delivers AI-powered digital marketing strategies from SEO and lead generation to social media and content creation designed to boost your visibility, drive qualified traffic, and grow your business online.",
+      "We help brands reach the right audience through a powerful blend of digital marketing and social media strategies. By combining SEO, content creation, paid advertising, and audience engagement, we turn online visibility into measurable business results.",
+
     features: [
-      "Search Engine Optimization",
+      "SEO & Search Visibility",
       "Social Media Marketing",
-      "Content Creation & Writing",
-      "Website Design & Development",
+      "Performance Advertising",
+      "Content Creation & Marketing",
     ],
+
     buttonText: "Discover More",
-    sideText: "Marketing",
-    bgImage:marketingBG
-  }
-
-
+    sideText: "Digital Media",
+    bgImage: marketingBG,
+  },
 };
 export const DigitalMarketing = () => {
   return (
