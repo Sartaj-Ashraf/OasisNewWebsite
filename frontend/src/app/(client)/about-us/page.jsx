@@ -7,6 +7,7 @@ import { TestimonialSection } from "@/components/client/HomeComponents/Testimoni
 import OurTeam from "@/shared/OurTeam";
 import PageHeader from "@/shared/PageHeader";
 import React from "react";
+import ProductsSection from "@/components/client/About-Us/Products";
 
 export const page = () => {
   return (
