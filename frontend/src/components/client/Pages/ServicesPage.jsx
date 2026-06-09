@@ -7,19 +7,19 @@ import ServiceFaqs from "../services/ServiceFaqs";
 import Cta from "@/shared/Cta";
 
 const services = [
-  {
-    id: "marketing",
-    title: "Digital Marketing",
-    description:
-      "We specialize in creating, developing, and managing a brand's identity to help businesses stand out in the marketplace and connect with their target audience.",
-    bg: "bg-gradient-to-br from-[#cce8f8] via-[#a8d4f0] to-[#7bbde8]",
-    titleColor: "text-[#1a2a3a]",
-    descColor: "text-[#2a3a50]",
-    btnBorder: "border-[#a088cc] text-[#2a1a60]",
-    iconColor: "#1a2a3a",
-    ServiceIcon: Megaphone,
-    link:"digital-marketing"
-  },
+{
+  id: "digital-media-marketing",
+  title: "Digital Marketing",
+  description:
+    "From SEO and paid advertising to video production and graphic design, we create data-driven marketing campaigns and compelling visual content that increase visibility, engagement, and business growth.",
+  bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
+  titleColor: "text-[#1a2530]",
+  descColor: "text-[#2a3845]",
+  btnBorder: "border-[#8090a0] text-[#1a2530]",
+  iconColor: "#1a2530",
+  ServiceIcon: Headphones,
+  link: "/digital-media-marketing"
+},
   {
     id: "web-development",
     title: "Web Development",
@@ -33,19 +33,19 @@ const services = [
     ServiceIcon: Code2,
     link:"web-development"
   },
-  {
-    id: "social-media-marketing",
-    title: "Social Media Marketing",
-    description:
-      "We provide dedicated, around-the-clock support to ensure your business runs smoothly resolving issues swiftly and keeping your customers satisfied.",
-    bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
-    titleColor: "text-[#1a2530]",
-    descColor: "text-[#2a3845]",
-    btnBorder: "border-[#8090a0] text-[#1a2530]",
-    iconColor: "#1a2530",
-    ServiceIcon: Headphones,
-    link:"social-media-marketing"
-  },
+ {
+  id: "video-graphic-design",
+  title: "Video Editing & Graphic Design",
+  description:
+    "Bring your brand to life with professional video editing and creative graphic design services. We create engaging visuals, promotional videos, social media creatives, brand assets, and marketing materials that capture attention and leave a lasting impression.",
+  bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
+  titleColor: "text-[#1a2530]",
+  descColor: "text-[#2a3845]",
+  btnBorder: "border-[#8090a0] text-[#1a2530]",
+  iconColor: "#1a2530",
+  ServiceIcon: Headphones,
+  link: "/video-graphic-design"
+},
 ];
 export const ServicesPage = () => {
   return (

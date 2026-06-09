@@ -213,7 +213,8 @@ export default function JobCard({ job }) {
 
         {/* CTA */}
         <Button
-          onClick={(e) => { e.stopPropagation(); router.push(`/careers/${job.slug}`); }}
+          onClick={(e) => { e.stopPropagation();
+             router.push(`/careers/${job.slug}`); }}
            type="submit"
            className="button mb-1 bg-linear-to-br from-primary via-primary to-primary-dark hover:primary-dark hover:via-primary hover:to-primary disabled:opacity-70"  
         >

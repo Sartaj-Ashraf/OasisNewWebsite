@@ -7,6 +7,7 @@ import { TestimonialSection } from '../HomeComponents/TestimonialSection'
 import { BlogSection } from '../HomeComponents/BlogSection'
 import {ClientsSlider} from '@/shared/ClientsSlider'
 import { ContactSection } from '../HomeComponents/ContactSection'
+import ProductSection from '@/shared/Product'
 
 export const HomePage = () => {
   return (
@@ -18,6 +19,7 @@ export const HomePage = () => {
       <ClientsSlider/>
       <TestimonialSection/>
       <BlogSection/>
+      <ProductSection/>
       <ContactSection/>
     </div>
   )
