@@ -126,15 +126,15 @@ export default function  Services() {
                   ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}
                 `}
               >
-                <div className="flex items-center gap-3 mb-auto">
+                <div className="flex  gap-3 mb-auto">
                   <ServiceIcon
-                    size={40}
+                    size={20}
                     strokeWidth={1.8}
                     color={s.iconColor}
                     className="opacity-70"
                   />
                   <span
-                    className="text-[13px] font-medium tracking-widest uppercase"
+                    className="text-sm font-medium tracking-widest uppercase"
                     style={{ color: s.iconColor }}
                   >
                     {s.title}
