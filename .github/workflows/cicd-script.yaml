@@ -146,13 +146,9 @@ jobs:
             # FRONTEND ENV (OPTIONAL)
             ##################################################
 
-            # if [ ! -f "${FRONTEND_DIR}/.env" ]; then
-            #
-            #   cat > "${FRONTEND_DIR}/.env" <<EOF
+            # cat > /home/ubuntu/oasis-ascend/frontend/.env << EOF
             # NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             # EOF
-            #
-            # fi
 
             ##################################################
             # BACKEND DEPLOYMENT
