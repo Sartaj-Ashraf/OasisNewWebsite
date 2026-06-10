@@ -4,7 +4,7 @@ name: Deploy Application
 on:
   push:
     branches:
-      - main
+      - production
 
 concurrency:
   group: production-deployment
@@ -38,7 +38,7 @@ jobs:
             else
               cd /home/ubuntu/oasis-ascend
               git fetch origin
-              git reset --hard origin/main
+              git reset --hard origin/production
             fi
 
       ##################################################
@@ -141,9 +141,9 @@ jobs:
             # CREATE FRONTEND ENV
             ##################################################
 
-            cat > /home/ubuntu/oasis-ascend/frontend/.env << EOF
-            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
-            EOF
+            # cat > /home/ubuntu/oasis-ascend/frontend/.env << EOF
+            # NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            # EOF
 
             ##################################################
             # BACKEND SETUP
