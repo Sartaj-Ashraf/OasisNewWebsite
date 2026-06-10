@@ -4,7 +4,7 @@ name: Deploy Application
 on:
   push:
     branches:
-      - production
+      - build-test-alias
 
 concurrency:
   group: production-deployment
@@ -38,7 +38,7 @@ jobs:
             else
               cd /home/ubuntu/oasis-ascend
               git fetch origin
-              git reset --hard origin/production
+              git reset --hard origin/build-test-alias
             fi
 
       ##################################################
