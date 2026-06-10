@@ -1,4 +1,4 @@
-import { LinkBtn } from "@/shared/ClickAble";
+
 import Image from "next/image";
 import React from "react";
 import svgImg from "@/assets/svg/angle-button-end.svg";
@@ -27,7 +27,7 @@ export const Overview = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-between h-full p-6 md:p-10">
+      <div className="relative flex flex-col justify-between h-full p-6 md:p-10">
         
         {/* Top Content */}
         <div className="max-w-2xl">
