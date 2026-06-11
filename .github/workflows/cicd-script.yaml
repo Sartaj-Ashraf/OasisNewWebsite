@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  APP_NAME: oasis-ascend
+  APP_NAME: OasisNewWebsite
 
 jobs:
   build:
