@@ -242,7 +242,7 @@ jobs:
             npm install --omit=dev
 
             # If not pre-built, build it (skip if tar already contains .next)
-            # npm run build
+            npm run build
 
             if pm2 describe oasis-frontend >/dev/null 2>&1; then
               pm2 delete oasis-frontend
