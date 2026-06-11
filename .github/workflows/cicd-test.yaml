@@ -69,6 +69,9 @@ jobs:
 
       - name: Install Frontend Dependencies
         working-directory: frontend
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
         run: npm install
 
       - name: Build Frontend
@@ -240,9 +243,6 @@ jobs:
 
             # Install dependencies
             npm install --omit=dev
-
-            # If not pre-built, build it (skip if tar already contains .next)
-            # npm run build
 
             if pm2 describe oasis-frontend >/dev/null 2>&1; then
               pm2 delete oasis-frontend
