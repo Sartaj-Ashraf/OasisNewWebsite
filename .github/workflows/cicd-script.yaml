@@ -86,7 +86,7 @@ jobs:
           mkdir release
 
           cp -r backend release/backend
-          cp -r frontend/dist release/frontend
+          cp -r frontend/.next release/frontend
 
           tar -czf release.tar.gz release
 
