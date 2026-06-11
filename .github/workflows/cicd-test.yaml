@@ -258,7 +258,7 @@ jobs:
 
             PORT=3000 pm2 start /var/www/oasis-ascend/current/release/frontend/standalone/server.js \
               --name oasis-frontend \
-              -- start
+              -- start \
               --update-env
 
             ####################################################
