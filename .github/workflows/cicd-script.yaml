@@ -6,24 +6,56 @@ on:
       - build-test-alias
 
 concurrency:
-  group: production
+  group: production-deployment
   cancel-in-progress: true
 
 env:
-  APP_NAME: OasisNewWebsite
+  APP_NAME: oasis-ascend
+  NODE_VERSION: 22
 
 jobs:
+
+  ##########################################################
+  # BUILD
+  ##########################################################
+
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
 
-      ################################################
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      ##########################################################
+      # NODE
+      ##########################################################
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      ##########################################################
+      # DEBUG
+      ##########################################################
+
+      - name: Verify Repository Structure
+        run: |
+          echo "Current Directory:"
+          pwd
+
+          echo "Package Files:"
+          find . -name package.json
+
+          echo "Lock Files:"
+          find . -name package-lock.json
+
+      ##########################################################
       # BACKEND
-      ################################################
+      ##########################################################
 
-      - name: Install Backend
+      - name: Install Backend Dependencies
         working-directory: backend
         run: npm ci
 
@@ -31,11 +63,11 @@ jobs:
         working-directory: backend
         run: npm test --if-present
 
-      ################################################
+      ##########################################################
       # FRONTEND
-      ################################################
+      ##########################################################
 
-      - name: Install Frontend
+      - name: Install Frontend Dependencies
         working-directory: frontend
         run: npm ci
 
@@ -43,36 +75,48 @@ jobs:
         working-directory: frontend
         run: npm run build
 
-      ################################################
+      ##########################################################
       # ARTIFACT
-      ################################################
+      ##########################################################
 
-      - name: Create Artifact
+      - name: Create Deployment Artifact
         run: |
-          mkdir deploy
+          set -e
 
-          cp -r backend deploy/backend
-          cp -r frontend/dist deploy/frontend
+          mkdir release
 
-          tar -czf release.tar.gz deploy
+          cp -r backend release/backend
+          cp -r frontend/dist release/frontend
+
+          tar -czf release.tar.gz release
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: release
+          name: application-release
           path: release.tar.gz
+          retention-days: 7
+
+  ##########################################################
+  # DEPLOY
+  ##########################################################
 
   deploy:
-    needs: build
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
+
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
-          name: release
+          name: application-release
 
-      - name: Copy Artifact To Server
+      ##########################################################
+      # COPY TO SERVER
+      ##########################################################
+
+      - name: Upload Release
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -81,7 +125,11 @@ jobs:
           source: release.tar.gz
           target: /tmp
 
-      - name: Deploy
+      ##########################################################
+      # DEPLOY
+      ##########################################################
+
+      - name: Deploy Release
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -89,35 +137,53 @@ jobs:
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script_stop: true
           script: |
+
             set -Eeuo pipefail
 
             APP_NAME="oasis-ascend"
 
             BASE_DIR="/var/www/${APP_NAME}"
-
             RELEASES_DIR="${BASE_DIR}/releases"
             SHARED_DIR="${BASE_DIR}/shared"
+            CURRENT_LINK="${BASE_DIR}/current"
 
             TIMESTAMP=$(date +%Y%m%d%H%M%S)
 
             RELEASE_DIR="${RELEASES_DIR}/${TIMESTAMP}"
 
-            CURRENT_LINK="${BASE_DIR}/current"
+            mkdir -p "${RELEASES_DIR}"
+            mkdir -p "${SHARED_DIR}"
 
-            mkdir -p "$RELEASES_DIR"
-            mkdir -p "$SHARED_DIR"
+            PREVIOUS_RELEASE=$(readlink -f "${CURRENT_LINK}" || true)
 
-            PREVIOUS_RELEASE=$(readlink -f "$CURRENT_LINK" || true)
+            echo "Previous Release:"
+            echo "${PREVIOUS_RELEASE}"
 
-            echo "Creating release $TIMESTAMP"
+            ####################################################
+            # NODE ENVIRONMENT
+            ####################################################
 
-            mkdir -p "$RELEASE_DIR"
+            export NVM_DIR="$HOME/.nvm"
 
-            tar -xzf /tmp/release.tar.gz -C "$RELEASE_DIR"
+            if [ -s "$NVM_DIR/nvm.sh" ]; then
+              . "$NVM_DIR/nvm.sh"
+            fi
 
-            #################################################
-            # ENV
-            #################################################
+            node -v
+            npm -v
+
+            ####################################################
+            # NEW RELEASE
+            ####################################################
+
+            mkdir -p "${RELEASE_DIR}"
+
+            tar -xzf /tmp/release.tar.gz \
+              -C "${RELEASE_DIR}"
+
+            ####################################################
+            # ENVIRONMENT FILE
+            ####################################################
 
             cat > "${SHARED_DIR}/.env" <<EOF
             PORT=5000
@@ -139,63 +205,91 @@ jobs:
             AWS_REGION=${{ secrets.AWS_REGION }}
             EOF
 
-            ln -sf \
+            ln -sfn \
               "${SHARED_DIR}/.env" \
-              "${RELEASE_DIR}/deploy/backend/.env"
+              "${RELEASE_DIR}/release/backend/.env"
 
-            #################################################
-            # INSTALL BACKEND
-            #################################################
+            ####################################################
+            # BACKEND INSTALL
+            ####################################################
 
-            cd "${RELEASE_DIR}/deploy/backend"
+            cd "${RELEASE_DIR}/release/backend"
 
             npm ci --omit=dev
 
-            #################################################
-            # PM2
-            #################################################
+            ####################################################
+            # PM2 START / RELOAD
+            ####################################################
 
             if pm2 describe oasis-backend >/dev/null 2>&1; then
+
               pm2 delete oasis-backend
+
             fi
 
             pm2 start server.js \
               --name oasis-backend \
               --update-env
 
-            #################################################
+            ####################################################
             # HEALTH CHECK
-            #################################################
+            ####################################################
 
-            sleep 10
+            echo "Waiting for application..."
 
-            if ! curl -f http://localhost:5000/health; then
+            sleep 15
 
-              echo "Health check failed"
+            if ! curl -fsS http://127.0.0.1:5000/health; then
 
-              if [ -n "$PREVIOUS_RELEASE" ]; then
+              echo "Health check failed."
 
-                ln -sfn "$PREVIOUS_RELEASE" "$CURRENT_LINK"
+              if [ -n "${PREVIOUS_RELEASE}" ]; then
 
-                pm2 restart oasis-backend
+                echo "Rolling back..."
+
+                ln -sfn \
+                  "${PREVIOUS_RELEASE}" \
+                  "${CURRENT_LINK}"
 
               fi
 
               exit 1
+
             fi
 
-            #################################################
-            # ATOMIC SWITCH
-            #################################################
+            ####################################################
+            # SWITCH RELEASE
+            ####################################################
 
-            ln -sfn "$RELEASE_DIR" "$CURRENT_LINK"
+            ln -sfn \
+              "${RELEASE_DIR}" \
+              "${CURRENT_LINK}"
 
-            #################################################
-            # CLEANUP
-            #################################################
-
-            ls -dt ${RELEASES_DIR}/* \
-              | tail -n +6 \
-              | xargs rm -rf || true
+            ####################################################
+            # PM2 PERSISTENCE
+            ####################################################
 
             pm2 save
+
+            sudo env PATH=$PATH:/home/ubuntu/.nvm/versions/node/$(node -v)/bin \
+              pm2 startup systemd -u ubuntu --hp /home/ubuntu || true
+
+            ####################################################
+            # CLEAN OLD RELEASES
+            ####################################################
+
+            find "${RELEASES_DIR}" \
+              -mindepth 1 \
+              -maxdepth 1 \
+              -type d \
+              | sort -r \
+              | tail -n +6 \
+              | xargs -r rm -rf
+
+            ####################################################
+            # STATUS
+            ####################################################
+
+            pm2 status
+
+            echo "Deployment Successful"
