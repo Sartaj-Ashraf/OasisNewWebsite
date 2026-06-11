@@ -1,5 +1,4 @@
-
-name: Deploy Application
+name: Production Deployment
 
 on:
   push:
@@ -7,119 +6,128 @@ on:
       - build-test-alias
 
 concurrency:
-  group: production-deployment
+  group: production
   cancel-in-progress: true
 
+env:
+  APP_NAME: oasis-ascend
+
 jobs:
-  deploy-application:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      ##################################################
-      # CHECKOUT
-      ##################################################
+      - uses: actions/checkout@v4
 
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      ################################################
+      # BACKEND
+      ################################################
 
-      ##################################################
-      # SYNC REPOSITORY ON SERVER
-      ##################################################
-
-      - name: Clone or Update Repository
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-          script: |
-            if [ ! -d "/home/ubuntu/oasis-ascend/.git" ]; then
-              git clone https://github.com/Sartaj-Ashraf/OasisNewWebsite.git /home/ubuntu/oasis-ascend
-            else
-              cd /home/ubuntu/oasis-ascend
-              git fetch origin
-              git reset --hard origin/build-test-alias
-            fi
+          node-version: 22
+          cache: npm
 
-      ##################################################
-      # BUILD FRONTEND LOCALLY (OPTIONAL VALIDATION)
-      ##################################################
+      - name: Install Backend
+        working-directory: backend
+        run: npm ci
 
-      - name: Install Frontend Dependencies
+      - name: Run Backend Tests
+        working-directory: backend
+        run: npm test --if-present
+
+      ################################################
+      # FRONTEND
+      ################################################
+
+      - name: Install Frontend
         working-directory: frontend
-        run: npm install
+        run: npm ci
 
       - name: Build Frontend
         working-directory: frontend
         run: npm run build
 
-      ##################################################
-      # BUILD BACKEND LOCALLY (OPTIONAL VALIDATION)
-      ##################################################
+      ################################################
+      # ARTIFACT
+      ################################################
 
-      - name: Install Backend Dependencies
-        working-directory: backend
-        run: npm install
+      - name: Create Artifact
+        run: |
+          mkdir deploy
 
-      ##################################################
-      # DEPLOY BACKEND SOURCE
-      ##################################################
+          cp -r backend deploy/backend
+          cp -r frontend/dist deploy/frontend
 
-      - name: Deploy Backend
-        uses: easingthemes/ssh-deploy@v5.1.0
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.EC2_HOST }}
-          REMOTE_USER: ubuntu
-          SOURCE: "backend/"
-          TARGET: "/home/ubuntu/oasis-ascend/backend/"
+          tar -czf release.tar.gz deploy
 
-      ##################################################
-      # DEPLOY FRONTEND SOURCE
-      ##################################################
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: release.tar.gz
 
-      - name: Deploy Frontend
-        uses: easingthemes/ssh-deploy@v5.1.0
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.EC2_HOST }}
-          REMOTE_USER: ubuntu
-          SOURCE: "frontend/"
-          TARGET: "/home/ubuntu/oasis-ascend/frontend/"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
-      ##################################################
-      # CONFIGURE SERVER
-      ##################################################
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release
 
-      - name: Configure Server
+      - name: Copy Artifact To Server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          source: release.tar.gz
+          target: /tmp
+
+      - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script_stop: true
           script: |
+            set -Eeuo pipefail
 
-            ##################################################
-            # LOAD NVM
-            ##################################################
+            APP_NAME="oasis-ascend"
 
-            export NVM_DIR="$HOME/.nvm"
+            BASE_DIR="/var/www/${APP_NAME}"
 
-            if [ -s "$NVM_DIR/nvm.sh" ]; then
-              . "$NVM_DIR/nvm.sh"
-            fi
+            RELEASES_DIR="${BASE_DIR}/releases"
+            SHARED_DIR="${BASE_DIR}/shared"
 
-            node -v
-            npm -v
-            pm2 -v
+            TIMESTAMP=$(date +%Y%m%d%H%M%S)
 
-            ##################################################
-            # CREATE BACKEND ENV
-            ##################################################
+            RELEASE_DIR="${RELEASES_DIR}/${TIMESTAMP}"
 
-            cat > /home/ubuntu/oasis-ascend/backend/.env << EOF
+            CURRENT_LINK="${BASE_DIR}/current"
+
+            mkdir -p "$RELEASES_DIR"
+            mkdir -p "$SHARED_DIR"
+
+            PREVIOUS_RELEASE=$(readlink -f "$CURRENT_LINK" || true)
+
+            echo "Creating release $TIMESTAMP"
+
+            mkdir -p "$RELEASE_DIR"
+
+            tar -xzf /tmp/release.tar.gz -C "$RELEASE_DIR"
+
+            #################################################
+            # ENV
+            #################################################
+
+            cat > "${SHARED_DIR}/.env" <<EOF
             PORT=5000
-            NODE_ENV=${{ secrets.NODE_ENV }}
+            NODE_ENV=production
 
             MONGO_URL=${{ secrets.MONGO_URL }}
 
@@ -137,104 +145,63 @@ jobs:
             AWS_REGION=${{ secrets.AWS_REGION }}
             EOF
 
-            ##################################################
-            # CREATE FRONTEND ENV
-            ##################################################
+            ln -sf \
+              "${SHARED_DIR}/.env" \
+              "${RELEASE_DIR}/deploy/backend/.env"
 
-            # cat > /home/ubuntu/oasis-ascend/frontend/.env << EOF
-            # NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
-            # EOF
+            #################################################
+            # INSTALL BACKEND
+            #################################################
 
-            ##################################################
-            # BACKEND SETUP
-            ##################################################
+            cd "${RELEASE_DIR}/deploy/backend"
 
-            cd /home/ubuntu/oasis-ascend/backend
+            npm ci --omit=dev
 
-            npm install --production
+            #################################################
+            # PM2
+            #################################################
 
-            pm2 delete backend || true
+            if pm2 describe oasis-backend >/dev/null 2>&1; then
+              pm2 delete oasis-backend
+            fi
 
-            PORT=5000 pm2 start server.js \
-              --name backend
+            pm2 start server.js \
+              --name oasis-backend \
+              --update-env
 
-            ##################################################
-            # FRONTEND SETUP (NEXT.JS)
-            ##################################################
+            #################################################
+            # HEALTH CHECK
+            #################################################
 
-            cd /home/ubuntu/oasis-ascend/frontend
+            sleep 10
 
-            npm install
+            if ! curl -f http://localhost:5000/health; then
 
-            npm run build
+              echo "Health check failed"
 
-            pm2 delete frontend || true
+              if [ -n "$PREVIOUS_RELEASE" ]; then
 
-            PORT=3000 pm2 start npm \
-              --name frontend \
-              -- start
+                ln -sfn "$PREVIOUS_RELEASE" "$CURRENT_LINK"
 
-            ##################################################
-            # SAVE PM2 CONFIGURATION
-            ##################################################
+                pm2 restart oasis-backend
+
+              fi
+
+              exit 1
+            fi
+
+            #################################################
+            # ATOMIC SWITCH
+            #################################################
+
+            ln -sfn "$RELEASE_DIR" "$CURRENT_LINK"
+
+            #################################################
+            # CLEANUP
+            #################################################
+
+            ls -dt ${RELEASES_DIR}/* \
+              | tail -n +6 \
+              | xargs rm -rf || true
 
             pm2 save
-
-            ##################################################
-            # NGINX CONFIGURATION
-            ##################################################
-
-            sudo tee /etc/nginx/sites-available/cicd > /dev/null <<'EOF'
-            server {
-                listen 80;
-                server_name _;
-
-                location / {
-                    proxy_pass http://localhost:3000;
-                    proxy_http_version 1.1;
-
-                    proxy_set_header Upgrade $http_upgrade;
-                    proxy_set_header Connection "upgrade";
-                    proxy_set_header Host $host;
-                    proxy_cache_bypass $http_upgrade;
-                }
-
-                location /api/ {
-                    proxy_pass http://localhost:5000/api/;
-                    proxy_http_version 1.1;
-
-                    proxy_set_header Upgrade $http_upgrade;
-                    proxy_set_header Connection "upgrade";
-                    proxy_set_header Host $host;
-                    proxy_cache_bypass $http_upgrade;
-                }
-            }
-            EOF
-
-            sudo ln -sf \
-              /etc/nginx/sites-available/cicd \
-              /etc/nginx/sites-enabled/cicd
-
-            sudo rm -f /etc/nginx/sites-enabled/default
-
-            ##################################################
-            # VALIDATE NGINX
-            ##################################################
-
-            sudo nginx -t
-
-            ##################################################
-            # RELOAD NGINX
-            ##################################################
-
-            sudo systemctl reload nginx
-
-            ##################################################
-            # STATUS OUTPUT
-            ##################################################
-
-            echo "===== PM2 STATUS ====="
-            pm2 status
-
-            echo "===== NGINX STATUS ====="
-            sudo systemctl status nginx --no-pager
