@@ -234,6 +234,25 @@ jobs:
               --update-env
 
             ####################################################
+            # FRONTEND START
+            ####################################################
+            cd "${RELEASE_DIR}/release/frontend"
+
+            # Install dependencies
+            npm install --omit=dev
+
+            # If not pre-built, build it (skip if tar already contains .next)
+            # npm run build
+
+            if pm2 describe oasis-frontend >/dev/null 2>&1; then
+              pm2 delete oasis-frontend
+            fi
+
+            pm2 start npm \
+              --name oasis-frontend \
+              -- start
+
+            ####################################################
             # HEALTH CHECK
             ####################################################
 
