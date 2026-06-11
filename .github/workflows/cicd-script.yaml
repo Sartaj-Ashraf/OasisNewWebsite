@@ -178,9 +178,10 @@ jobs:
             ####################################################
 
             sudo mkdir -p "${RELEASE_DIR}"
+            sudo chown ubuntu:ubuntu "${RELEASE_DIR}"
 
-            tar -xzf /tmp/release.tar.gz \
-              -C "${RELEASE_DIR}"
+            sudo tar -xzf /tmp/release.tar.gz \
+            -C "${RELEASE_DIR}"
 
             ####################################################
             # ENVIRONMENT FILE
