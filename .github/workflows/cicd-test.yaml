@@ -214,6 +214,14 @@ jobs:
               "${SHARED_DIR}/.env" \
               "${RELEASE_DIR}/release/backend/.env"
 
+            cat > "${SHARED_DIR}/.env" <<EOF
+              NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            EOF
+
+            ln -sfn \
+              "${SHARED_DIR}/.env" \
+              "${RELEASE_DIR}/release/frontend/.env"
+
             ####################################################
             # BACKEND INSTALL
             ####################################################
@@ -248,9 +256,10 @@ jobs:
               pm2 delete oasis-frontend
             fi
 
-            pm2 start npm \
+            PORT=3000 pm2 start /var/www/oasis-ascend/current/release/frontend/standalone/server.js \
               --name oasis-frontend \
               -- start
+              --update-env
 
             ####################################################
             # HEALTH CHECK
