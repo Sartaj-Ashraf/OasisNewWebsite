@@ -69,7 +69,7 @@ jobs:
 
       - name: Install Frontend Dependencies
         working-directory: frontend
-        run: npm ci
+        run: npm install
 
       - name: Build Frontend
         working-directory: frontend
@@ -215,7 +215,7 @@ jobs:
 
             cd "${RELEASE_DIR}/release/backend"
 
-            npm ci --omit=dev
+            npm install --omit=dev
 
             ####################################################
             # PM2 START / RELOAD
