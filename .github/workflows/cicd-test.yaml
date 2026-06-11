@@ -214,12 +214,12 @@ jobs:
               "${SHARED_DIR}/.env" \
               "${RELEASE_DIR}/release/backend/.env"
 
-            cat > "${SHARED_DIR}/.env.production" <<EOF
+            cat > "${SHARED_DIR}/.env.production-frontend" <<EOF
               NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             EOF
 
             ln -sfn \
-              "${SHARED_DIR}/.env.production" \
+              "${SHARED_DIR}/.env.production-frontend" \
               "${RELEASE_DIR}/release/frontend/.env"
 
             ####################################################
@@ -256,7 +256,7 @@ jobs:
               pm2 delete oasis-frontend
             fi
 
-            PORT=3000 pm2 start /var/www/oasis-ascend/current/release/frontend/standalone/server.js \
+            PORT=3000 pm2 start npm \
               --name oasis-frontend \
               -- start \
               --update-env
@@ -322,4 +322,4 @@ jobs:
 
             pm2 status
 
-            echo "Deployment Successful all the best ..."
+            echo "Deployment Successful"
