@@ -88,7 +88,7 @@ jobs:
           sudo cp -r backend release/backend
           sudo cp -r frontend/.next release/frontend
 
-          tar -czf release.tar.gz release
+          sudo tar -czf release.tar.gz release
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -143,6 +143,7 @@ jobs:
             APP_NAME="oasis-ascend"
 
             BASE_DIR="/var/www/${APP_NAME}"
+            sudo mkdir -p "${BASE_DIR}"
             RELEASES_DIR="${BASE_DIR}/releases"
             SHARED_DIR="${BASE_DIR}/shared"
             CURRENT_LINK="${BASE_DIR}/current"
