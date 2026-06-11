@@ -83,10 +83,10 @@ jobs:
         run: |
           set -e
 
-          mkdir release
+          sudo mkdir release
 
-          cp -r backend release/backend
-          cp -r frontend/.next release/frontend
+          sudo cp -r backend release/backend
+          sudo cp -r frontend/.next release/frontend
 
           tar -czf release.tar.gz release
 
@@ -151,8 +151,8 @@ jobs:
 
             RELEASE_DIR="${RELEASES_DIR}/${TIMESTAMP}"
 
-            mkdir -p "${RELEASES_DIR}"
-            mkdir -p "${SHARED_DIR}"
+            sudo mkdir -p "${RELEASES_DIR}"
+            sudo mkdir -p "${SHARED_DIR}"
 
             PREVIOUS_RELEASE=$(readlink -f "${CURRENT_LINK}" || true)
 
@@ -176,7 +176,7 @@ jobs:
             # NEW RELEASE
             ####################################################
 
-            mkdir -p "${RELEASE_DIR}"
+            sudo mkdir -p "${RELEASE_DIR}"
 
             tar -xzf /tmp/release.tar.gz \
               -C "${RELEASE_DIR}"
@@ -205,7 +205,7 @@ jobs:
             AWS_REGION=${{ secrets.AWS_REGION }}
             EOF
 
-            ln -sfn \
+            sudo ln -sfn \
               "${SHARED_DIR}/.env" \
               "${RELEASE_DIR}/release/backend/.env"
 
@@ -215,7 +215,7 @@ jobs:
 
             cd "${RELEASE_DIR}/release/backend"
 
-            npm install --omit=dev
+            sudo npm install --omit=dev
 
             ####################################################
             # PM2 START / RELOAD
