@@ -29,14 +29,6 @@ export default function ProductSection() {
     <section className="py-16 md:py-24" >
       <div className="mx-auto ">
 
-        {/* ── Label ── */}
-        <div className="flex items-center gap-3 mb-4">
-          <div className="h-px w-6" style={{ background: "var(--primary)" }} />
-          <p className="text-[10.5px] font-bold uppercase tracking-[.22em]" style={{ color: "var(--secondary)" }}>
-            Our Products
-          </p>
-        </div>
-
         {/* ── Main grid ── */}
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 items-center">
 
@@ -44,27 +36,15 @@ export default function ProductSection() {
           <div>
 
             {/* Name + logo */}
-            <div className="flex items-center gap-3 mb-4">
-              <Image
-                src={Logo}
-                alt="MangoReview"
-                width={36}
-                height={36}
-                className="object-contain"
-              />
+            <div className="flex flex-col gap-3 mb-4">
+             
               <h2
-                className="text-[32px] md:text-[40px] font-extrabold tracking-tight leading-none"
+                className=" font-meidum tracking-tight leading-none"
                 style={{ color: "var(--secondary-dark)" }}
               >
                 MangoReview
               </h2>
-              <span
-                className="inline-flex items-center gap-1.5 text-[8.5px] font-bold uppercase tracking-[.1em] px-2.5 py-1 rounded-full"
-                style={{ background: "rgba(16,185,129,.1)", color: "#065f46", border: "1px solid rgba(16,185,129,.2)" }}
-              >
-                <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#10b981" }} />
-                Live
-              </span>
+            
             </div>
 
             {/* Tagline */}
@@ -118,7 +98,17 @@ export default function ProductSection() {
           </div>
 
           {/* ── RIGHT: image ── */}
-          <div className="hidden lg:block w-full">
+          <div className="hidden flex-col items-center  gap-2 lg:block w-full">
+           <div className="flex items-center gap-2">
+              <Image
+                src={Logo}
+                alt="MangoReview"
+                width={100}
+                height={100}
+                className="object-contain"
+              />
+              <h4 className="text-gray-500 text-lg!">Dashboard</h4>
+              </div>
             <div
               className="relative w-xl aspect-video shadow-xl overflow-hidden rounded-2xl"
              

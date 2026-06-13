@@ -39,10 +39,13 @@ const servicesContent = {
 
 export const WebDevPage = () => {
   const [projects, setProjects] = useState([]);
+  const [loading , setLoading  ] = useState(false)
   const fetchProject = async () => {
     try {
+      setLoading(true)
       const { data } = await fetchAllProjects();
       setProjects(data.data);
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -51,11 +54,10 @@ export const WebDevPage = () => {
   useEffect(() => {
     fetchProject();
   }, []);
-console.log(projects)
   return (
     <div>
       <ServiceDetail content={servicesContent.webDevelopment} />
-      <WebsiteShowCase projects={projects} />
+      <WebsiteShowCase projects={projects}  loading={loading}/>
       <Cta />
     </div>
   );

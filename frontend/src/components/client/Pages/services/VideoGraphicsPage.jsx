@@ -25,7 +25,7 @@ const servicesContent = {
 export const VideoGraphicsPage = () => {
   return (
     <div className='container mx-auto'>
-      <PageHeader title="Video & Graphics" />
+      <PageHeader title="Video Creation and Graphic Design "  />
       <ServiceDetail content={servicesContent.videoAndDesign}/>
       <VideoGraphics/>
     </div>
