@@ -5,9 +5,8 @@ import { LayoutGrid, List, Search } from "lucide-react";
 import { getAllBlogs } from "@/services/blogs.service";
 import { BlogCard } from "../../HomeComponents/Blogs/BlogCard";
 import { DetailedBlogCard } from "../../HomeComponents/Blogs/DetailedBlogCard";
-import Image from "next/image";
-import Link from "next/link";
 import { RandomBlog } from "../../HomeComponents/Blogs/RandomBlog";
+import { BlogsPageSkeleton } from "@/components/skeleton/BlogsPageSkeleton";
 
 export const BlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -73,12 +72,10 @@ export const BlogsPage = () => {
   // (Optional: remove `&& blogs.length === 0` if you want a full spinner on every page turn)
   if (loading && blogs.length === 0) {
     return (
-      <div className="flex justify-center items-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#002B49]"></div>
-      </div>
+    <BlogsPageSkeleton/>
     );
   }
-
+if(blogs.length == 0 ) return null
   return (
     <div className=" bg-accent-dark font-sans py-8 ">
       

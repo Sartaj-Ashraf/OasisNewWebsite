@@ -1,75 +1,134 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Splide from "@splidejs/splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
-import "@splidejs/splide/css";
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import { getClientsService } from "@/services/clients.service";
-export function ClientsSlider() {
-const [clients, setClients] = useState([]);
+import { BrandMarqueeSkeleton } from "@/components/skeleton/BrandMarqueeSkeleton";
 
-  const splideRef = useRef(null);
+const BrandItem = ({ brand }) => {
+  const src =
+    typeof brand?.coverImage?.url === "string"
+      ? brand.coverImage.url
+      : brand?.coverImage?.url?.src;
 
-useEffect(() => {
-    const fetchClients = async () => {
-        const response = await getClientsService();
-        // console.log(response.data);
-        setClients(response.data)
-    }
-    fetchClients();
-}, [])
-  useEffect(() => {
-    const splide = new Splide(splideRef.current, {
-      type: "loop",
-      drag: false,
-      arrows: false,
-      pagination: false,
-      autoWidth: true,
-      gap: "40px",
+  if (!src) return null;
 
-      speed: 0, // IMPORTANT: remove slide animation feel
-      autoScroll: {
-        speed: 1, // controls smooth continuous motion
-        pauseOnHover: false,
-        pauseOnFocus: false,
-      },
-    });
-
-    splide.mount({ AutoScroll });
-
-    return () => splide.destroy();
-  }, []);
 
   return (
-    <div className="w-full overflow-hidden relative ">
-      {/* LEFT FADE */}
-      <div
-        className="hidden lg:block pointer-events-none absolute left-0 top-0 h-full w-24 z-10
-        bg-linear-to-r from-white to-transparent"
+    <div className="flex items-center justify-center min-w-[180px] md:min-w-[240px]">
+      <img
+        src={src}
+        alt={brand?.name || "Brand"}
+        className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 hover:scale-110"
       />
+    </div>
+  );
+};
 
-      {/* RIGHT FADE */}
-      <div
-        className="hidden lg:block pointer-events-none absolute right-0 top-0 h-full w-24 z-10
-        bg-linear-to-l from-white to-transparent"
-      />
+export default function BrandMarquee() {
+  const [brands, setBrands] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-      {/* SPLIDE */}
-      <div className="splide" ref={splideRef}>
-        <div className="splide__track">
-          <div className="splide__list flex items-center ">
-            {clients.map((client, i) => (
-              <div
-                key={i}
-                className="splide__slide whitespace-nowrap uppercase text-5xl md:text-8xl font-bold text-black/10"
-              >
-                <Image src={client?.coverImage?.url} alt={`Client ${i + 1}`} width={100} height={100} className=""  />
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        setLoading(true);
+        const res = await getClientsService();
+        const data = res?.data || [];
+        setBrands(data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
+    fetchBrands();
+  }, []);
+  if (loading) {
+    return (
+      <BrandMarqueeSkeleton />
+    );
+  }
+  if (!brands.length) {
+    return null;
+  }
+
+  const duplicatedBrands = [...brands, ...brands, ...brands];
+
+  return (
+    <>
+      <style jsx global>{`
+          .marquee-left {
+            animation: marqueeLeft 50s linear infinite;
+          }
+          .marquee-left-reverse {
+            animation: marqueeLeft 35s linear infinite;
+          }
+          .marquee-right {
+            animation: marqueeRight 50s linear infinite;
+          }
+
+          .marquee-left:hover,
+          .marquee-right:hover {
+            animation-play-state: paused;
+          }
+
+          @keyframes marqueeLeft {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(-50%);
+            }
+          }
+
+          @keyframes marqueeRight {
+            from {
+              transform: translateX(-50%);
+            }
+            to {
+              transform: translateX(0);
+            }
+          }
+        `}</style>
+
+      <section className="py-12 overflow-hidden">
+        <div className="container mx-auto ">
+          <div className="space-y-10">
+            <div className="overflow-hidden">
+              <div className="marquee-left-reverse flex gap-12 w-max">
+                {duplicatedBrands.map((brand, index) => (
+                  <BrandItem
+                    key={`row1-${brand?._id || index}-${index}`}
+                    brand={brand}
+                  />
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="overflow-hidden">
+              <div className="marquee-right flex gap-12 w-max">
+                {duplicatedBrands.map((brand, index) => (
+                  <BrandItem
+                    key={`row2-${brand?._id || index}-${index}`}
+                    brand={brand}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="overflow-hidden">
+              <div className="marquee-left flex gap-12 w-max">
+                {duplicatedBrands.map((brand, index) => (
+                  <BrandItem
+                    key={`row3-${brand?._id || index}-${index}`}
+                    brand={brand}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }

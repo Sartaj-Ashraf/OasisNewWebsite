@@ -43,7 +43,7 @@ export default function ServiceFaqs() {
 
   const toggle = (id) => {
     setOpenId(openId === id ? null : id);
-  };
+  }; 
 
   return (
     <div className="flex items-center justify-center py-8 ">
@@ -59,7 +59,7 @@ export default function ServiceFaqs() {
         </div>
         <div className="flex flex-col md:flex-row gap-2 items-center justify-center w-full">
           {/* Left Column */}
-          <div className="flex-1 w-xl relative px-6 flex flex-col justify-center min-h-[420px] max-h-fit lg:ml-[18%] mt-14 md:mt-0">
+          <div className="flex-1 w-full md:w-xl relative px-6 flex flex-col justify-center md:min-h-[420px] md:max-h-fit lg:ml-[18%] mt-14 md:mt-0">
             <div className="absolute lg:-left-30 z-10 w-[40%] lg:w-[80%]">
               {" "}
               <Image
@@ -82,7 +82,7 @@ export default function ServiceFaqs() {
                 <span className="text-secondary italic">marketing </span>  <span className="text-primary-dark italic">services.</span>
               </h2>
 
-              <p className="text-gray-500 text-base mb-8 leading-relaxed">
+              <p className="text-gray-500 text-base mb-2 md:mb-8 leading-relaxed">
                 Oasis Ascend accelerates business growth through innovative
                 software and digital marketing solutions where your brand goes
                 viral or goes home.
