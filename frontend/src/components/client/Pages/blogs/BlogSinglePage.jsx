@@ -5,10 +5,12 @@ import ContentRenderer from "@/components/content/ContentRenderer";
 import { getBlogBySlug, getRandomBlogs } from "@/services/blogs.service";
 import { BlogHeader } from "./BlogHeader";
 import { RandomBlog } from "../../HomeComponents/Blogs/RandomBlog";
+import BlogSinglePageSkeleton from "@/components/skeleton/BlogSinglePageSkeleton";
 
 export const BlogSinglePage = ({ slug }) => {
   const [blog, setBlog] = useState(null);
   const [RandomBlogs, setRandomBlogs] = useState([]);
+
   useEffect(() => {
     if (!slug) return;
 
@@ -23,6 +25,7 @@ export const BlogSinglePage = ({ slug }) => {
 
     fetchBlog();
   }, [slug]);
+  
   useEffect(() => {
     const fetchRandomBlog = async () => {
       try {
@@ -34,17 +37,11 @@ export const BlogSinglePage = ({ slug }) => {
     };
     fetchRandomBlog();
   }, []);
-  console.log(RandomBlogs);
+
+  
   if (!blog) {
     return (
-      <div className="max-w-2xl mx-auto px-6 py-20">
-        <div className="space-y-4 animate-pulse">
-          <div className="h-6 bg-gray-100 rounded w-3/4" />
-          <div className="h-4 bg-gray-100 rounded w-full" />
-          <div className="h-4 bg-gray-100 rounded w-5/6" />
-          <div className="h-4 bg-gray-100 rounded w-4/6" />
-        </div>
-      </div>
+     <BlogSinglePageSkeleton/>
     );
   }
 

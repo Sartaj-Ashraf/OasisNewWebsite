@@ -37,14 +37,14 @@ const services = [
   id: "video-graphic-design",
   title: "Video Editing & Graphic Design",
   description:
-    "Bring your brand to life with professional video editing and creative graphic design services. We create engaging visuals, promotional videos, social media creatives, brand assets, and marketing materials that capture attention and leave a lasting impression.",
-  bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
+    "Transform your brand with professional video editing and creative graphic design services. Stunning visuals, engaging videos, and brand-focused creative assets that capture attention and leave a lasting impression.",
+    bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
   titleColor: "text-[#1a2530]",
   descColor: "text-[#2a3845]",
   btnBorder: "border-[#8090a0] text-[#1a2530]",
   iconColor: "#1a2530",
   ServiceIcon: Headphones,
-  link: "/video-graphic-design"
+  link: "/video-&-design"
 },
 ];
 export const ServicesPage = () => {

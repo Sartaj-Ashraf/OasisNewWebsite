@@ -1,7 +1,6 @@
 import Image from "next/image";
 import AboutImage from "@/assets/AboutImage.png";
-import { Button, LinkBtn } from "@/shared/ClickAble"
-import Link from "next/link";
+import {  LinkBtn } from "@/shared/ClickAble"
 export default function AboutSection() {
   return (
     

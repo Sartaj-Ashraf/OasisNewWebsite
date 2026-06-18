@@ -25,6 +25,8 @@ import contactRouter from "./routes/contactRoutes.js";
 import careerRouter from "./routes/careerRoutes.js";
 import jobApplicationRouter from "./routes/jobApplicationRoutes.js";
 import projectsRouter from "./routes/projectsRoutes.js";
+import { getSitemapData } from "./routes/sitemap.route.js";
+
 // public
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -49,16 +51,6 @@ app.use(helmet(({
   crossOriginResourcePolicy: { policy: "cross-origin" } // allow frontend to load images
 })));
 app.use(mongoSanitize());
-
-
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 300, 
-//   standardHeaders: "draft-7",
-//   legacyHeaders: false,
-// });
-// app.use(limiter);
-
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -94,6 +86,7 @@ app.use("/api/contacts", contactRouter);
 app.use("/api/careers", careerRouter);
 app.use("/api/job-applications", jobApplicationRouter);
 app.use("/api/projects", projectsRouter);
+app.get("/api/sitemap", getSitemapData);
 app.use("*", (req, res) => {
   res.status(404).json({
     message: "Route not found",

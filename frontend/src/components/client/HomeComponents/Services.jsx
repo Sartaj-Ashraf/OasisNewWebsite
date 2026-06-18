@@ -1,23 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { X, Plus, Megaphone, Code2 , Headphones } from "lucide-react";
+import { X, Plus, Megaphone, Code2, Headphones } from "lucide-react";
 import bgImage from "@/assets/svg/download.svg";
-import {LinkBtn } from "@/shared/ClickAble";
+import { LinkBtn } from "@/shared/ClickAble";
 const services = [
-  {
-    id: "marketing",
-    title: "Digital Marketing",
-    description:
-      "We specialize in creating, developing, and managing a brand's identity to help businesses stand out in the marketplace and connect with their target audience.",
-    bg: "bg-gradient-to-br from-[#cce8f8] via-[#a8d4f0] to-[#7bbde8]",
-    titleColor: "text-[#1a2a3a]",
-    descColor: "text-[#2a3a50]",
-    btnBorder: "border-[#a088cc] text-[#2a1a60]",
-    iconColor: "#1a2a3a",
-    ServiceIcon: Megaphone,
-    link:"/digital-marketing"
-  },
   {
     id: "web-development",
     title: "Web Development",
@@ -29,21 +16,35 @@ const services = [
     btnBorder: "border-[#c080e0] text-[#2a1040]",
     iconColor: "#2a1040",
     ServiceIcon: Code2,
-    link:"/web-development"
+    link: "/web-development"
   },
-{
-  id: "video-graphic",
-  title: "Video & Graphic Design",
-  description:
-    "We create engaging videos, eye-catching graphics, and brand-focused visual content that helps businesses stand out and connect with their audience.",
-  bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
-  titleColor: "text-[#1a2530]",
-  descColor: "text-[#2a3845]",
-  btnBorder: "border-[#8090a0] text-[#1a2530]",
-  iconColor: "#1a2530",
-  ServiceIcon: Headphones,
-  link: "/video-&-graphic"        
-}
+  {
+    id: "marketing",
+    title: "Digital Marketing",
+    description:
+      "We specialize in creating, developing, and managing a brand's identity to help businesses stand out in the marketplace and connect with their target audience.",
+    bg: "bg-gradient-to-br from-[#cce8f8] via-[#a8d4f0] to-[#7bbde8]",
+    titleColor: "text-[#1a2a3a]",
+    descColor: "text-[#2a3a50]",
+    btnBorder: "border-[#a088cc] text-[#2a1a60]",
+    iconColor: "#1a2a3a",
+    ServiceIcon: Megaphone,
+    link: "/digital-marketing"
+  },
+
+  {
+    id: "video-graphic",
+    title: "Video & Graphic Design",
+    description:
+      "We create engaging videos, eye-catching graphics, and brand-focused visual content that helps businesses stand out and connect with their audience.",
+    bg: "bg-gradient-to-br from-[#dde3ea] via-[#c8d0db] to-[#b0bcc8]",
+    titleColor: "text-[#1a2530]",
+    descColor: "text-[#2a3845]",
+    btnBorder: "border-[#8090a0] text-[#1a2530]",
+    iconColor: "#1a2530",
+    ServiceIcon: Headphones,
+    link: "/video-&-graphic"
+  }
 ];
 
 function RibbonShape() {
@@ -84,7 +85,7 @@ function RibbonShape() {
   );
 }
 
-export default function  Services() {
+export default function Services() {
   const [active, setActive] = useState("marketing");
 
   return (
@@ -179,9 +180,9 @@ export default function  Services() {
                   transition-opacity duration-200 rounded-[2rem_0_2rem_2rem]
                   ${isOpen ? "opacity-100 pointer-events-auto delay-150" : "opacity-0 pointer-events-none delay-0"}
                 `}
-        
+
               >
-                 {/* Background image with opacity */}
+                {/* Background image with opacity */}
                 <div
                   className="-z-10 absolute inset-0 rounded-[2rem_0_2rem_2rem] "
                   style={{
@@ -189,11 +190,11 @@ export default function  Services() {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    opacity: 0.7, 
+                    opacity: 0.7,
                   }}
                 />
                 <div className="mt-auto space-y-4">
-                  <div className="mb-2 opacity-50"> 
+                  <div className="mb-2 opacity-50">
                     <ServiceIcon
                       size={32}
                       strokeWidth={1.8}
@@ -209,9 +210,9 @@ export default function  Services() {
                     {s.description}
                   </p>
                   <LinkBtn
-                   link={s.link} children=" Discover More" className="mt-8 bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary transition-all duration-300" />
-                   
-                 
+                    link={s.link} children=" Discover More" className="mt-8 bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary transition-all duration-300" />
+
+
                 </div>
               </div>
 

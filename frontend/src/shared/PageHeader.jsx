@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const PageHeader = ({title}) => {
   return (
-    <section className="relative h-screen max-h-[55vh] my-8">  
+    <section className="relative h-[40vh] md:h-fit  my-8 ">  
 
       {/* Background */}
       <div className="bg-accent corner-shape-scoop absolute inset-0 rounded-3xl" />
@@ -40,7 +40,7 @@ const PageHeader = ({title}) => {
         <NavBar />
 
         {/* Centered Title */}
-        <div className="flex-1 flex flex-col items-center justify-center gap-4">
+        <div className="flex-1 flex flex-col items-center justify-center gap-4 mt-12">
           <h1 className="font-semibold text-2xl md:text-7xl! text-black/80 text-center">
             {title}
           </h1>

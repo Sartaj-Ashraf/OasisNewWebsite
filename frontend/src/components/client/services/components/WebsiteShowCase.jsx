@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Heart, Tag, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { ProjectModal } from "../caseStudyCard/ProjectModel";
+import WebsiteShowCaseSkeleton from "@/components/skeleton/WebsiteShowCaseSkeleton";
 
 // ─── Span helpers ─────────────────────────────────────────────────────────────
 const TILE_PATTERN = [
@@ -155,8 +156,16 @@ function Modal({ project, onClose }) {
 }
 
 // ─── Main export ──────────────────────────────────────────────────────────────
-export const WebsiteShowCase = ({ projects }) => {
+export const WebsiteShowCase = ({ projects, loading }) => {
   const [selected, setSelected] = useState(null);
+  if (loading) {
+    return (
+      <div>
+        <WebsiteShowCaseSkeleton/>
+      </div>
+    )
+  }
+  if (!projects) return null;
 
   return (
     <>
@@ -168,10 +177,10 @@ export const WebsiteShowCase = ({ projects }) => {
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-widest uppercase mb-4">
               ✦ Our Work
             </span>
-            <h2 className="text-4xl md:text-6xl font-medium text-black dark:text-white">
+            <h3 className=" font-medium text-black ">
               Projects We're
               <span className="block italic text-primary">Proud Of</span>
-            </h2>
+            </h3>
           </div>
           <p className="text-black/60 dark:text-white/60 max-w-sm leading-relaxed md:text-right">
             From ambitious startups to established brands — here's what we've
