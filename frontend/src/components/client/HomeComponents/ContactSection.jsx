@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 import bgImage from "@/assets/svg/download.svg";
-import contactBg from "@/assets/bgcontact.jpg";
+import contactBg from "@/assets/bgcontact.webp";
 
 import { Button } from "@/shared/ClickAble";
 // import { socailLinks, contactLinks } from "@/utils/navLink";
@@ -97,30 +97,26 @@ export const ContactSection = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.8,
         }}
       >
-        <div className="absolute inset-0 bg-linear-to-r from-white/50 to-transparent"></div>
+        {/* <div className="absolute inset-0 bg-linear-to-r from-black/20 to-transparent backdrop-blur-xs"></div> */}
 
         <div className=" grid lg:grid-cols-2 gap-8 relative z-10">
           {/* LEFT CONTENT */}
           <div className="  text-white relative z-10">
-            <h2 className=" relative z-10 text-secondary-dark font-medium leading-tight">
+            <h2 className=" relative z-10 text-white font-medium leading-tight">
               We’re here to{" "}
-              <span className="italic text-transparent bg-clip-text bg-linear-to-r from-primary to-primary-dark px-1">
+              <span className="italic text-secondary px-1">
                 help
               </span>{" "}
               with your{" "}
-              <span className="italic text-transparent bg-clip-text bg-linear-to-r from-primary to-primary-dark px-1">
+              <span className="italic text-secondary px-1">
                 questions
               </span>
               .
             </h2>
             
-          <div className="w-full h-full  ">
-            <Image src={bgImage2} alt="bgimage" className="object-cover"/>
-          </div>
-        
+      
           </div>
 
           {/* RIGHT FORM CARD */}

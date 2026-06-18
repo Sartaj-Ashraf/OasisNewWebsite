@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
 import svgImg from "@/assets/svg/angle-start.svg";
-import bgImage from "@/assets/testimonialBg.png";
+import bgImage from "@/assets/testimonialBg.jpg";
 import quorte from "@/assets/svg/quotes.svg";
 import avatarDefault from "@/assets/svg/avatarDefault.png";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -36,7 +36,7 @@ export const TestimonialCard = ({ testimonials = [] }) => {
     <div className=" relative  md:flex-1 rounded-3xl   overflow-hidden flex flex-col justify-between">
       {/* Background */}
       <div
-        className="absolute inset-0 bg-cover bg-center  -z-10"
+        className="absolute inset-0 bg-cover bg-center -z-10"
         style={{
           backgroundImage: `url(${bgImage.src})`,
           backgroundPosition: "center",
@@ -78,7 +78,7 @@ export const TestimonialCard = ({ testimonials = [] }) => {
             >
               {/* Fixed Height Testimonial Section */}
               <div className="px-8 h-[180px] md:h-full flex items-center overflow-hidden">
-                <span className="text-lg md:text-3xl text-secondary-dark font-medium line-clamp-4 md:line-clamp-none">
+                <span className="text-lg md:text-3xl text-shadow-md text-white font-semibold line-clamp-4 md:line-clamp-none">
                   "{item?.testimonial}" 
                 </span>
               </div>
