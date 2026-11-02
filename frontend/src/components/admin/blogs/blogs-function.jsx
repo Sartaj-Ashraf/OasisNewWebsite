@@ -1,6 +1,6 @@
 import {
   Plus, Trash2, ChevronUp, ChevronDown,
-  CheckCircle, AlertCircle, GripVertical, FileText, X
+  CheckCircle, AlertCircle, GripVertical, FileText, X, Image as ImageIcon
 } from "lucide-react";
 const HEADING_STYLE = {
   h1: "text-2xl! font-extrabold tracking-tight text-stone-900",
@@ -199,7 +199,7 @@ export function ImageBlock({ block, onChange }) {
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-stone-400">
             <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center">
-              <Image size={20} className="text-stone-400" />
+              <ImageIcon size={20} className="text-stone-400" />
             </div>
             <p className="text-sm font-medium">Drop image or click to upload</p>
             <p className="text-xs text-stone-300">PNG, JPG, WEBP accepted</p>

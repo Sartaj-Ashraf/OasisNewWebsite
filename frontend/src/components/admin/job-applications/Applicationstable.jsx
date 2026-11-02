@@ -3,7 +3,7 @@
 import { Badge, Spinner, STATUS_OPTIONS } from "./ApplicationsUi";
 
 const inputCls =
-  "border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition bg-white";
+  "border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition bg-white";
 
 // ─── Filters Bar ─────────────────────────────────────────────────────────────
 
@@ -117,7 +117,7 @@ export function ApplicationsTable({ applications, loading, onView, onDelete }) {
                 {/* Applicant */}
                 <td className="px-5 py-3.5">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-medium text-xs shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary-dark font-medium text-xs shrink-0">
                       {app.fullName?.charAt(0).toUpperCase()}
                     </div>
                     <div>
@@ -167,7 +167,7 @@ export function ApplicationsTable({ applications, loading, onView, onDelete }) {
                     {/* View detail */}
                     <button
                       onClick={() => onView(app)}
-                      className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition"
+                      className="p-1.5 text-gray-400 hover:text-secondary hover:bg-secondary/10 rounded-lg transition"
                       title="View details"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

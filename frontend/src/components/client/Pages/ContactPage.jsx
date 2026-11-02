@@ -1,4 +1,5 @@
 import { ContactSection } from "../HomeComponents/ContactSection";
+import ContactFaq from "../HomeComponents/ContactFaq";
 import PageHeader from "@/shared/PageHeader";
 
 export const ContactPage = () => {
@@ -7,6 +8,7 @@ export const ContactPage = () => {
       {" "}
       <PageHeader title="Contact Us" />
       <ContactSection />
+      <ContactFaq />
     </div>
   );
 };

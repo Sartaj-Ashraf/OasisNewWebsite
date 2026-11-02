@@ -120,7 +120,7 @@ export default function ServiceFaqs() {
                   <div
                     className={`overflow-hidden transition-all duration-300 ease-in-out ${
                       openId === faq.id
-                        ? "max-h-40 opacity-100 mt-3"
+                        ? "max-h-64 opacity-100 mt-3"
                         : "max-h-0 opacity-0"
                     }`}
                   >

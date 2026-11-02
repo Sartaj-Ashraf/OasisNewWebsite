@@ -20,17 +20,27 @@ import {
     X
 } from 'lucide-react';
 import { logoutUser } from '@/services/auth.service';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 export const AdminSidebar = () => {
     const [isOpen, setIsOpen] = useState(true);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState('Dashboard');
     const router = useRouter();
+    const pathname = usePathname();
 
 
     const menuItems = [
+        {
+            category: "Overview",
+            items: [
+                {
+                    title: "Dashboard",
+                    link: "/admin",
+                    icon: <LayoutDashboard size={19} />,
+                },
+            ],
+        },
         {
             category: "Content Management",
             items: [
@@ -108,7 +118,7 @@ export const AdminSidebar = () => {
             {/* --- MOBILE TRIGGER BUTTON --- */}
             <button
                 onClick={() => setIsMobileOpen(true)}
-                className="md:hidden fixed top-4 left-4 z-40 p-2 bg-white text-yellow-600 rounded-lg border border-slate-200 shadow-sm"
+                className="md:hidden fixed top-4 left-4 z-40 p-2 bg-white text-secondary-dark rounded-lg border border-border-custom shadow-sm"
             >
                 <Menu size={24} />
             </button>
@@ -128,7 +138,7 @@ export const AdminSidebar = () => {
                     ${isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
                     ${isOpen ? 'w-64' : 'md:w-20'} 
                     h-full flex flex-col
-                    border-r border-slate-200 
+                    border-r border-border-custom 
                     bg-white
                     transition-all duration-300 ease-in-out select-none
                 `}
@@ -136,7 +146,7 @@ export const AdminSidebar = () => {
                 {/* Desktop Toggle Button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="hidden md:flex absolute top-5 -right-3 text-slate-800 bg-yellow-400 p-1 rounded-full z-50 hover:scale-110 transition-transform shadow-md border border-white"
+                    className="hidden md:flex absolute top-5 -right-3 text-secondary-dark bg-primary p-1 rounded-full z-50 hover:scale-110 transition-transform shadow-md border border-white"
                 >
                     <ChevronRight className={`${isOpen && 'rotate-180'}`} size={16} />
                 </button>
@@ -151,13 +161,13 @@ export const AdminSidebar = () => {
 
                 {/* Logo Section */}
                 <div className="py-6 px-4 flex items-center gap-x-4">
-                    <div className="shrink-0 bg-yellow-400 p-2.5 rounded-2xl shadow-sm">
+                    <div className="shrink-0 bg-primary p-2.5 rounded-2xl shadow-sm">
                         <div className="w-5 h-5 border-2 border-slate-900 rounded-sm rotate-45 flex items-center justify-center">
                             <div className="w-1 h-1 bg-slate-900 rounded-full" />
                         </div>
                     </div>
-                    <h5 onClick={() => router.push('/admin')} className={`text-slate-900 origin-left font-bold tracking-tight duration-300 text-sm ${(!isOpen && !isMobileOpen) && 'hidden md:opacity-0'}`}>
-                        Oasis <span className="text-yellow-500">Ascend</span>
+                    <h5 onClick={() => router.push('/admin')} className={`text-secondary-dark origin-left font-bold tracking-tight duration-300 text-sm ${(!isOpen && !isMobileOpen) && 'hidden md:opacity-0'}`}>
+                        Oasis <span className="text-primary-dark">Ascend</span>
                     </h5>
                 </div>
 
@@ -167,27 +177,28 @@ export const AdminSidebar = () => {
                         <div key={group.category} className="mb-4">
 
                             {(isOpen || isMobileOpen) && (
-                                <h4 className="px-3 mb-2 text-xs! font-semibold uppercase tracking-wider text-secondary">
+                                <h4 className="px-3 mb-2 text-xs! font-semibold uppercase tracking-wider text-text-secondary">
                                     {group.category}
                                 </h4>
                             )}
 
                             <div className="space-y-1">
                                 {group.items.map((item) => {
-                                    const isActive = activeTab === item.title;
+                                    const isActive = item.link === "/admin"
+                                        ? pathname === "/admin"
+                                        : pathname.startsWith(item.link);
 
                                     return (
                                         <button
                                             key={item.title}
                                             onClick={() => {
-                                                setActiveTab(item.title);
-                                                if (item.link) router.push(item.link);
+                                                router.push(item.link);
                                                 setIsMobileOpen(false);
                                             }}
-                                            className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-all duration-200
+                                            className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-xl transition-all duration-200 cursor-pointer
               ${isActive
-                                                    ? "bg-yellow-400 text-slate-900 shadow-md shadow-yellow-400/10"
-                                                    : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                                                    ? "bg-primary text-secondary-dark shadow-sm"
+                                                    : "text-text-secondary hover:bg-accent hover:text-secondary-dark"
                                                 }`}
                                         >
                                             <span className="shrink-0">{item.icon}</span>
@@ -210,7 +221,7 @@ export const AdminSidebar = () => {
                 </nav>
 
                 {/* Footer Section */}
-                <div className="p-4 border-t border-slate-100 space-y-2">
+                <div className="p-4 border-t border-border-custom space-y-2">
                     {/* <button className="flex items-center gap-3 w-full p-2 text-slate-500 hover:text-slate-900 transition-colors">
                         <Settings size={18} />
                         <span className={`text-sm ${(!isOpen && !isMobileOpen) ? 'hidden md:opacity-0' : 'block'}`}>Settings</span>

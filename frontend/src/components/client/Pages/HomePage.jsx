@@ -8,6 +8,7 @@ import { BlogSection } from '../HomeComponents/BlogSection'
 import { ContactSection } from '../HomeComponents/ContactSection'
 import ProductSection from '@/shared/Product'
 import BrandMarquee from '@/shared/ClientsSlider'
+import BusinessGoals from '../HomeComponents/BusinessGoals'
 
 export const HomePage = () => {
   return (
@@ -16,6 +17,7 @@ export const HomePage = () => {
       <AboutSection/>
       <Marque/>
       <Services/>
+      <BusinessGoals/>
       <BrandMarquee/>
       <TestimonialSection/>
       <BlogSection/>

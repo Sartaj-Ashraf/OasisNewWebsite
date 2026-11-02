@@ -82,7 +82,7 @@ export default function ClientsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#030303] flex flex-col items-center justify-center text-zinc-500 font-mono text-xs gap-3">
-        <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
         <span>FETCHING BRAND CLIENT REGISTRY...</span>
       </div>
     );
