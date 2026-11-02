@@ -106,7 +106,7 @@ export const TeamForm = ({ onSubmit }) => {
     }
   };
 
-  const inputStyles = "w-full h-11 bg-white border border-slate-200 rounded-xl px-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:bg-white transition-all shadow-sm";
+  const inputStyles = "w-full h-11 bg-white border border-slate-200 rounded-xl px-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 focus:bg-white transition-all shadow-sm";
   return (
     <div className="min-h-screen bg-slate-50 p-6 lg:p-12 text-slate-900 font-sans">
       <div className="max-w-5xl mx-auto">
@@ -135,7 +135,7 @@ export const TeamForm = ({ onSubmit }) => {
           <div className="lg:col-span-1 space-y-6">
             <div className="bg-white border border-slate-200 shadow-sm rounded-3xl p-8 flex flex-col items-center text-center">
               <div className="relative group w-32 h-32 mb-6">
-                <div className="w-full h-full rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 flex items-center justify-center transition-all group-hover:border-blue-500/50">
+                <div className="w-full h-full rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 flex items-center justify-center transition-all group-hover:border-secondary/50">
                   {preview ? (
                     <img src={preview} alt="preview" className="w-full h-full object-cover" />
                   ) : (
@@ -160,7 +160,7 @@ export const TeamForm = ({ onSubmit }) => {
               <button
                 type="button"
                 onClick={() => setForm((f) => ({ ...f, isActive: !f.isActive }))}
-                className={`w-11 h-6 flex items-center rounded-full transition-all duration-300 px-1 ${form.isActive ? "bg-blue-600" : "bg-slate-200"}`}
+                className={`w-11 h-6 flex items-center rounded-full transition-all duration-300 px-1 ${form.isActive ? "bg-secondary-dark" : "bg-slate-200"}`}
               >
                 <div
                   className={`w-4 h-4 bg-white rounded-full shadow-sm transform transition-all duration-300 ${form.isActive ? "translate-x-5" : "translate-x-0"}`}
@@ -175,10 +175,10 @@ export const TeamForm = ({ onSubmit }) => {
               {/* General Info */}
               <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <FormField label="Display Name" icon={User} className="text-slate-700">
-                  <input name="name" value={form.name} onChange={handleChange} placeholder="Full Name" className={`${inputStyles} border-slate-200 focus:border-blue-500 focus:ring-blue-50 text-slate-900`} required />
+                  <input name="name" value={form.name} onChange={handleChange} placeholder="Full Name" className={`${inputStyles} border-slate-200 focus:border-secondary focus:ring-secondary text-slate-900`} required />
                 </FormField>
                 <FormField label="Professional Title" icon={Briefcase} className="text-slate-700">
-                  <input name="designation" value={form.designation} onChange={handleChange} placeholder="e.g. Lead Engineer" className={`${inputStyles} border-slate-200 focus:border-blue-500 focus:ring-blue-50 text-slate-900`} required />
+                  <input name="designation" value={form.designation} onChange={handleChange} placeholder="e.g. Lead Engineer" className={`${inputStyles} border-slate-200 focus:border-secondary focus:ring-secondary text-slate-900`} required />
                 </FormField>
               </section>
 
@@ -218,7 +218,7 @@ export const TeamForm = ({ onSubmit }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 h-12 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-[0.2em] shadow-lg shadow-blue-600/10 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                className="flex-1 h-12 rounded-2xl bg-secondary-dark hover:bg-secondary text-white font-bold text-xs uppercase tracking-[0.2em] shadow-lg shadow-blue-600/10 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
               >
                 {loading ? (
                   <Loader2 className="w-4 h-4 animate-spin" />

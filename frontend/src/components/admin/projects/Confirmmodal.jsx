@@ -25,7 +25,7 @@ export default function ConfirmModal({ project, onConfirm, onCancel }) {
         </h3>
         <p className="text-gray-400 text-sm text-center mb-6">
           Are you sure you want to delete{" "}
-          <span className="text-white font-medium">"{project?.title}"</span>?
+          <span className="text-white font-medium">&quot;{project?.title}&quot;</span>?
           This action cannot be undone.
         </p>
 

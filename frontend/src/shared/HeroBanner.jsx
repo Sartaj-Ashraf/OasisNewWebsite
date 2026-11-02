@@ -41,7 +41,7 @@ const HeroBanner = () => {
             accelerate growth and deliver measurable results.{" "}
           </p>
           <Button
-            link="/contact"
+            link="/contact-us"
             className="mb-4 ml-4 w-fit button md:ml-[20%] bg-linear-to-br from-primary via-primary-dark to-primary-dark hover:from-primary-dark hover:via-primary-dark hover:to-primary text-white transition-all duration-300 ease-in-out"
           >
             Contact Us

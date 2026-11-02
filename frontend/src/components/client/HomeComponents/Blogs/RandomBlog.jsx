@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import fallbackCover from "@/assets/Digital3.webp";
 
 export const RandomBlog = ({ blog }) => {
   return (
@@ -12,7 +13,7 @@ export const RandomBlog = ({ blog }) => {
         Update `blog?.image` to match your actual data schema.
       */}
       <Image
-        src={blog?.coverImage?.url || "/api/placeholder/100/100"}
+        src={blog?.coverImage?.url || fallbackCover}
         alt={blog?.title}
         width={100}
         height={100}

@@ -11,7 +11,7 @@ export const StatsGrid = ({ stats }) => (
             { label: "Inactive",     value: stats.inactiveJobs,  color: "text-rose-500"},
             { label: "Vacancies",    value: stats.totalVacancies, color: "text-amber-600"},
             { label: "New (30d)",    value: stats.recentJobs,    color: "text-sky-600"},
-            { label: "Job Types",    value: stats.jobsByType?.length || 0, color: "text-violet-600"},
+            { label: "Job Types",    value: stats.jobsByType?.length || 0, color: "text-secondary"},
         ].map((s) => (
             <div key={s.label}
                 className="bg-white border border-slate-100 rounded-2xl px-4 py-4 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 relative overflow-hidden group cursor-default">

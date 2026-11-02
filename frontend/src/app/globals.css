@@ -55,6 +55,7 @@
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-light: var(--text-light);
+  --color-border-custom: var(--border);
 
   --font-inter: var(--font-inter);
   --font-poppins: var(--font-poppins);

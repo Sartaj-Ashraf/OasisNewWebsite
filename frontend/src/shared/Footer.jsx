@@ -42,7 +42,7 @@ export const Footer = () => {
           />
 
           <p className="text-secondary-dark absolute bottom-5 md:bottom-5 left-15 md:left-20 z-10 text-xs md:text-sm">
-            Copyright © 2025 Oasis Ascend. All rights reserved.
+            Copyright © 2026 Oasis Ascend. All rights reserved.
           </p>
         </div>
 

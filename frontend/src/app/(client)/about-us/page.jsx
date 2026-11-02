@@ -1,4 +1,5 @@
 import AboutSection from "@/components/client/About-Us/AboutSection";
+import OurApproach from "@/components/client/About-Us/OurApproach";
 import OurStory from "@/components/client/About-Us/OurStory";
 import StatsSection from "@/components/client/About-Us/StatsSection";
 import VideoSection from "@/components/client/About-Us/VideoSection";
@@ -18,6 +19,7 @@ export const page = () => {
         <StatsSection />
         {/* <OurStory /> */}
           <OurTeam/>
+        <OurApproach />
         <WhyChooseUs />
         <TestimonialSection />
       </div>

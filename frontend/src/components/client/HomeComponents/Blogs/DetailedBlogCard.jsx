@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/shared/ClickAble";
+import fallbackCover from "@/assets/Digital3.webp";
 
 export const DetailedBlogCard = ({ blog }) => {
   // Format the date to look like "MAY 7, 2025"
@@ -12,8 +13,8 @@ export const DetailedBlogCard = ({ blog }) => {
   }).toUpperCase();
 
 
-  // Provide a safe fallback image in case url is empty
-  const imageUrl = blog?.coverImage?.url;
+  // Fall back to a stock cover when a post has none
+  const imageUrl = blog?.coverImage?.url || fallbackCover;
 
   return (
     <div className="flex flex-col w-full px-2 ">

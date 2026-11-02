@@ -95,6 +95,7 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
     if (!slug.trim()) return "Slug is required";
     if (title.trim().length > 200) return "Title must be ≤ 200 characters";
     if (excerpt.length > 400) return "Excerpt must be ≤ 400 characters";
+    if (!coverImage?._file && !coverImage?.url) return "Add a cover image (blog cards need one)";
     if (blocks.length === 0) return "Add at least one content block";
 
     const empty = blocks.filter(b => {
@@ -142,7 +143,7 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
         await createBlog(fd);
       }
 
-      setToast({ message: isEdit ? "Post updated successfully!" : "Post published!", type: "success" });
+      setToast({ message: isEdit ? "Post updated successfully!" : isPublished ? "Post published!" : "Draft saved!", type: "success" });
       setTimeout(() => onSuccess?.(), 1400);
     } catch (e) {
       setToast({ message: e?.response?.data?.message || e?.message || "Something went wrong", type: "error" });
@@ -179,10 +180,10 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
         .bf-root ::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 4px; }
       `}</style>
 
-      <div className="bf-root bf-sans min-h-screen bg-[#FAFAF8] text-stone-800 flex flex-col">
+      <div className="bf-root bf-sans min-h-screen bg-accent text-text-primary flex flex-col">
 
         {/* ════ TOP HEADER ════ */}
-        <header className="sticky top-0 z-40 bg-accent-light/80 backdrop-blur-md border-b border-accent-dark px-6 h-14.5 flex items-center justify-between shrink-0 shadow-sm shadow-accent-dark/20">
+        <header className="sticky top-0 z-40 bg-accent-light/80 backdrop-blur-md border-b border-accent-dark pl-16 pr-4 md:px-6 h-14.5 flex items-center justify-between shrink-0 shadow-sm shadow-accent-dark/20">
           <div className="flex items-center gap-3">
             {/* Logo block updated to match your brand's primary theme token */}
             <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center shadow-sm">
@@ -232,7 +233,7 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
                   ? <RotateCcw size={13} className="animate-spin" />
                   : <Send size={13} />
                 }
-                {loading ? "Saving…" : isEdit ? "Update" : "Publish"}
+                {loading ? "Saving…" : isEdit ? "Update" : isPublished ? "Publish" : "Save draft"}
               </button>
             </div>
           </div>
@@ -245,14 +246,13 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
 
 
           {/* ── WRITING CANVAS ── */}
-          <main className="flex-1 overflow-y-auto bg-accent-light">
-            <div className="max-w-5xl mx-auto px-6 md:px-10 py-12">
+          <main className="flex-1">
+            <div className="max-w-3xl mx-auto px-4 md:px-8 py-10">
 
               {/* Cover Image Upload */}
               <div className="mb-8">
                 <input
                   ref={coverImageRef}
-                  required
                   type="file"
                   accept=".jpg,.jpeg,image/jpeg"
                   className="hidden"
@@ -262,7 +262,7 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
                     if (!file) return;
 
                     if (!["image/jpeg", "image/jpg"].includes(file.type)) {
-                      alert("Only JPG/JPEG images are allowed");
+                      setToast({ message: "Only JPG/JPEG images are allowed", type: "error" });
                       e.target.value = "";
                       return;
                     }
@@ -291,7 +291,7 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
 
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all" />
 
-                    <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                    <div className="absolute top-3 right-3 flex gap-2 md:opacity-0 md:group-hover:opacity-100 transition-all">
 
                       <button
                         onClick={() => coverImageRef.current?.click()}
@@ -331,7 +331,7 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
                     </div>
                     <div className="text-center">
                       <p className="text-xs font-semibold text-text-primary/70">Add cover image</p>
-                      <p className="text-[10px] text-text-secondary/40">PNG, JPG, WEBP — recommended 1200×630</p>
+                      <p className="text-[10px] text-text-secondary/40">JPG only — recommended 1200×630</p>
                     </div>
                   </button>
                 )}
@@ -363,7 +363,9 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
                     maxLength={400}
                     rows={4}
                     className="w-full bg-accent border border-border-custom rounded-xl px-3 py-2.5 text-xs text-text-secondary placeholder-text-secondary/30 outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/5 transition-all resize-none leading-relaxed"
-                  />  <div className="space-y-1.5">
+                  />
+                </div>
+                <div className="space-y-1.5 mt-4">
                     <div className="flex items-center justify-between">
                       <label className="text-[10px] font-bold uppercase tracking-widest text-text-secondary/50">Slug</label>
                       <button
@@ -384,7 +386,6 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
                       />
                     </div>
                   </div>
-                </div>
                 {/* Live Inline Slug Display */}
                 <div className="mt-4 flex items-center gap-2">
                   <div className="h-px flex-1 bg-accent-dark" />
@@ -510,12 +511,9 @@ export default function BlogForm({ initialData = null, onSuccess, onCancel }) {
                   {/* Master Execution Action Trigger */}
                   <button
                     onClick={() => setIsFeatured(p => !p)}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs font-bold tracking-wide uppercase transition-all cursor-pointer ${isPublished
-                      ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-700"
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs font-bold tracking-wide uppercase transition-all cursor-pointer ${isFeatured
+                      ? "bg-primary/15 text-primary-dark border-primary/40"
                       : "border-border-custom bg-accent text-text-secondary hover:border-primary/40"
-                      } ${isFeatured
-                        ? "bg-yellow-500/10 text-yellow-600 border-yellow-500/20"
-                        : "bg-accent-dark text-text-secondary border-border-custom"
                       }`}
                   >
                     {isFeatured ? "★ Featured" : "Not Featured"}

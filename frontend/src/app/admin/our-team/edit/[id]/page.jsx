@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { getTeamMemberid, updateTeamMember, createTeamMember } from "@/services/team.service";
 import { useParams, useRouter } from "next/navigation";
-import { Camera, Link as LinkIcon, Instagram, Linkedin, Globe, ChevronLeft, Save, User, Image, Briefcase,Eye,Loader2 } from "lucide-react";
+import { Camera, Link as LinkIcon, Instagram, Linkedin, Globe, ChevronLeft, Save, User, Image, Briefcase, Eye, Loader2, Plus } from "lucide-react";
 
 const FormField = ({ label, icon: Icon, children }) => (
     <div className="flex flex-col gap-2">
@@ -121,7 +121,7 @@ const Edit = () => {
         }
     };
 
-    const inputStyles = "w-full h-11 bg-white border border-slate-200 rounded-xl px-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all shadow-sm disabled:bg-slate-50";
+    const inputStyles = "w-full h-11 bg-white border border-slate-200 rounded-xl px-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-secondary focus:ring-4 focus:ring-secondary/10 transition-all shadow-sm disabled:bg-slate-50";
 
     return (
         <div className="min-h-screen bg-slate-50 p-6 lg:p-12 text-slate-900 font-sans">
@@ -156,7 +156,7 @@ const Edit = () => {
                     <div className="lg:col-span-1 space-y-6">
                         <div className="bg-white border border-slate-200 shadow-sm rounded-3xl p-8 flex flex-col items-center text-center">
                             <div className="relative group w-32 h-32 mb-6">
-                                <div className="w-full h-full rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 flex items-center justify-center transition-all group-hover:border-blue-500/50">
+                                <div className="w-full h-full rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 flex items-center justify-center transition-all group-hover:border-secondary/50">
                                     {preview ? (
                                         <img src={preview} alt="preview" className="w-full h-full object-cover" />
                                     ) : (
@@ -182,7 +182,7 @@ const Edit = () => {
                             <button
                                 type="button"
                                 onClick={() => setForm((f) => ({ ...f, isActive: !f.isActive }))}
-                                className={`w-11 h-6 flex items-center rounded-full transition-all duration-300 px-1 ${form.isActive ? "bg-blue-600" : "bg-slate-200"
+                                className={`w-11 h-6 flex items-center rounded-full transition-all duration-300 px-1 ${form.isActive ? "bg-secondary-dark" : "bg-slate-200"
                                     }`}
                             >
                                 <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-all duration-300 ${form.isActive ? "translate-x-5" : "translate-x-0"

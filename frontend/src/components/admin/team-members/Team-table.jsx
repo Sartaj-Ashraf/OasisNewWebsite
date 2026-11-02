@@ -68,7 +68,7 @@ const ActionMenu = ({ item, onEdit, onDelete }) => {
               onClick={() => { onEdit(item); setIsOpen(false); }}
               className="w-full flex items-center gap-2 px-4 py-2.5 text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors"
             >
-              <Pencil size={14} className="text-blue-500" /> Edit Member
+              <Pencil size={14} className="text-secondary" /> Edit Member
             </button>
             <div className="h-px bg-slate-100 mx-2 my-1" />
             <button

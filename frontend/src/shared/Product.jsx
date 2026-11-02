@@ -18,10 +18,10 @@ const StarIcon = () => (
 );
 
 const FEATURES = [
-  "Automated review requests via SMS & Email",
-  "AI-powered response generator",
-  "Real-time reputation dashboard",
-  "Google Business Profile integration",
+  "Smart review response assistance",
+  "Easy customer review requests",
+  "QR-powered feedback requests",
+  "Simple analytics dashboard",
 ];
 
 export default function ProductSection() {
@@ -49,7 +49,7 @@ export default function ProductSection() {
 
             {/* Tagline */}
             <p className="text-[15px] font-semibold mb-4" style={{ color: "var(--secondary)" }}>
-              Reputation Management, Automated.
+              Everything You Need To Grow Customer Reviews
             </p>
 
             {/* Description */}
@@ -57,7 +57,7 @@ export default function ProductSection() {
               className="text-[14px] leading-[1.85] mb-7"
               style={{ color: "var(--text-secondary)" }}
             >
-              MangoReview helps businesses collect, manage, and showcase Google reviews completely on autopilot. Stop chasing customers for feedback  let AI handle your reputation while you focus on running your business.
+              MangoReview helps businesses collect authentic customer feedback through smart QR flows, automated follow-ups, and reputation management tools — all from one simple platform.
             </p>
 
             {/* Features */}

@@ -43,17 +43,22 @@ export const contactLinks = [
 export const socailLinks = [
   {
     name: "Facebook",
-    path: "https://www.facebook.com/oasisascend",
+    path: "https://www.facebook.com/OasisAscend/",
     icon: Facebook,
   },
   {
+    name: "X",
+    path: "https://x.com/oasisascend",
+    icon: X,
+  },
+  {
     name: "Instagram",
-    path: "https://www.instagram.com/oasisascend",
+    path: "https://www.instagram.com/oasis_ascend/",
     icon: Instagram,
   },
   {
     name: "LinkedIn",
-    path: "https://www.linkedin.com/company/oasisascend",
+    path: "https://in.linkedin.com/company/oasisascend",
     icon: LinkedIn,
   },
   {

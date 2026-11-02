@@ -2,8 +2,8 @@ import "./globals.css";
 import { Toaster } from 'sonner';
 
 export const metadata = {
-  title: "Oasis Ascend",
-  description: "Oasis is a platform for developers to build and deploy their applications.",
+  title: "Oasis Ascend - Software & Digital Marketing Services",
+  description: "Oasis Ascend delivers website design and development, custom software, mobile apps, SEO, social media marketing and lead generation for businesses worldwide.",
 };
 
 export default function RootLayout({ children }) {

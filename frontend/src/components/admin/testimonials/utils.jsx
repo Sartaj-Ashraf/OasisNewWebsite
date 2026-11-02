@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /* =========================
    STAR RATING
@@ -31,10 +31,11 @@ export const StarRating = ({ value, onChange, readonly = false }) => {
    MODAL
 ========================= */
 export const Modal = ({ open, title, onClose, children, wide = false }) => {
-    // Lock scroll
-    if (typeof window !== "undefined") {
+    // Lock scroll while open; always release on close/unmount
+    useEffect(() => {
         document.body.style.overflow = open ? "hidden" : "";
-    }
+        return () => { document.body.style.overflow = ""; };
+    }, [open]);
     if (!open) return null;
     return (
         <div
